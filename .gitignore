@@ -1,0 +1,7 @@
+/vendor
+/composer.phar
+/composer.lock
+/.php_cs.cache
+/tests/var/log/*.log
+/tests/var/coverage
+/tests/runtime/*

@@ -1,0 +1,9 @@
+coverage:
+    round: nearest
+    precision: 0
+
+comment: off
+
+ignore:
+    - "tests"
+    - "vendor"
