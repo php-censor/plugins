@@ -22,6 +22,8 @@ class Shell extends Plugin
      */
     protected $commands = [];
 
+    protected $executeAll = false;
+
     /**
      * {@inheritdoc}
      */
@@ -35,24 +37,25 @@ class Shell extends Plugin
      */
     public function execute(): bool
     {
+        $result = true;
         foreach ($this->commands as $command) {
             $command = $this->variableInterpolator->interpolate($command);
 
             if (!$this->commandExecutor->executeCommand($command)) {
-                return false;
+                $result = false;
+
+                if (!$this->executeAll) {
+                    return $result;
+                }
             }
         }
 
-        return true;
+        return $result;
     }
 
     protected function initPluginSettings(): void
     {
-        if ($this->options->has('commands')) {
-            $commands = $this->options->get('commands');
-            if (is_array($commands)) {
-                $this->commands = $commands;
-            }
-        }
+        $this->executeAll = (bool)$this->options->get('execute_all', $this->executeAll);
+        $this->commands   = (array)$this->options->get('commands', $this->commands);
     }
 }

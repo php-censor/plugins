@@ -19,11 +19,11 @@ use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
  */
 class Composer extends Plugin implements ZeroConfigPluginInterface
 {
-    protected $action;
-    protected $preferDist;
-    protected $noDev;
-    protected $ignorePlatformReqs;
-    protected $preferSource;
+    protected $action = 'install';
+    protected $preferDist = false;
+    protected $noDev = false;
+    protected $ignorePlatformReqs = false;
+    protected $preferSource = true;
 
     /**
      * {@inheritdoc}
@@ -81,14 +81,14 @@ class Composer extends Plugin implements ZeroConfigPluginInterface
      */
     protected function initPluginSettings(): void
     {
-        $this->action             = $this->options->get('action', 'install');
-        $this->preferDist         = (bool)$this->options->get('prefer_dist', false);
-        $this->noDev              = (bool)$this->options->get('no_dev', false);
-        $this->ignorePlatformReqs = (bool)$this->options->get('ignore_platform_reqs', false);
+        $this->action             = $this->options->get('action', $this->action);
+        $this->preferDist         = (bool)$this->options->get('prefer_dist', $this->preferDist);
+        $this->noDev              = (bool)$this->options->get('no_dev', $this->noDev);
+        $this->ignorePlatformReqs = (bool)$this->options->get('ignore_platform_reqs', $this->ignorePlatformReqs);
 
         if ($this->options->has('prefer_source')) {
             $this->preferDist   = false;
-            $this->preferSource = (bool)$this->options->get('prefer_source', false);
+            $this->preferSource = (bool)$this->options->get('prefer_source', $this->preferSource);
         }
     }
 
