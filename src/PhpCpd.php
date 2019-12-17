@@ -69,7 +69,7 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
         $this->buildMetaWriter->write(
             $this->build->getId(),
             (self::getName() . '-warnings'),
-            (string)$errorCount
+            $errorCount
         );
 
         \unlink($tmpFileName);

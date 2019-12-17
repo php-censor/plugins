@@ -62,7 +62,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
         $this->buildMetaWriter->write(
             $this->build->getId(),
             (self::getName() . '-warnings'),
-            (string)$errorCount
+            $errorCount
         );
 
         if (-1 !== $this->allowedWarnings && $errorCount > $this->allowedWarnings) {
@@ -176,8 +176,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
             $suffixes = ' --suffixes ' . \implode(',', $this->suffixes);
         }
 
-        if ((!\defined('DEBUG_MODE') || !DEBUG_MODE) &&
-            !(bool)$this->build->getExtra('debug')) {
+        if (!$this->build->isDebug()) {
             $this->commandExecutor->disableCommandOutput();
         }
 

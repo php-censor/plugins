@@ -56,11 +56,11 @@ class PhpParallelLint extends Plugin implements ZeroConfigPluginInterface
         $output = $this->commandExecutor->getLastCommandOutput();
 
         $matches = [];
-        if (\preg_match_all('#Parse error\:#', $output, $matches)) {
+        if (\preg_match_all("#Parse error\:#", $output, $matches)) {
             $this->buildMetaWriter->write(
                 $this->build->getId(),
                 (self::getName() . '-errors'),
-                (string)\count($matches[0])
+                \count($matches[0])
             );
         }
 

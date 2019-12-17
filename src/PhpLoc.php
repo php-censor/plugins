@@ -61,7 +61,7 @@ class PhpLoc extends Plugin implements ZeroConfigPluginInterface
             $this->buildMetaWriter->write(
                 $this->build->getId(),
                 (self::getName() . '-data'),
-                \json_encode($data)
+                $data
             );
         }
 

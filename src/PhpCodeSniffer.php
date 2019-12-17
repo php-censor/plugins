@@ -82,8 +82,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
 
         $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
 
-        if ((!\defined('DEBUG_MODE') || !DEBUG_MODE) &&
-            !(bool)$this->build->getExtra('debug')) {
+        if (!$this->build->isDebug()) {
             $this->commandExecutor->disableCommandOutput();
         }
 
@@ -112,13 +111,13 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
         $this->buildMetaWriter->write(
             $this->build->getId(),
             (self::getName() . '-warnings'),
-            (string)$warnings
+            $warnings
         );
 
         $this->buildMetaWriter->write(
             $this->build->getId(),
             (self::getName() . '-errors'),
-            (string)$errors
+            $errors
         );
 
         if (-1 !== $this->allowedWarnings && $warnings > $this->allowedWarnings) {
