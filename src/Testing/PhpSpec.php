@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace PHPCensor\Plugins;
+namespace PHPCensor\Plugins\Testing;
 
 use PHPCensor\Common\Plugin\Plugin;
 

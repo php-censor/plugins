@@ -42,6 +42,7 @@
         "ext-json":                    "*",
         "ext-simplexml":               "*",
         "ext-dom":                     "*",
+        "ext-pdo":                     "*",
         "php-censor/common":           "dev-master",
         "sensiolabs/security-checker": "^5.0"
     },
