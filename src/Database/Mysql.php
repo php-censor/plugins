@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace PHPCensor\Plugins\Database;
 
+use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
 use PDO;
@@ -101,6 +102,14 @@ class Mysql extends Plugin
             $this->executeFile($import);
         }
 
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function canExecute(string $stage, BuildInterface $build): bool
+    {
         return true;
     }
 

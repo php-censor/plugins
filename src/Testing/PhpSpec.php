@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace PHPCensor\Plugins\Testing;
 
+use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
@@ -116,6 +117,18 @@ class PhpSpec extends Plugin
         );
 
         return $success;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function canExecute(string $stage, BuildInterface $build): bool
+    {
+        if (BuildInterface::STAGE_TEST === $stage) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

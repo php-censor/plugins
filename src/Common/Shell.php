@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace PHPCensor\Plugins\Common;
 
+use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
@@ -57,5 +58,13 @@ class Shell extends Plugin
     {
         $this->executeAll = (bool)$this->options->get('execute_all', $this->executeAll);
         $this->commands   = (array)$this->options->get('commands', $this->commands);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function canExecute(string $stage, BuildInterface $build): bool
+    {
+        return true;
     }
 }

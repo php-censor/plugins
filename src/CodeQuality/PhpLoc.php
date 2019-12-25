@@ -71,7 +71,7 @@ class PhpLoc extends Plugin implements ZeroConfigPluginInterface
     /**
      * {@inheritdoc}
      */
-    public static function canExecuteOnStage(string $stage, BuildInterface $build): bool
+    public static function canExecute(string $stage, BuildInterface $build): bool
     {
         if (BuildInterface::STAGE_TEST === $stage) {
             return true;
