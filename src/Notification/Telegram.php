@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace PHPCensor\Plugins\Database;
+namespace PHPCensor\Plugins\Notification;
 
 use GuzzleHttp\Client as HttpClient;
 use PHPCensor\Common\Build\BuildInterface;
@@ -20,11 +20,30 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Telegram extends Plugin
 {
-    protected $apiKey;
-    protected $message;
-    protected $buildMsg;
-    protected $recipients = [];
-    protected $sendLog = false;
+    /**
+     * @var string
+     */
+    private $apiKey;
+
+    /**
+     * @var string
+     */
+    private $message;
+
+    /**
+     * @var string
+     */
+    private $buildMsg;
+
+    /**
+     * @var array
+     */
+    private $recipients = [];
+
+    /**
+     * @var bool
+     */
+    private $sendLog = false;
 
     /**
      * {@inheritdoc}

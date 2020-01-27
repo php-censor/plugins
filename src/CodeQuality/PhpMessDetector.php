@@ -24,7 +24,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var array
      */
-    protected $suffixes = ['php'];
+    private $suffixes = ['php'];
 
     /**
      * Array of PHPMD rules. Can be one of the builtins (codesize, unusedcode, naming, design, controversial)
@@ -32,9 +32,12 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
      *
      * @var array
      */
-    protected $rules = ['codesize', 'unusedcode', 'naming'];
+    private $rules = ['codesize', 'unusedcode', 'naming'];
 
-    protected $allowedWarnings = 0;
+    /**
+     * @var int
+     */
+    private $allowedWarnings = 0;
 
     /**
      * {@inheritdoc}

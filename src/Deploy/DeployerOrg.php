@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace PHPCensor\Plugins\Database;
+namespace PHPCensor\Plugins\Deploy;
 
 use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Plugin\Plugin;
@@ -18,7 +18,10 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class DeployerOrg extends Plugin
 {
-    protected $branch;
+    /**
+     * @var string
+     */
+    private $branch;
 
     /**
      * {@inheritdoc}

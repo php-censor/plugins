@@ -20,12 +20,12 @@ class Atoum extends Plugin
     /**
      * @var string
      */
-    protected $args = null;
+    private $args = null;
 
     /**
      * @var string
      */
-    protected $config = null;
+    private $config = null;
 
     /**
      * {@inheritdoc}

@@ -19,11 +19,30 @@ use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
  */
 class Composer extends Plugin implements ZeroConfigPluginInterface
 {
-    protected $action = 'install';
-    protected $preferDist = false;
-    protected $noDev = false;
-    protected $ignorePlatformReqs = false;
-    protected $preferSource = true;
+    /**
+     * @var string
+     */
+    private $action = 'install';
+
+    /**
+     * @var bool
+     */
+    private $preferDist = false;
+
+    /**
+     * @var bool
+     */
+    private $noDev = false;
+
+    /**
+     * @var bool
+     */
+    private $ignorePlatformReqs = false;
+
+    /**
+     * @var bool
+     */
+    private $preferSource = true;
 
     /**
      * {@inheritdoc}

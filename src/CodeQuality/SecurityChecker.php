@@ -23,7 +23,7 @@ class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var int
      */
-    protected $allowedWarnings = 0;
+    private $allowedWarnings = 0;
 
     /**
      * {@inheritdoc}

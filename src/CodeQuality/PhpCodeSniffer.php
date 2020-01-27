@@ -24,46 +24,47 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var array
      */
-    protected $suffixes = ['php'];
+    private $suffixes = ['php'];
 
     /**
      * @var string
      */
-    protected $standard = 'PSR2';
+    private $standard = 'PSR2';
 
     /**
      * @var string
      */
-    protected $tabWidth = '';
+    private $tabWidth = '';
 
     /**
      * @var string
      */
-    protected $encoding = '';
+    private $encoding = '';
 
     /**
      * @var int
      */
-    protected $allowedErrors = 0;
+    private $allowedErrors = 0;
 
     /**
      * @var int
      */
-    protected $allowedWarnings = 0;
+    private $allowedWarnings = 0;
 
     /**
      * @var int
      */
-    protected $severity = null;
-    /**
-     * @var null|int
-     */
-    protected $errorSeverity = null;
+    private $severity = null;
 
     /**
      * @var null|int
      */
-    protected $warningSeverity = null;
+    private $errorSeverity = null;
+
+    /**
+     * @var null|int
+     */
+    private $warningSeverity = null;
 
     /**
      * {@inheritdoc}

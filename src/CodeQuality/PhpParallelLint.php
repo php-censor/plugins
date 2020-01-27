@@ -22,12 +22,12 @@ class PhpParallelLint extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var string Comma separated list of file extensions
      */
-    protected $extensions = 'php';
+    private $extensions = 'php';
 
     /**
      * @var bool Enable short tags
      */
-    protected $shortTags = false;
+    private $shortTags = false;
 
     /**
      * {@inheritdoc}

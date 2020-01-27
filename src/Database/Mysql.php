@@ -24,47 +24,47 @@ class Mysql extends Plugin
     /**
      * @var string
      */
-    protected $host = '127.0.0.1';
+    private $host = '127.0.0.1';
 
     /**
      * @var int
      */
-    protected $port = 3306;
+    private $port = 3306;
 
     /**
      * @var string|null
      */
-    protected $dbName = null;
+    private $dbName = null;
 
     /**
      * @var string|null
      */
-    protected $charset = null;
+    private $charset = null;
 
     /**
      * @var array
      */
-    protected $pdoOptions = [];
+    private $pdoOptions = [];
 
     /**
      * @var string
      */
-    protected $user = '';
+    private $user = '';
 
     /**
      * @var string
      */
-    protected $password = '';
+    private $password = '';
 
     /**
      * @var array
      */
-    protected $queries = [];
+    private $queries = [];
 
     /**
      * @var array
      */
-    protected $imports = [];
+    private $imports = [];
 
     /**
      * {@inheritdoc}

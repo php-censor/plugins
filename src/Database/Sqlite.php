@@ -21,17 +21,17 @@ class Sqlite extends Plugin
     /**
      * @var array
      */
-    protected $queries = [];
+    private $queries = [];
 
     /**
      * @var string
      */
-    protected $path = '';
+    private $path = '';
 
     /**
      * @var array
      */
-    protected $pdoOptions = [];
+    private $pdoOptions = [];
 
     /**
      * {@inheritdoc}

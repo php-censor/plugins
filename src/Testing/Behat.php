@@ -22,7 +22,7 @@ class Behat extends Plugin
     /**
      * @var string
      */
-    protected $features = '';
+    private $features = '';
 
     /**
      * {@inheritdoc}
