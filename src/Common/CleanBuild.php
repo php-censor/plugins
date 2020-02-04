@@ -62,6 +62,7 @@ class CleanBuild extends Plugin
             BuildInterface::STAGE_FAILURE,
             BuildInterface::STAGE_FIXED,
             BuildInterface::STAGE_SUCCESS,
+            BuildInterface::STAGE_DEPLOY,
         ], true)) {
             return true;
         }
