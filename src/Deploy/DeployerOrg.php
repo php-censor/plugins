@@ -72,6 +72,17 @@ class DeployerOrg extends Plugin
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function getPluginDefaultBinaryNames(): array
+    {
+        return [
+            'dep',
+            'dep.phar',
+        ];
+    }
+
+    /**
      * Validate config.
      *
      * $validationRes['message'] Message to log
