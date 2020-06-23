@@ -145,6 +145,7 @@ class Telegram extends Plugin
 
     /**
      * Build message.
+     *
      * @return string
      */
     private function buildMessage()

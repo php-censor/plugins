@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace PHPCensor\Plugins\Database;
 
+use PDO;
 use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Plugin\Plugin;
-use PDO;
 
 /**
  * PgSQL Plugin - Provides access to a PgSQL database.
@@ -67,10 +67,10 @@ class Pgsql extends Plugin
      */
     public function execute(): bool
     {
-        $pdoOptions = array_merge([
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        $pdoOptions = \array_merge([
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         ], $this->pdoOptions);
-        $dsn     = sprintf('pgsql:host=%s;port=%s', $this->host, $this->port);
+        $dsn     = \sprintf('pgsql:host=%s;port=%s', $this->host, $this->port);
 
         if (null !== $this->dbName) {
             $dsn .= ';dbname=' . $this->dbName;

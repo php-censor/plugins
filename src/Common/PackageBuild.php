@@ -52,8 +52,8 @@ class PackageBuild extends Plugin
         $filename = \str_replace('%build.id%', $build->getId(), $filename);
         $filename = \str_replace('%build.branch%', $build->getBranch(), $filename);
         $filename = \str_replace('%project.title%', $build->getProject()->getTitle(), $filename);
-        $filename = \str_replace('%date%', date('Y-m-d'), $filename);
-        $filename = \str_replace('%time%', date('Hi'), $filename);
+        $filename = \str_replace('%date%', \date('Y-m-d'), $filename);
+        $filename = \str_replace('%time%', \date('Hi'), $filename);
         $filename = \preg_replace('/([^a-zA-Z0-9_-]+)/', '', $filename);
 
         if (!\is_array($this->format)) {

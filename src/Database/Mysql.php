@@ -4,10 +4,10 @@ declare(strict_types = 1);
 
 namespace PHPCensor\Plugins\Database;
 
+use PDO;
 use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
-use PDO;
 
 /**
  * MySQL Plugin - Provides access to a MySQL database.
@@ -80,7 +80,7 @@ class Mysql extends Plugin
     public function execute(): bool
     {
         $pdoOptions = \array_merge([
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         ], $this->pdoOptions);
         $dsn     = \sprintf('mysql:host=%s;port=%s', $this->host, $this->port);
 

@@ -247,7 +247,8 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
                     $this->build->getId(),
                     self::getName(),
                     ('PHPCS: ' . $message['message']),
-                    ('ERROR' === $message['type']
+                    (
+                        'ERROR' === $message['type']
                         ? BuildErrorInterface::SEVERITY_HIGH
                         : BuildErrorInterface::SEVERITY_LOW
                     ),

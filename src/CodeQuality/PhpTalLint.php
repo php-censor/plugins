@@ -207,7 +207,7 @@ class PhpTalLint extends Plugin
                     'file'    => $path,
                     'line'    => $line,
                     'type'    => $matches[2],
-                    'message' => $message
+                    'message' => $message,
                 ];
             }
 

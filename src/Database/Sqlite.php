@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace PHPCensor\Plugins\Database;
 
+use PDO;
 use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Plugin\Plugin;
-use PDO;
 
 /**
  * SQLite Plugin — Provides access to a SQLite database.
@@ -47,7 +47,7 @@ class Sqlite extends Plugin
     public function execute(): bool
     {
         $pdoOptions = \array_merge([
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         ], $this->pdoOptions);
 
         $pdo = new PDO('sqlite:' . $this->path, $pdoOptions);

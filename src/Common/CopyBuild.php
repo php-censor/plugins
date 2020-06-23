@@ -108,7 +108,7 @@ class CopyBuild extends Plugin
      */
     protected function wipeExistingDirectory()
     {
-        if ($this->wipe === true && $this->directory !== '/' && is_dir($this->directory)) {
+        if ($this->wipe === true && $this->directory !== '/' && \is_dir($this->directory)) {
             $cmd     = 'cd "%s" && rm -Rf "%s"';
             $success = $this->commandExecutor->executeCommand($cmd, $this->build->getBuildPath(), $this->directory);
 

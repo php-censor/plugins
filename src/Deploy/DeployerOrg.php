@@ -95,14 +95,14 @@ class DeployerOrg extends Plugin
         if (!$this->options->all()) {
             return [
                 'message'    => 'Can\'t find configuration for plugin!',
-                'successful' => false
+                'successful' => false,
             ];
         }
 
         if (!$this->options->get($this->branch)) {
             return [
                 'message'    => 'There is no specified config for this branch.',
-                'successful' => true
+                'successful' => true,
             ];
         }
 
@@ -110,7 +110,7 @@ class DeployerOrg extends Plugin
         if (empty($branchConf['stage'])) {
             return [
                 'message'    => 'There is no stage for this branch',
-                'successful' => false
+                'successful' => false,
             ];
         }
 
@@ -136,9 +136,8 @@ class DeployerOrg extends Plugin
         $verbosity = \strtolower(\trim($verbosity));
         if ('normal' !== $verbosity) {
             return '-' . $logLevelList[$verbosity];
-        } else {
-            return '';
         }
+        return '';
     }
 
     /**
@@ -169,6 +168,6 @@ class DeployerOrg extends Plugin
             $options[] = '--file=' . $config['file'];
         }
 
-        return implode(' ', $options);
+        return \implode(' ', $options);
     }
 }

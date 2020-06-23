@@ -44,7 +44,8 @@ class Deployer extends Plugin
 
         $client   = new Client();
         $response = $client->post(
-            $this->webhookUrl, [
+            $this->webhookUrl,
+            [
                 'form_params' => [
                     'reason'      => $this->variableInterpolator->interpolate($this->reason),
                     'source'      => 'PHP Censor',
@@ -52,7 +53,7 @@ class Deployer extends Plugin
                     'branch'      => $this->variableInterpolator->interpolate('%BRANCH%'),
                     'commit'      => $this->variableInterpolator->interpolate('%COMMIT_ID%'),
                     'update_only' => $this->updateOnly,
-                ]
+                ],
             ]
         );
 

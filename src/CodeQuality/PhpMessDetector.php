@@ -163,6 +163,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Execute PHP Mess Detector.
+     *
      * @param $executable
      */
     protected function executePhpMd($executable)

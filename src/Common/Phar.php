@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace PHPCensor\Plugins\Common;
 
+use Phar as BasePhar;
 use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Plugin\Plugin;
-use Phar as BasePhar;
 
 /**
  * Phar Plugin.
