@@ -26,7 +26,6 @@ return PhpCsFixer\Config::create()
         'single_blank_line_before_namespace'  => true,
         'cast_spaces'                         => ['space' => 'none'],
         'modernize_types_casting'             => true,
-        'short_scalar_cast'                   => true,
         'declare_strict_types'                => true,
         'phpdoc_scalar'                       => true,
         'phpdoc_separation'                   => true,
