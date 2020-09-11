@@ -10,7 +10,7 @@ use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
- * Telegram Plugin
+ * TelegramNotify Plugin
  *
  * @package    PHP Censor
  * @subpackage Plugins
@@ -18,7 +18,7 @@ use PHPCensor\Common\Plugin\Plugin;
  * @author Dmitry Khomutov <poisoncorpsee@gmail.com>
  * @author LEXASOFT <lexasoft83@gmail.com>
  */
-class Telegram extends Plugin
+class TelegramNotify extends Plugin
 {
     /**
      * @var string
