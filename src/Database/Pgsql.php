@@ -98,12 +98,15 @@ class Pgsql extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->host       = $this->buildSettings->get('host', $this->host);
-        $this->port       = $this->buildSettings->get('port', $this->port);
-        $this->dbName     = $this->buildSettings->get('dbname', $this->dbName);
-        $this->user       = $this->buildSettings->get('user', $this->user);
-        $this->password   = $this->buildSettings->get('password', $this->password);
-        $this->pdoOptions = $this->buildSettings->get('options', $this->pdoOptions);
+        $buildSettings    = $this->buildSettings->get('pgsql', []);
+        $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
+
+        $this->host       = $buildSettingsBag->get('host', $this->host);
+        $this->port       = $buildSettingsBag->get('port', $this->port);
+        $this->dbName     = $buildSettingsBag->get('dbname', $this->dbName);
+        $this->user       = $buildSettingsBag->get('user', $this->user);
+        $this->password   = $buildSettingsBag->get('password', $this->password);
+        $this->pdoOptions = $buildSettingsBag->get('options', $this->pdoOptions);
 
         $this->queries = (array)$this->options->get('queries', $this->queries);
     }

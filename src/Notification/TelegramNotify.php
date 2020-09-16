@@ -10,7 +10,7 @@ use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
- * TelegramNotify Plugin
+ * TelegramNotify Plugin.
  *
  * @package    PHP Censor
  * @subpackage Plugins
@@ -50,7 +50,7 @@ class TelegramNotify extends Plugin
      */
     public static function getName(): string
     {
-        return 'telegram';
+        return 'telegram_notify';
     }
 
     /**

@@ -1,7 +1,7 @@
 PHP Censor Plugins
 ==================
 
-[WIP] PHP Censor commom plugins (for PHP Censor v2.0+).
+[WIP] PHP Censor common plugins (for PHP Censor v2.0+).
 
 Code style
 ----------

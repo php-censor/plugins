@@ -72,8 +72,11 @@ class Sqlite extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->path       = $this->buildSettings->get('path', $this->path);
-        $this->pdoOptions = $this->buildSettings->get('options', $this->pdoOptions);
+        $buildSettings    = $this->buildSettings->get('sqlite', []);
+        $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
+
+        $this->path       = $buildSettingsBag->get('path', $this->path);
+        $this->pdoOptions = $buildSettingsBag->get('options', $this->pdoOptions);
 
         $this->queries = (array)$this->options->get('queries', $this->queries);
     }
