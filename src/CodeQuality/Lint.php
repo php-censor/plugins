@@ -18,8 +18,14 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Lint extends Plugin
 {
+    /**
+     * @var array
+     */
     private $directories = [];
 
+    /**
+     * @var bool
+     */
     private $recursive = true;
 
     /**

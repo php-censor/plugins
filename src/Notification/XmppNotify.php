@@ -190,9 +190,9 @@ class XmppNotify extends Plugin
     private function buildMessage(string $messageFile): bool
     {
         if ($this->build->isSuccessful()) {
-            $message = "✔ [" . $this->build->getProjectTitle() . "] Build #" . $this->build->getId() . " successful";
+            $message = "✔ [" . $this->project->getTitle() . "] Build #" . $this->build->getId() . " successful";
         } else {
-            $message = "✘ [" . $this->build->getProjectTitle() . "] Build #" . $this->build->getId() . " failure";
+            $message = "✘ [" . $this->project->getTitle() . "] Build #" . $this->build->getId() . " failure";
         }
 
         $message .= ' (' . \strftime($this->dateFormat) . ')';
