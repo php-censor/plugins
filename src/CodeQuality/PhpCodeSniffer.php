@@ -253,7 +253,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
                         : BuildErrorInterface::SEVERITY_LOW
                     ),
                     $fileName,
-                    $message['line']
+                    (int)$message['line']
                 );
             }
         }

@@ -269,7 +269,7 @@ class PhpCsFixer extends Plugin
                         "PHP CS Fixer suggestion:\r\n```diff\r\n" . \implode("\r\n", $chunkDiff) . "\r\n```",
                         BuildErrorInterface::SEVERITY_LOW,
                         $filename,
-                        $firstModifiedLine
+                        (int)$firstModifiedLine
                     );
                 }
             }

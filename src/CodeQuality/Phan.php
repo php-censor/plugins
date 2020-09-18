@@ -144,8 +144,8 @@ class Phan extends Plugin
                 $data['check_name']."\n\n".$data['description'],
                 $this->severity((int)$data['severity']),
                 isset($data['location']['path']) ? $data['location']['path'] : '??',
-                isset($data['location']['lines']['begin']) ? $data['location']['lines']['begin'] : '??',
-                isset($data['location']['lines']['end']) ? $data['location']['lines']['end'] : '??'
+                isset($data['location']['lines']['begin']) ? (int)$data['location']['lines']['begin'] : 0,
+                isset($data['location']['lines']['end']) ? (int)$data['location']['lines']['end'] : 0
             );
 
             $warnings++;
