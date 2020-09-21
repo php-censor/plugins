@@ -135,11 +135,11 @@ class Pahout extends Plugin
                         $hint['lineno'],
                         $hint['type'],
                         $hint['message'],
-                        $hint['link']
+                        $hint['link'],
                     ]),
                     'message'   => $hint['message'],
                     'file'      => $hint['filename'],
-                    'line_from' => $hint['lineno']
+                    'line_from' => $hint['lineno'],
                 ];
             }
         }
