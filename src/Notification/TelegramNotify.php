@@ -161,7 +161,7 @@ class TelegramNotify extends Plugin
             $firstRow = \mb_substr($bm, 0, $pos);
 
             //skip long outputs
-            if (\in_array($firstRow, ['slack_notify', 'php_loc', 'telegram'], true)) {
+            if (\in_array($firstRow, ['slack_notify', 'php_loc', 'telegram_notify'], true)) {
                 continue;
             }
 

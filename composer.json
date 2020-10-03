@@ -46,6 +46,8 @@
         "php-censor/common":           "dev-master",
         "sensiolabs/security-checker": "^5.0",
         "guzzlehttp/guzzle":           "^6.5",
+        "hipchat/hipchat-php":         "^1.4",
+        "maknz/slack":                 "^1.7",
         "sebastian/diff":              "^3.0"
     },
     "require-dev": {

@@ -103,7 +103,7 @@ class IrcNotify extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $buildSettings    = $this->buildSettings->get('irc', []);
+        $buildSettings    = $this->buildSettings->get('irc_notify', []);
         $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
 
         $this->server = $buildSettingsBag->get('server', $this->server);
