@@ -6,6 +6,7 @@ namespace PHPCensor\Plugins\Testing;
 
 use PHPCensor\Common\Build\BuildErrorInterface;
 use PHPCensor\Common\Build\BuildInterface;
+use PHPCensor\Common\Build\BuildMetaWriterInterface;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
@@ -44,13 +45,15 @@ class Behat extends Plugin
 
         $this->buildMetaWriter->write(
             $this->build->getId(),
-            (self::getName() . '-warnings'),
+            self::getName(),
+            BuildMetaWriterInterface::KEY_WARNINGS,
             $errorCount
         );
 
         $this->buildMetaWriter->write(
             $this->build->getId(),
-            (self::getName() . '-data'),
+            self::getName(),
+            BuildMetaWriterInterface::KEY_DATA,
             $data
         );
 

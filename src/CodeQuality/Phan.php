@@ -6,6 +6,7 @@ namespace PHPCensor\Plugins\CodeQuality;
 
 use PHPCensor\Common\Build\BuildErrorInterface;
 use PHPCensor\Common\Build\BuildInterface;
+use PHPCensor\Common\Build\BuildMetaWriterInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
 
@@ -71,7 +72,8 @@ class Phan extends Plugin
         $warningCount = $this->processReport(\file_get_contents($this->location . '/phan.out'));
         $this->buildMetaWriter->write(
             $this->build->getId(),
-            (self::getName() . '-warnings'),
+            self::getName(),
+            BuildMetaWriterInterface::KEY_WARNINGS,
             $warningCount
         );
 
