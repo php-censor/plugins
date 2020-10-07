@@ -82,7 +82,7 @@ class PhpStan extends Plugin
                             self::getName(),
                             $message['message'],
                             BuildErrorInterface::SEVERITY_NORMAL,
-                            $filename,
+                            (string)$filename,
                             (int)$message['line']
                         );
                     }

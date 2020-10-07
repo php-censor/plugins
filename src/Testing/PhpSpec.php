@@ -49,10 +49,10 @@ class PhpSpec extends Plugin
         $xml  = new \SimpleXMLElement($output);
         $attr = $xml->attributes();
         $data = [
-            'time'     => (float)$attr['time'],
-            'tests'    => (int)$attr['tests'],
-            'failures' => (int)$attr['failures'],
-            'errors'   => (int)$attr['errors'],
+            'time'     => $attr ? (float)$attr['time'] : 0,
+            'tests'    => $attr ? (int)$attr['tests'] : 0,
+            'failures' => $attr ? (int)$attr['failures'] : 0,
+            'errors'   => $attr ? (int)$attr['errors'] : 0,
             // now all the tests
             'suites'   => [],
         ];
@@ -63,12 +63,12 @@ class PhpSpec extends Plugin
         foreach ($xml->xpath('testsuite') as $group) {
             $attr  = $group->attributes();
             $suite = [
-                'name'     => (string)$attr['name'],
-                'time'     => (float)$attr['time'],
-                'tests'    => (int)$attr['tests'],
-                'failures' => (int)$attr['failures'],
-                'errors'   => (int)$attr['errors'],
-                'skipped'  => (int)$attr['skipped'],
+                'name'     => $attr ? (string)$attr['name'] : '',
+                'time'     => $attr ? (float)$attr['time'] : 0,
+                'tests'    => $attr ? (int)$attr['tests'] : 0,
+                'failures' => $attr ? (int)$attr['failures'] : 0,
+                'errors'   => $attr ? (int)$attr['errors'] : 0,
+                'skipped'  => $attr ? (int)$attr['skipped'] : 0,
                 // now the cases
                 'cases'    => [],
             ];
@@ -79,10 +79,10 @@ class PhpSpec extends Plugin
             foreach ($group->xpath('testcase') as $child) {
                 $attr = $child->attributes();
                 $case = [
-                    'name'      => (string)$attr['name'],
-                    'classname' => (string)$attr['classname'],
-                    'time'      => (float)$attr['time'],
-                    'status'    => (string)$attr['status'],
+                    'name'      => $attr ? (string)$attr['name'] : '',
+                    'classname' => $attr ? (string)$attr['classname'] : '',
+                    'time'      => $attr ? (float)$attr['time'] : 0,
+                    'status'    => $attr ? (string)$attr['status'] : '',
                 ];
 
                 if ('failed' == $case['status']) {
@@ -94,8 +94,8 @@ class PhpSpec extends Plugin
                      */
                     foreach ($child->xpath('failure') as $failure) {
                         $attr             = $failure->attributes();
-                        $error['type']    = (string)$attr['type'];
-                        $error['message'] = (string)$attr['message'];
+                        $error['type']    = $attr ? (string)$attr['type'] : '';
+                        $error['message'] = $attr ? (string)$attr['message'] : '';
                     }
 
                     foreach ($child->xpath('system-err') as $systemError) {

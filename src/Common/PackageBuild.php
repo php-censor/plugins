@@ -24,9 +24,9 @@ class PackageBuild extends Plugin
     private $filename = 'build';
 
     /**
-     * @var string
+     * @var string[]
      */
-    private $format = 'zip';
+    private $format = ['zip'];
 
     /**
      * {@inheritdoc}
@@ -49,16 +49,12 @@ class PackageBuild extends Plugin
         }
 
         $filename = \str_replace('%build.commit%', $build->getCommitId(), $this->filename);
-        $filename = \str_replace('%build.id%', $build->getId(), $filename);
+        $filename = \str_replace('%build.id%', (string)$build->getId(), $filename);
         $filename = \str_replace('%build.branch%', $build->getBranch(), $filename);
-        $filename = \str_replace('%project.title%', $build->getProject()->getTitle(), $filename);
+        $filename = \str_replace('%project.title%', $this->project->getTitle(), $filename);
         $filename = \str_replace('%date%', \date('Y-m-d'), $filename);
         $filename = \str_replace('%time%', \date('Hi'), $filename);
         $filename = \preg_replace('/([^a-zA-Z0-9_-]+)/', '', $filename);
-
-        if (!\is_array($this->format)) {
-            $this->format = [$this->format];
-        }
 
         $success = true;
         foreach ($this->format as $format) {
@@ -105,6 +101,11 @@ class PackageBuild extends Plugin
     protected function initPluginSettings(): void
     {
         $this->filename = $this->options->get('filename', $this->filename);
-        $this->format   = $this->options->get('format', $this->format);
+
+        $format = $this->options->get('format', $this->format);
+        if (!\is_array($format)) {
+            $format = [$format];
+        }
+        $this->format = $format;
     }
 }

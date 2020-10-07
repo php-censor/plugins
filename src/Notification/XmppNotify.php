@@ -19,37 +19,37 @@ use PHPCensor\Common\Plugin\Plugin;
 class XmppNotify extends Plugin
 {
     /**
-     * @var string, username of sender account xmpp
+     * @var string Username of sender account xmpp
      */
     private $username = '';
 
     /**
-     * @var string, alias server of sender account xmpp
+     * @var string Alias server of sender account xmpp
      */
     private $server = '';
 
     /**
-     * @var string, password of sender account xmpp
+     * @var string Password of sender account xmpp
      */
     private $password = '';
 
     /**
-     * @var string, alias for sender
+     * @var string Alias for sender
      */
     private $alias = '';
 
     /**
-     * @var string, use tls
+     * @var bool Use tls
      */
     private $tls = false;
 
     /**
-     * @var array, list of recipients xmpp accounts
+     * @var array List of recipients xmpp accounts
      */
     private $recipients = [];
 
     /**
-     * @var string, mask to format date
+     * @var string Mask to format date
      */
     private $dateFormat = '%c';
 
@@ -124,10 +124,8 @@ class XmppNotify extends Plugin
     protected function initPluginSettings(): void
     {
         $this->recipients = $this->options->get('recipients', $this->recipients);
-        if ($this->recipients) {
-            if (\is_string($this->recipients)) {
-                $this->recipients = [$this->recipients];
-            }
+        if ($this->recipients && \is_string($this->recipients)) {
+            $this->recipients = [(string)$this->recipients];
         }
     }
 

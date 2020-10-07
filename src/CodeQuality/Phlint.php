@@ -116,9 +116,9 @@ class Phlint extends Plugin
         if (0 < \count($data)) {
             foreach ($data as $error) {
                 $error   = \explode(PHP_EOL, $error);
-                $header  = \substr(\trim(\array_shift($error)), 3);
-                $file    = \strstr(\substr(\strstr($header, 'in '), 3), ':', true);
-                $line    = \substr(\strrchr($header, ':'), 1);
+                $header  = (string)\substr(\trim(\array_shift($error)), 3);
+                $file    = (string)\strstr((string)\substr((string)\strstr($header, 'in '), 3), ':', true);
+                $line    = (int)\substr((string)\strrchr($header, ':'), 1);
                 $message = \ltrim($error[0]) . PHP_EOL . \ltrim($error[1]);
 
                 $errors[] = [

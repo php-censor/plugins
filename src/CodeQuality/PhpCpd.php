@@ -36,6 +36,7 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
     public function execute(): bool
     {
         $ignoresString = '';
+        $filesToIgnore = [];
         if (\is_array($this->ignores)) {
             foreach ($this->ignores as $ignore) {
                 $ignore = \rtrim($ignore, '/');
@@ -48,7 +49,7 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
             }
         }
 
-        if (isset($filesToIgnore)) {
+        if ($filesToIgnore) {
             $filesToIgnore = \sprintf(' --names-exclude="%s"', \implode(',', $filesToIgnore));
             $ignoresString = $ignoresString . $filesToIgnore;
         }

@@ -127,7 +127,7 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
         $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->directory));
 
         $this->buildLogger->logDebug("Directory: " . $this->directory);
-        $this->buildLogger->logDebug("Ignored path: " . \json_encode($this->ignores, true));
+        $this->buildLogger->logDebug("Ignored path: " . \json_encode($this->ignores));
 
         $errorCount = 0;
         /** @var SplFileInfo $file */
@@ -164,7 +164,7 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
                     $line = \fgets($handle);
 
                     foreach ($this->searches as $search) {
-                        if ($technicalDebtLine = \trim(\strstr($line, $search))) {
+                        if ($technicalDebtLine = \trim((string)\strstr($line, $search))) {
                             $fileName = \str_replace($this->directory, '', $filePath);
 
                             $this->buildErrorWriter->write(
@@ -208,7 +208,7 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
         foreach ($this->errorPerFile as $oneLine) {
             $fileNumber += \strlen($oneLine);
             $string     .= \str_pad($oneLine, 60, ' ', STR_PAD_RIGHT);
-            $string     .= \str_pad($fileNumber, 4, ' ', STR_PAD_LEFT);
+            $string     .= \str_pad((string)$fileNumber, 4, ' ', STR_PAD_LEFT);
             $string     .= "/" . $this->numberOfAnalysedFile . " (" . \floor($fileNumber * 100 / $this->numberOfAnalysedFile) . " %)\n";
         }
         $string .= "Checked {$fileNumber} files\n";

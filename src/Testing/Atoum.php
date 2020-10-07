@@ -18,12 +18,12 @@ use PHPCensor\Common\Plugin\Plugin;
 class Atoum extends Plugin
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $args = null;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $config = null;
 

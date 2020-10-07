@@ -100,7 +100,7 @@ class WebhookNotify extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        if (!\is_array($this->options->all())) {
+        if (!$this->options->all()) {
             throw new Exception("Please configure the options for the WebhookNotify plugin!");
         }
 
@@ -108,7 +108,7 @@ class WebhookNotify extends Plugin
             throw new Exception("Please define the url for WebhookNotify plugin!");
         }
 
-        $this->url  = \trim($this->options->get('url'));
+        $this->url = \trim((string)$this->options->get('url', ''));
     }
 
     /**

@@ -39,6 +39,7 @@ class Phing extends Plugin
     {
         $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
 
+        $cmd   = [];
         $cmd[] = $executable . ' -f ' . $this->getBuildFilePath();
 
         if ($this->getPropertyFile()) {
@@ -74,9 +75,16 @@ class Phing extends Plugin
         $this->setBuildFile($buildFile);
 
         $targets = $this->options->get('targets', $this->targets);
+        if (!\is_array($targets)) {
+            $targets = [(string)$targets];
+        }
+
         $this->setTargets($targets);
 
         $properties = $this->options->get('properties', $this->properties);
+        if (!\is_array($properties)) {
+            $properties = [(string)$properties];
+        }
         $this->setProperties($properties);
 
         $propertyFile = (string)$this->options->get('property_file', $this->propertyFile);

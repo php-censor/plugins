@@ -136,11 +136,11 @@ class SlackNotify extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        if (!\is_array($this->options->all()) || !$this->options->get('webhook_url')) {
+        if (!$this->options->all() || !$this->options->get('webhook_url')) {
             throw new Exception("Please define the webhook_url for SlackNotify plugin!");
         }
 
-        $this->webHook    = \trim($this->options->get('webhook_url'));
+        $this->webHook    = \trim((string)$this->options->get('webhook_url', ''));
         $this->message    = $this->options->get('message', $this->message);
         $this->room       = $this->options->get('room', $this->room);
         $this->username   = $this->options->get('username', $this->username);

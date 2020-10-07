@@ -118,7 +118,7 @@ class Mysql extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $buildSettings    = $this->buildSettings->get('mysql', []);
+        $buildSettings    = (array)$this->buildSettings->get('mysql', []);
         $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
 
         $this->host       = $buildSettingsBag->get('host', $this->host);

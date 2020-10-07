@@ -44,7 +44,7 @@ class DeployerOrg extends Plugin
             return $validationResult['successful'];
         }
 
-        $branchConfig = $this->options[$this->branch];
+        $branchConfig = (array)$this->options->get($this->branch, []);
         $options      = $this->getOptions($branchConfig);
         $deployerCmd  = "$executable $options";
 

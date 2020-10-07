@@ -157,7 +157,7 @@ class TelegramNotify extends Plugin
         $buildMessages  = \explode('RUNNING PLUGIN: ', $buildLog);
 
         foreach ($buildMessages as $bm) {
-            $pos      = \mb_strpos($bm, "\n");
+            $pos      = (int)\mb_strpos($bm, "\n");
             $firstRow = \mb_substr($bm, 0, $pos);
 
             //skip long outputs

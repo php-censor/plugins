@@ -98,7 +98,7 @@ class Pgsql extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $buildSettings    = $this->buildSettings->get('pgsql', []);
+        $buildSettings    = (array)$this->buildSettings->get('pgsql', []);
         $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
 
         $this->host       = $buildSettingsBag->get('host', $this->host);

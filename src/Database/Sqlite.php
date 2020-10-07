@@ -50,7 +50,7 @@ class Sqlite extends Plugin
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         ], $this->pdoOptions);
 
-        $pdo = new PDO('sqlite:' . $this->path, $pdoOptions);
+        $pdo = new PDO(('sqlite:' . $this->path), null, null, $pdoOptions);
 
         foreach ($this->queries as $query) {
             $pdo->query($query);
@@ -72,7 +72,7 @@ class Sqlite extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $buildSettings    = $this->buildSettings->get('sqlite', []);
+        $buildSettings    = (array)$this->buildSettings->get('sqlite', []);
         $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
 
         $this->path       = $buildSettingsBag->get('path', $this->path);

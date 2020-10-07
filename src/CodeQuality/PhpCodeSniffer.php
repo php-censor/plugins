@@ -53,7 +53,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
     private $allowedWarnings = 0;
 
     /**
-     * @var int
+     * @var int|null
      */
     private $severity = null;
 

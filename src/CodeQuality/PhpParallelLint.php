@@ -90,7 +90,7 @@ class PhpParallelLint extends Plugin implements ZeroConfigPluginInterface
 
         if ($this->options->has('extensions')) {
             $pattern    = '#^([a-z]+)(,\ *[a-z]*)*$#';
-            $extensions = $this->options->get('extensions', '');
+            $extensions = (string)$this->options->get('extensions', '');
 
             if (\preg_match($pattern, $extensions)) {
                 $this->extensions = \str_replace(' ', '', $extensions);
