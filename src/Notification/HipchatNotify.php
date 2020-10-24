@@ -101,7 +101,7 @@ class HipchatNotify extends Plugin
     protected function initPluginSettings(): void
     {
         if (!$this->options->all() || !$this->options->get('authToken') || !$this->options->get('room')) {
-            throw new Exception("Please define room and authToken for HipchatNotify plugin!");
+            throw new Exception("Please define 'room' and 'authToken' for HipchatNotify plugin!");
         }
 
         $this->authToken = $this->options->get('authToken');
