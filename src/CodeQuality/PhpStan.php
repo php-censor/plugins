@@ -31,7 +31,7 @@ class PhpStan extends Plugin
      */
     public static function getName(): string
     {
-        return 'phpstan';
+        return 'php_stan';
     }
 
     /**
