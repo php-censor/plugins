@@ -2,17 +2,17 @@
 
 declare(strict_types = 1);
 
-namespace Tests\PHPCensor\Plugins\CodeQuality;
+namespace Tests\PHPCensor\Plugins\Notification;
 
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Plugins\CodeQuality\PhpTalLint;
+use PHPCensor\Plugins\Notification\IrcNotify;
 use PHPUnit\Framework\TestCase;
 
-class PhpTalLintTest extends TestCase
+class IrcNotifyTest extends TestCase
 {
     public function testGetName()
     {
-        $this->assertEquals('php_tal_lint', PhpTalLint::getName());
+        $this->assertEquals('irc_notify', IrcNotify::getName());
     }
 
     /**
@@ -25,7 +25,7 @@ class PhpTalLintTest extends TestCase
     {
         $this->assertEquals(
             $expectedResult,
-            PhpTalLint::canExecute(
+            IrcNotify::canExecute(
                 $stage,
                 $this->createMock(BuildInterface::class)
             )
@@ -36,13 +36,13 @@ class PhpTalLintTest extends TestCase
     {
         return [
             [BuildInterface::STAGE_SETUP, false],
-            [BuildInterface::STAGE_TEST, true],
+            [BuildInterface::STAGE_TEST, false],
             [BuildInterface::STAGE_DEPLOY, false],
-            [BuildInterface::STAGE_COMPLETE, false],
-            [BuildInterface::STAGE_SUCCESS, false],
-            [BuildInterface::STAGE_FAILURE, false],
-            [BuildInterface::STAGE_FIXED, false],
-            [BuildInterface::STAGE_BROKEN, false],
+            [BuildInterface::STAGE_COMPLETE, true],
+            [BuildInterface::STAGE_SUCCESS, true],
+            [BuildInterface::STAGE_FAILURE, true],
+            [BuildInterface::STAGE_FIXED, true],
+            [BuildInterface::STAGE_BROKEN, true],
         ];
     }
 }

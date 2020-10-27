@@ -114,7 +114,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
         ];
     }
 
-    protected function processRules(): void
+    private function processRules(): void
     {
         foreach ($this->rules as &$rule) {
             if (false !== \strpos($rule, '/')) {
@@ -132,7 +132,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
      *
      * @throws Exception
      */
-    protected function processReport(string $xmlString): int
+    private function processReport(string $xmlString): int
     {
         $xml = \simplexml_load_string($xmlString);
 
@@ -168,7 +168,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
      *
      * @param $executable
      */
-    protected function executePhpMd($executable)
+    private function executePhpMd($executable)
     {
         $cmd = 'cd "%s" && ' . $executable . ' "%s" xml %s %s %s';
 

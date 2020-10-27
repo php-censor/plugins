@@ -109,7 +109,7 @@ class PhpParallelLint extends Plugin implements ZeroConfigPluginInterface
         ];
     }
 
-    protected function getExcludeString(): string
+    private function getExcludeString(): string
     {
         $ignoreFlags = [];
         foreach ($this->ignores as $ignore) {

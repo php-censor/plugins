@@ -119,7 +119,7 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
      *
      * @throws Exception
      */
-    protected function processReport(string $xmlString): int
+    private function processReport(string $xmlString): int
     {
         $xml = \simplexml_load_string($xmlString);
 

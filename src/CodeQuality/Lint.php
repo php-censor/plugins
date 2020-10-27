@@ -84,7 +84,7 @@ class Lint extends Plugin
      *
      * @return bool
      */
-    protected function lintDirectory($path)
+    private function lintDirectory($path)
     {
         $success   = true;
         $directory = new \DirectoryIterator($path);
@@ -115,7 +115,7 @@ class Lint extends Plugin
      *
      * @return bool
      */
-    protected function lintItem(\SplFileInfo $item, $itemPath)
+    private function lintItem(\SplFileInfo $item, $itemPath)
     {
         $success = true;
         if ($item->isFile() && $item->getExtension() == 'php' && !$this->lintFile($itemPath)) {
@@ -138,7 +138,7 @@ class Lint extends Plugin
      *
      * @return bool
      */
-    protected function lintFile($path)
+    private function lintFile($path)
     {
         $success = true;
         if (!$this->commandExecutor->executeCommand('php -l "%s"', $path)) {

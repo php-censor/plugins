@@ -2,17 +2,17 @@
 
 declare(strict_types = 1);
 
-namespace Tests\PHPCensor\Plugins\CodeQuality;
+namespace Tests\PHPCensor\Plugins\Testing;
 
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Plugins\CodeQuality\PhpTalLint;
+use PHPCensor\Plugins\Testing\Atoum;
 use PHPUnit\Framework\TestCase;
 
-class PhpTalLintTest extends TestCase
+class AtoumTest extends TestCase
 {
     public function testGetName()
     {
-        $this->assertEquals('php_tal_lint', PhpTalLint::getName());
+        $this->assertEquals('atoum', Atoum::getName());
     }
 
     /**
@@ -25,7 +25,7 @@ class PhpTalLintTest extends TestCase
     {
         $this->assertEquals(
             $expectedResult,
-            PhpTalLint::canExecute(
+            Atoum::canExecute(
                 $stage,
                 $this->createMock(BuildInterface::class)
             )

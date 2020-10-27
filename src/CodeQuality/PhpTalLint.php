@@ -125,7 +125,7 @@ class PhpTalLint extends Plugin
      *
      * @return bool
      */
-    protected function lintDirectory($path)
+    private function lintDirectory($path)
     {
         $success   = true;
         $directory = new \DirectoryIterator($path);
@@ -156,7 +156,7 @@ class PhpTalLint extends Plugin
      *
      * @return bool
      */
-    protected function lintItem(\SplFileInfo $item, $itemPath)
+    private function lintItem(\SplFileInfo $item, $itemPath)
     {
         $success = true;
 
@@ -178,7 +178,7 @@ class PhpTalLint extends Plugin
      *
      * @return bool
      */
-    protected function lintFile($path)
+    private function lintFile($path)
     {
         $success  = true;
         $suffixes = ' -e ' . \implode(',', $this->suffixes);

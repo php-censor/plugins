@@ -140,7 +140,7 @@ class Mysql extends Plugin
      *
      * @throws Exception
      */
-    protected function executeFile(array $query): bool
+    private function executeFile(array $query): bool
     {
         if (!isset($query['file'])) {
             throw new Exception('Import statement must contain a \'file\' key');
@@ -169,7 +169,7 @@ class Mysql extends Plugin
      *
      * @return string
      */
-    protected function getImportCommand(string $importFile, $database = null): string
+    private function getImportCommand(string $importFile, $database = null): string
     {
         $decompression = [
             'bz2' => '| bzip2 --decompress',

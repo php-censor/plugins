@@ -106,7 +106,7 @@ class CopyBuild extends Plugin
      *
      * @throws Exception
      */
-    protected function wipeExistingDirectory()
+    private function wipeExistingDirectory()
     {
         if ($this->wipe === true && $this->directory !== '/' && \is_dir($this->directory)) {
             $cmd     = 'cd "%s" && rm -Rf "%s"';
@@ -125,7 +125,7 @@ class CopyBuild extends Plugin
     /**
      * Delete any ignored files from the build prior to copying.
      */
-    protected function deleteIgnoredFiles()
+    private function deleteIgnoredFiles()
     {
         if ($this->respectIgnore) {
             foreach ($this->ignores as $file) {

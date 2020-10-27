@@ -185,7 +185,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
         ];
     }
 
-    protected function getFlags(): array
+    private function getFlags(): array
     {
         $ignoreString = '';
         if ($this->ignores) {
@@ -229,7 +229,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
      *
      * @throws Exception
      */
-    protected function processReport(string $output): array
+    private function processReport(string $output): array
     {
         $data = \json_decode(\trim($output), true);
 

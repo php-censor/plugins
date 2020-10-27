@@ -90,7 +90,7 @@ class DeployerOrg extends Plugin
      *
      *  @return array validation result
      */
-    protected function validateConfig(): ?array
+    private function validateConfig(): ?array
     {
         if (!$this->options->all()) {
             return [
@@ -124,7 +124,7 @@ class DeployerOrg extends Plugin
      *
      * @return string Verbosity flag
      */
-    protected function getVerbosityOption($verbosity)
+    private function getVerbosityOption($verbosity)
     {
         $logLevelList = [
             'verbose'      => 'v',
@@ -147,7 +147,7 @@ class DeployerOrg extends Plugin
      *
      * @return string Deployer options
      */
-    protected function getOptions($config)
+    private function getOptions($config)
     {
         $options = [];
         if (!empty($config['task'])) {

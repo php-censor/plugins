@@ -2,17 +2,17 @@
 
 declare(strict_types = 1);
 
-namespace Tests\PHPCensor\Plugins\CodeQuality;
+namespace Tests\PHPCensor\Plugins\Deploy;
 
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Plugins\CodeQuality\PhpTalLint;
+use PHPCensor\Plugins\Deploy\DeployerOrg;
 use PHPUnit\Framework\TestCase;
 
-class PhpTalLintTest extends TestCase
+class DeployerOrgTest extends TestCase
 {
     public function testGetName()
     {
-        $this->assertEquals('php_tal_lint', PhpTalLint::getName());
+        $this->assertEquals('deployer_org', DeployerOrg::getName());
     }
 
     /**
@@ -25,7 +25,7 @@ class PhpTalLintTest extends TestCase
     {
         $this->assertEquals(
             $expectedResult,
-            PhpTalLint::canExecute(
+            DeployerOrg::canExecute(
                 $stage,
                 $this->createMock(BuildInterface::class)
             )
@@ -36,8 +36,8 @@ class PhpTalLintTest extends TestCase
     {
         return [
             [BuildInterface::STAGE_SETUP, false],
-            [BuildInterface::STAGE_TEST, true],
-            [BuildInterface::STAGE_DEPLOY, false],
+            [BuildInterface::STAGE_TEST, false],
+            [BuildInterface::STAGE_DEPLOY, true],
             [BuildInterface::STAGE_COMPLETE, false],
             [BuildInterface::STAGE_SUCCESS, false],
             [BuildInterface::STAGE_FAILURE, false],
