@@ -17,6 +17,7 @@ use PHPCensor\Common\Plugin\Plugin;
  * @subpackage Plugins
  *
  * @author Dmitry Khomutov <poisoncorpsee@gmail.com>
+ * @author Fred Delrieu <caouecs@caouecs.net>
  */
 class Phan extends Plugin
 {

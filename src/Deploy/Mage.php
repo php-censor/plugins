@@ -15,6 +15,7 @@ use PHPCensor\Common\Plugin\Plugin;
  * @subpackage Plugins
  *
  * @author Dmitry Khomutov <poisoncorpsee@gmail.com>
+ * @author Stepan Strelets <s.strelec@nikitaonline.ru>
  */
 class Mage extends Plugin
 {

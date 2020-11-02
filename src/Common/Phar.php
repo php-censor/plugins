@@ -15,6 +15,7 @@ use PHPCensor\Common\Plugin\Plugin;
  * @subpackage Plugins
  *
  * @author Dmitry Khomutov <poisoncorpsee@gmail.com>
+ * @author Wanderson Camargo <wandersonwhcr@gmail.com>
  */
 class Phar extends Plugin
 {

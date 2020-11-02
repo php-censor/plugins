@@ -16,6 +16,7 @@ use PHPCensor\Common\Plugin\Plugin;
  * @subpackage Plugins
  *
  * @author Dmitry Khomutov <poisoncorpsee@gmail.com>
+ * @author Panagiotis Kosmidis <panoskosmidis87@gmail.com>
  */
 class Pahout extends Plugin
 {

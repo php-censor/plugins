@@ -21,13 +21,40 @@ class ComposerTest extends TestCase
      * @param string $stage
      * @param bool $expectedResult
      */
-    public function testCanExecute(string $stage, bool $expectedResult)
+    public function testCanExecuteWithNotExistsPath(string $stage, bool $expectedResult)
     {
+        $build = $this->createMock(BuildInterface::class);
+        $build
+            ->method('getBuildPath')
+            ->willReturn('/var/www/php-censor.local/runtime/builds/1/');
+
+        $this->assertEquals(
+            false,
+            Composer::canExecute(
+                $stage,
+                $build
+            )
+        );
+    }
+
+    /**
+     * @dataProvider canExecuteProvider
+     *
+     * @param string $stage
+     * @param bool $expectedResult
+     */
+    public function testCanExecuteWithExistsPath(string $stage, bool $expectedResult)
+    {
+        $build = $this->createMock(BuildInterface::class);
+        $build
+            ->method('getBuildPath')
+            ->willReturn(\rtrim(\dirname(\dirname(\dirname(__DIR__))), "/\\") . '/');
+
         $this->assertEquals(
             $expectedResult,
             Composer::canExecute(
                 $stage,
-                $this->createMock(BuildInterface::class)
+                $build
             )
         );
     }

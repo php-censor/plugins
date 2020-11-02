@@ -14,6 +14,7 @@ use PHPCensor\Common\Plugin\Plugin;
  * @subpackage Plugins
  *
  * @author Dmitry Khomutov <poisoncorpsee@gmail.com>
+ * @author Sanpi <sanpi@homecomputing.fr>
  */
 class Atoum extends Plugin
 {

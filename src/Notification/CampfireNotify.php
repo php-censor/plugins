@@ -103,7 +103,9 @@ class CampfireNotify extends Plugin
         $this->authToken = $buildSettingsBag->get('authToken', $this->authToken);
         $this->roomId    = $buildSettingsBag->get('roomId', $this->roomId);
 
-        $this->message   = $this->options->get('message', $this->message);
+        $this->message = (string)$this->options->get('message', $this->message);
+        $this->verbose = (bool)$this->options->get('verbose', $this->verbose);
+
         $this->userAgent = 'PHP Censor/' . $this->variableInterpolator->interpolate('%SYSTEM_VERSION%');
         $this->cookie    = "php-censor-cookie";
     }

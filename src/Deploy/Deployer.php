@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace PHPCensor\Plugins\Deploy;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as HttpClient;
 use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Plugin\Plugin;
 
@@ -42,7 +42,7 @@ class Deployer extends Plugin
             return false;
         }
 
-        $client   = new Client();
+        $client   = new HttpClient();
         $response = $client->post(
             $this->webhookUrl,
             [
@@ -59,9 +59,7 @@ class Deployer extends Plugin
 
         $status = (int)$response->getStatusCode();
 
-        return ($status >= 200 && $status < 300)
-            ? true
-            : false;
+        return ($status >= 200 && $status < 300);
     }
 
     /**
