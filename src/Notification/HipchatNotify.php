@@ -100,11 +100,11 @@ class HipchatNotify extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        if (!$this->options->all() || !$this->options->get('authToken') || !$this->options->get('room')) {
-            throw new Exception("Please define 'room' and 'authToken' for HipchatNotify plugin!");
+        if (!$this->options->all() || !$this->options->get('auth_token') || !$this->options->get('room')) {
+            throw new Exception("Please define 'room' and 'auth_token' for HipchatNotify plugin!");
         }
 
-        $this->authToken = $this->options->get('authToken');
+        $this->authToken = $this->options->get('auth_token');
         $this->room      = $this->options->get('room');
         $this->message   = $this->options->get('message', $this->message);
         $this->color     = $this->options->get('color', $this->color);

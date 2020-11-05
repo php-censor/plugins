@@ -23,7 +23,7 @@ class TelegramNotify extends Plugin
     /**
      * @var string
      */
-    private $apiKey;
+    private $authToken;
 
     /**
      * @var string
@@ -60,7 +60,7 @@ class TelegramNotify extends Plugin
     {
         $message = $this->buildMessage();
         $client  = new HttpClient();
-        $url     = '/bot'. $this->apiKey . '/sendMessage';
+        $url     = '/bot'. $this->authToken . '/sendMessage';
 
         foreach ($this->recipients as $chatId) {
             $params = [
@@ -116,16 +116,16 @@ class TelegramNotify extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        if (!$this->options->get('api_key')) {
-            throw new Exception("Not setting telegram api_key");
+        if (!$this->options->get('auth_token')) {
+            throw new Exception("Not setting telegram 'auth_token'");
         }
 
         if (!$this->options->get('recipients')) {
-            throw new Exception("Not setting telegram api_key");
+            throw new Exception("Not setting telegram 'recipients'");
         }
 
-        $this->apiKey  = $this->options->get('api_key');
-        $this->message = '[%ICON_BUILD%] [%PROJECT_TITLE%](%PROJECT_LINK%)' .
+        $this->authToken = $this->options->get('auth_token');
+        $this->message   = '[%ICON_BUILD%] [%PROJECT_TITLE%](%PROJECT_LINK%)' .
             ' - [Build #%BUILD_ID%](%BUILD_LINK%) has finished ' .
             'for commit [%SHORT_COMMIT_ID% (%COMMITTER_EMAIL%)](%COMMIT_LINK%) ' .
             'on branch [%BRANCH%](%BRANCH_LINK%)';

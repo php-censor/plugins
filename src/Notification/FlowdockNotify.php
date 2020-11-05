@@ -24,7 +24,7 @@ class FlowdockNotify extends Plugin
     /**
      * @var string
      */
-    private $apiKey;
+    private $authToken;
 
     /**
      * @var string
@@ -52,7 +52,7 @@ class FlowdockNotify extends Plugin
     {
         $message         = $this->variableInterpolator->interpolate($this->message);
         $successfulBuild = $this->build->isSuccessful() ? 'Success' : 'Failed';
-        $push            = new Push($this->apiKey);
+        $push            = new Push($this->authToken);
         $flowMessage     = TeamInboxMessage::create()
             ->setSource("PHPCensor")
             ->setFromAddress($this->email)
@@ -94,12 +94,12 @@ class FlowdockNotify extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        if (!$this->options->all() || !$this->options->get('api_key')) {
-            throw new Exception("Please define the 'api_key' for FlowdockNotify plugin!");
+        if (!$this->options->all() || !$this->options->get('auth_token')) {
+            throw new Exception("Please define the 'auth_token' for FlowdockNotify plugin!");
         }
 
-        $this->apiKey  = \trim($this->options->get('api_key'));
-        $this->message = $this->options->get('message', $this->message);
-        $this->email   = $this->options->get('email', $this->email);
+        $this->authToken = \trim($this->options->get('auth_token'));
+        $this->message   = $this->options->get('message', $this->message);
+        $this->email     = $this->options->get('email', $this->email);
     }
 }

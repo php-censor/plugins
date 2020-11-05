@@ -29,7 +29,7 @@ class SensiolabsInsight extends Plugin
     /**
      * @var string
      */
-    private $apiToken = '';
+    private $authToken = '';
 
     /**
      * @var string
@@ -83,7 +83,7 @@ class SensiolabsInsight extends Plugin
     {
         $this->allowedWarnings = (int)$this->options->get('allowed_warnings', $this->allowedWarnings);
         $this->userUuid        = $this->options->get('user_uuid', $this->userUuid);
-        $this->apiToken        = $this->options->get('api_token', $this->apiToken);
+        $this->authToken       = $this->options->get('auth_token', $this->authToken);
         $this->projectUuid     = $this->options->get('project_uuid', $this->projectUuid);
     }
 
@@ -151,7 +151,7 @@ class SensiolabsInsight extends Plugin
             $cmd,
             $this->build->getBranch(),
             $this->projectUuid,
-            $this->apiToken,
+            $this->authToken,
             $this->userUuid
         );
 
@@ -160,7 +160,7 @@ class SensiolabsInsight extends Plugin
         $this->commandExecutor->executeCommand(
             $cmd,
             $this->projectUuid,
-            $this->apiToken,
+            $this->authToken,
             $this->userUuid
         );
     }

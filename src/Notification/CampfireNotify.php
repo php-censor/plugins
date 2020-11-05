@@ -100,8 +100,8 @@ class CampfireNotify extends Plugin
         $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
 
         $this->url       = $buildSettingsBag->get('url', $this->url);
-        $this->authToken = $buildSettingsBag->get('authToken', $this->authToken);
-        $this->roomId    = $buildSettingsBag->get('roomId', $this->roomId);
+        $this->authToken = $buildSettingsBag->get('auth_token', $this->authToken);
+        $this->roomId    = $buildSettingsBag->get('room_id', $this->roomId);
 
         $this->message = (string)$this->options->get('message', $this->message);
         $this->verbose = (bool)$this->options->get('verbose', $this->verbose);
