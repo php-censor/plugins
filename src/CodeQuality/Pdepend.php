@@ -21,16 +21,6 @@ use Symfony\Component\Filesystem\Filesystem;
 class Pdepend extends Plugin
 {
     /**
-     * @var string
-     */
-    private $buildDirectory;
-
-    /**
-     * @var string
-     */
-    private $buildBranchDirectory;
-
-    /**
      * @var string File where the summary.xml is stored
      */
     private $summary = 'summary.xml';
@@ -44,16 +34,6 @@ class Pdepend extends Plugin
      * @var string File where the pyramid.svg is stored
      */
     private $pyramid = 'pyramid.svg';
-
-    /**
-     * @var string
-     */
-    private $buildLocation;
-
-    /**
-     * @var string
-     */
-    private $buildBranchLocation;
 
     /**
      * {@inheritdoc}
@@ -81,14 +61,14 @@ class Pdepend extends Plugin
 
         $fileSystem = new Filesystem();
 
-        if (!$fileSystem->exists($this->buildLocation)) {
-            $fileSystem->mkdir($this->buildLocation, (0777 & ~\umask()));
+        if (!$fileSystem->exists($this->getArtifactPath())) {
+            $fileSystem->mkdir($this->getArtifactPath(), (0777 & ~\umask()));
         }
 
-        if (!\is_writable($this->buildLocation)) {
+        if (!\is_writable($this->getArtifactPath())) {
             throw new Exception(\sprintf(
                 'The location %s is not writable or does not exist.',
-                $this->buildLocation
+                $this->getArtifactPath()
             ));
         }
 
@@ -102,31 +82,31 @@ class Pdepend extends Plugin
         $success = $this->commandExecutor->executeCommand(
             $cmd,
             $this->build->getBuildPath(),
-            $this->buildLocation . '/' . $this->summary,
-            $this->buildLocation . '/' . $this->chart,
-            $this->buildLocation . '/' . $this->pyramid,
+            $this->getArtifactPath($this->summary),
+            $this->getArtifactPath($this->chart),
+            $this->getArtifactPath($this->pyramid),
             $ignores,
             $this->directory
         );
 
         if (!$allowPublicArtifacts) {
-            $fileSystem->remove($this->buildLocation);
+            $fileSystem->remove($this->getArtifactPath());
         }
-        if ($allowPublicArtifacts && \file_exists($this->buildLocation)) {
-            $fileSystem->remove($this->buildBranchLocation);
-            $fileSystem->mirror($this->buildLocation, $this->buildBranchLocation);
+        if ($allowPublicArtifacts && \file_exists($this->getArtifactPath())) {
+            $fileSystem->remove($this->getArtifactPathForBranch());
+            $fileSystem->mirror($this->getArtifactPath(), $this->getArtifactPathForBranch());
         }
 
         if ($allowPublicArtifacts && $success) {
             $this->buildLogger->logSuccess(
                 \sprintf(
                     "\nPdepend successful build report.\nYou can use report for this build for inclusion in the readme.md file:\n%s,\n![Chart](%s \"Pdepend Chart\") and\n![Pyramid](%s \"Pdepend Pyramid\")\n\nOr report for last build in the branch:\n%s,\n![Chart](%s \"Pdepend Chart\") and\n![Pyramid](%s \"Pdepend Pyramid\")\n",
-                    $this->application->getArtifactsLink() . 'pdepend/' . $this->buildDirectory . '/' . $this->summary,
-                    $this->application->getArtifactsLink() . 'pdepend/' . $this->buildDirectory . '/' . $this->chart,
-                    $this->application->getArtifactsLink() . 'pdepend/' . $this->buildDirectory . '/' . $this->pyramid,
-                    $this->application->getArtifactsLink() . 'pdepend/' . $this->buildBranchDirectory . '/' . $this->summary,
-                    $this->application->getArtifactsLink() . 'pdepend/' . $this->buildBranchDirectory . '/' . $this->chart,
-                    $this->application->getArtifactsLink() . 'pdepend/' . $this->buildBranchDirectory . '/' . $this->pyramid
+                    $this->getArtifactLink($this->summary),
+                    $this->getArtifactLink($this->chart),
+                    $this->getArtifactLink($this->pyramid),
+                    $this->getArtifactLinkForBranch($this->summary),
+                    $this->getArtifactLinkForBranch($this->chart),
+                    $this->getArtifactLinkForBranch($this->pyramid)
                 )
             );
         }
@@ -151,11 +131,6 @@ class Pdepend extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->buildDirectory       = $this->build->getBuildDirectory();
-        $this->buildBranchDirectory = $this->build->getBuildBranchDirectory();
-
-        $this->buildLocation       = $this->application->getArtifactsPath() . 'pdepend/' . $this->buildDirectory;
-        $this->buildBranchLocation = $this->application->getArtifactsPath() . 'pdepend/' . $this->buildBranchDirectory;
     }
 
     /**
