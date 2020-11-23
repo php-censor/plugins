@@ -6,7 +6,7 @@ namespace PHPCensor\Plugins\CodeQuality;
 
 use PHPCensor\Common\Build\BuildErrorInterface;
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Common\Build\BuildMetaWriterInterface;
+use PHPCensor\Common\Build\BuildMetaInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
 use SebastianBergmann\Diff\Line;
@@ -129,7 +129,7 @@ class PhpCsFixer extends Plugin
             $this->buildMetaWriter->write(
                 $this->build->getId(),
                 self::getName(),
-                BuildMetaWriterInterface::KEY_WARNINGS,
+                BuildMetaInterface::KEY_WARNINGS,
                 $warningCount
             );
 

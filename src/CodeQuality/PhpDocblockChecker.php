@@ -6,7 +6,7 @@ namespace PHPCensor\Plugins\CodeQuality;
 
 use PHPCensor\Common\Build\BuildErrorInterface;
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Common\Build\BuildMetaWriterInterface;
+use PHPCensor\Common\Build\BuildMetaInterface;
 use PHPCensor\Common\Plugin\Plugin;
 use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
 
@@ -98,7 +98,7 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
 
             $this->reportErrors($output);
         }
-        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaWriterInterface::KEY_WARNINGS, $errors);
+        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaInterface::KEY_WARNINGS, $errors);
 
         $success = true;
 

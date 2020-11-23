@@ -7,7 +7,7 @@ namespace PHPCensor\Plugins\Notification;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\GuzzleException;
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Common\Build\BuildMetaWriterInterface;
+use PHPCensor\Common\Build\BuildMetaInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
 use PHPCensor\Common\Plugin\Plugin\ParameterBag;
@@ -26,7 +26,7 @@ use Psr\Http\Message\ResponseInterface;
  * @subpackage Plugins
  *
  * @author Dmitry Khomutov <poisoncorpsee@gmail.com>
- * @author Eugen Ganshorn <eugen.ganshorn@check24.de>
+ * @author Eugen Ganshorn  <eugen.ganshorn@check24.de>
  */
 class BitbucketNotify extends Plugin
 {
@@ -340,7 +340,9 @@ class BitbucketNotify extends Plugin
 
     /**
      * @param string $targetBranch
+     *
      * @return PluginResult
+     *
      * @throws Exception
      */
     private function getPhpUnitCoverage(string $targetBranch): PluginResult
@@ -356,14 +358,14 @@ class BitbucketNotify extends Plugin
             $targetMetaData = $buildMetaRepository->getOneByBuildIdAndPluginAndKey(
                 $lastBuildId,
                 PhpUnit::getName(),
-                BuildMetaWriterInterface::KEY_COVERAGE
+                BuildMetaInterface::KEY_COVERAGE
             );
         }
 
         $currentMetaData = $buildMetaRepository->getOneByBuildIdAndPluginAndKey(
             $this->build->getId(),
             PhpUnit::getName(),
-            BuildMetaWriterInterface::KEY_COVERAGE
+            BuildMetaInterface::KEY_COVERAGE
         );
 
         $targetBranchCoverage = [];
@@ -377,7 +379,7 @@ class BitbucketNotify extends Plugin
         }
 
         return new PluginResult(
-            PhpUnit::getName() . '-' . BuildMetaWriterInterface::KEY_COVERAGE,
+            PhpUnit::getName() . '-' . BuildMetaInterface::KEY_COVERAGE,
             isset($targetBranchCoverage['lines']) ? $targetBranchCoverage['lines'] : 0,
             isset($currentBranchCoverage['lines']) ? $currentBranchCoverage['lines'] : 0
         );

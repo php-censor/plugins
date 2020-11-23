@@ -6,7 +6,7 @@ namespace PHPCensor\Plugins\CodeQuality;
 
 use PHPCensor\Common\Build\BuildErrorInterface;
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Common\Build\BuildMetaWriterInterface;
+use PHPCensor\Common\Build\BuildMetaInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
 
@@ -59,7 +59,7 @@ class SensiolabsInsight extends Plugin
         $this->executeSensiolabsInsight($executable);
 
         $errorCount = $this->processReport(\trim($this->commandExecutor->getLastCommandOutput()));
-        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaWriterInterface::KEY_WARNINGS, $errorCount);
+        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaInterface::KEY_WARNINGS, $errorCount);
 
         return $this->wasLastExecSuccessful($errorCount);
     }

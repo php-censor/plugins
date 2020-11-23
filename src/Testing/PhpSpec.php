@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace PHPCensor\Plugins\Testing;
 
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Common\Build\BuildMetaWriterInterface;
+use PHPCensor\Common\Build\BuildMetaInterface;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
@@ -114,7 +114,7 @@ class PhpSpec extends Plugin
         $this->buildMetaWriter->write(
             $this->build->getId(),
             self::getName(),
-            BuildMetaWriterInterface::KEY_DATA,
+            BuildMetaInterface::KEY_DATA,
             $data
         );
 

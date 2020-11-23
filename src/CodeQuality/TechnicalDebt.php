@@ -6,7 +6,7 @@ namespace PHPCensor\Plugins\CodeQuality;
 
 use PHPCensor\Common\Build\BuildErrorInterface;
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Common\Build\BuildMetaWriterInterface;
+use PHPCensor\Common\Build\BuildMetaInterface;
 use PHPCensor\Common\Plugin\Plugin;
 use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
 use RecursiveDirectoryIterator;
@@ -80,7 +80,7 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
         $this->buildMetaWriter->write(
             $this->build->getId(),
             self::getName(),
-            BuildMetaWriterInterface::KEY_WARNINGS,
+            BuildMetaInterface::KEY_WARNINGS,
             $errorCount
         );
 

@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace PHPCensor\Plugins\CodeQuality;
 
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Common\Build\BuildMetaWriterInterface;
+use PHPCensor\Common\Build\BuildMetaInterface;
 use PHPCensor\Common\Plugin\Plugin;
 use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
 
@@ -61,7 +61,7 @@ class PhpParallelLint extends Plugin implements ZeroConfigPluginInterface
             $this->buildMetaWriter->write(
                 $this->build->getId(),
                 self::getName(),
-                BuildMetaWriterInterface::KEY_ERRORS,
+                BuildMetaInterface::KEY_ERRORS,
                 \count($matches[0])
             );
         }

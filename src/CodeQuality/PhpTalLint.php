@@ -5,7 +5,7 @@ declare(strict_types = 1);
 namespace PHPCensor\Plugins\CodeQuality;
 
 use PHPCensor\Common\Build\BuildInterface;
-use PHPCensor\Common\Build\BuildMetaWriterInterface;
+use PHPCensor\Common\Build\BuildMetaInterface;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
@@ -68,9 +68,9 @@ class PhpTalLint extends Plugin
             }
         }
 
-        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaWriterInterface::KEY_WARNINGS, $warnings);
-        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaWriterInterface::KEY_ERRORS, $errors);
-        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaWriterInterface::KEY_DATA, $this->failedPaths);
+        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaInterface::KEY_WARNINGS, $warnings);
+        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaInterface::KEY_ERRORS, $errors);
+        $this->buildMetaWriter->write($this->build->getId(), self::getName(), BuildMetaInterface::KEY_DATA, $this->failedPaths);
 
         $success = true;
 
