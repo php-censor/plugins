@@ -7,7 +7,7 @@ Code style
 ----------
 
 ```bash
-vendor/bin/php-cs-fixer fix
+vendor/bin/php-cs-fixer --diff fix
 
 vendor/bin/psalm --config=psalm.xml.dist --threads=4 --show-snippet=true --show-info=true
 ```
