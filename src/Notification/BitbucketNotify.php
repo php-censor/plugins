@@ -33,42 +33,42 @@ class BitbucketNotify extends Plugin
     /**
      * @var string
      */
-    private $url = '';
+    private string $url = '';
 
     /**
      * @var string
      */
-    private $authToken = '';
+    private string $authToken = '';
 
     /**
      * @var string
      */
-    private $projectKey = '';
+    private string $projectKey = '';
 
     /**
      * @var string
      */
-    private $repositorySlug = '';
+    private string $repositorySlug = '';
 
     /**
      * @var bool
      */
-    private $createTaskPerFail = true;
+    private bool $createTaskPerFail = true;
 
     /**
      * @var bool
      */
-    private $createTaskIfFail = true;
+    private bool $createTaskIfFail = true;
 
     /**
      * @var bool
      */
-    private $updateBuild = false;
+    private bool $updateBuild = false;
 
     /**
      * @var string
      */
-    private $message = '';
+    private string $message = '';
 
     /**
      * {@inheritdoc}
@@ -232,7 +232,7 @@ class BitbucketNotify extends Plugin
      *
      * @throws GuzzleException
      */
-    private function createCommentInPullRequest(int $pullRequestId, string $message)
+    private function createCommentInPullRequest(int $pullRequestId, string $message): int
     {
         $endpoint = \sprintf(
             '/projects/%s/repos/%s/pull-requests/%s/comments',
@@ -297,8 +297,6 @@ class BitbucketNotify extends Plugin
      * @param string $targetBranch
      *
      * @return PluginResult[]
-     *
-     * @throws Exception
      */
     private function prepareResult(string $targetBranch): array
     {
@@ -342,8 +340,6 @@ class BitbucketNotify extends Plugin
      * @param string $targetBranch
      *
      * @return PluginResult
-     *
-     * @throws Exception
      */
     private function getPhpUnitCoverage(string $targetBranch): PluginResult
     {
@@ -427,7 +423,6 @@ class BitbucketNotify extends Plugin
      *
      * @return int|null
      *
-     * @throws Exception
      */
     private function findLatestBuild(string $branchName): ?int
     {

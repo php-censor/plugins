@@ -19,26 +19,26 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class PhpTalLint extends Plugin
 {
-    private $recursive = true;
+    private bool $recursive = true;
 
-    private $suffixes = ['zpt'];
-
-    /**
-     * @var int
-     */
-    private $allowedWarnings = 0;
+    private array $suffixes = ['zpt'];
 
     /**
      * @var int
      */
-    private $allowedErrors = 0;
+    private int $allowedWarnings = 0;
+
+    /**
+     * @var int
+     */
+    private int $allowedErrors = 0;
 
     /**
      * @var array The results of the lint scan
      */
-    private $failedPaths = [];
+    private array $failedPaths = [];
 
-    private $executable;
+    private string $executable;
 
     /**
      * {@inheritdoc}
@@ -125,7 +125,7 @@ class PhpTalLint extends Plugin
      *
      * @return bool
      */
-    private function lintDirectory($path)
+    private function lintDirectory($path): bool
     {
         $success   = true;
         $directory = new \DirectoryIterator($path);
@@ -156,10 +156,9 @@ class PhpTalLint extends Plugin
      *
      * @return bool
      */
-    private function lintItem(\SplFileInfo $item, $itemPath)
+    private function lintItem(\SplFileInfo $item, $itemPath): bool
     {
         $success = true;
-
         if ($item->isFile() && \in_array(\strtolower($item->getExtension()), $this->suffixes)) {
             if (!$this->lintFile($itemPath)) {
                 $success = false;
@@ -174,11 +173,11 @@ class PhpTalLint extends Plugin
     /**
      * Run phptal lint against a specific file.
      *
-     * @param $path
+     * @param string $path
      *
      * @return bool
      */
-    private function lintFile($path)
+    private function lintFile(string $path): bool
     {
         $success  = true;
         $suffixes = ' -e ' . \implode(',', $this->suffixes);

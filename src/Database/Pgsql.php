@@ -22,37 +22,37 @@ class Pgsql extends Plugin
     /**
      * @var string
      */
-    private $host = '127.0.0.1';
+    private string $host = '127.0.0.1';
 
     /**
      * @var int
      */
-    private $port = 5432;
-
-    /**
-     * @var string|null
-     */
-    private $dbName = null;
-
-    /**
-     * @var array
-     */
-    private $pdoOptions = [];
+    private int $port = 5432;
 
     /**
      * @var string
      */
-    private $user = '';
-
-    /**
-     * @var string
-     */
-    private $password = '';
+    private string $dbName = '';
 
     /**
      * @var array
      */
-    private $queries = [];
+    private array $pdoOptions = [];
+
+    /**
+     * @var string
+     */
+    private string $user = '';
+
+    /**
+     * @var string
+     */
+    private string $password = '';
+
+    /**
+     * @var array
+     */
+    private array $queries = [];
 
     /**
      * {@inheritdoc}
@@ -72,7 +72,7 @@ class Pgsql extends Plugin
         ], $this->pdoOptions);
         $dsn     = \sprintf('pgsql:host=%s;port=%s', $this->host, $this->port);
 
-        if (null !== $this->dbName) {
+        if ($this->dbName) {
             $dsn .= ';dbname=' . $this->dbName;
         }
 
@@ -101,12 +101,12 @@ class Pgsql extends Plugin
         $buildSettings    = (array)$this->buildSettings->get('pgsql', []);
         $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
 
-        $this->host       = $buildSettingsBag->get('host', $this->host);
-        $this->port       = $buildSettingsBag->get('port', $this->port);
-        $this->dbName     = $buildSettingsBag->get('dbname', $this->dbName);
-        $this->user       = $buildSettingsBag->get('user', $this->user);
-        $this->password   = $buildSettingsBag->get('password', $this->password);
-        $this->pdoOptions = $buildSettingsBag->get('options', $this->pdoOptions);
+        $this->host       = (string)$buildSettingsBag->get('host', $this->host);
+        $this->port       = (int)$buildSettingsBag->get('port', $this->port);
+        $this->dbName     = (string)$buildSettingsBag->get('dbname', $this->dbName);
+        $this->user       = (string)$buildSettingsBag->get('user', $this->user);
+        $this->password   = (string)$buildSettingsBag->get('password', $this->password);
+        $this->pdoOptions = (array)$buildSettingsBag->get('options', $this->pdoOptions);
 
         $this->queries = (array)$this->options->get('queries', $this->queries);
     }

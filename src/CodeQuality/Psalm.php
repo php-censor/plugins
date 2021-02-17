@@ -22,12 +22,12 @@ class Psalm extends Plugin
     /**
      * @var int
      */
-    private $allowedErrors = 0;
+    private int $allowedErrors = 0;
 
     /**
      * @var int
      */
-    private $allowedWarnings = 0;
+    private int $allowedWarnings = 0;
 
     /**
      * {@inheritdoc}

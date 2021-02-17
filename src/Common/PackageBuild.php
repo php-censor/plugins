@@ -21,12 +21,12 @@ class PackageBuild extends Plugin
     /**
      * @var string
      */
-    private $filename = 'build';
+    private string $filename = 'build';
 
     /**
      * @var string[]
      */
-    private $format = ['zip'];
+    private array $format = ['zip'];
 
     /**
      * {@inheritdoc}
@@ -100,12 +100,12 @@ class PackageBuild extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->filename = $this->options->get('filename', $this->filename);
+        $this->filename = (string)$this->options->get('filename', $this->filename);
 
         $format = $this->options->get('format', $this->format);
         if (!\is_array($format)) {
             $format = [$format];
         }
-        $this->format = $format;
+        $this->format = (array)$format;
     }
 }

@@ -23,27 +23,27 @@ class TelegramNotify extends Plugin
     /**
      * @var string
      */
-    private $authToken;
+    private string $authToken = '';
 
     /**
      * @var string
      */
-    private $message;
+    private string $message;
 
     /**
      * @var string
      */
-    private $buildMsg;
+    private string $buildMsg;
 
     /**
      * @var array
      */
-    private $recipients = [];
+    private array $recipients = [];
 
     /**
      * @var bool
      */
-    private $sendLog = false;
+    private bool $sendLog = false;
 
     /**
      * {@inheritdoc}
@@ -124,13 +124,13 @@ class TelegramNotify extends Plugin
             throw new Exception("Not setting telegram 'recipients'");
         }
 
-        $this->authToken = $this->options->get('auth_token');
+        $this->authToken = (string)$this->options->get('auth_token', $this->authToken);
         $this->message   = '[%ICON_BUILD%] [%PROJECT_TITLE%](%PROJECT_LINK%)' .
             ' - [Build #%BUILD_ID%](%BUILD_LINK%) has finished ' .
             'for commit [%SHORT_COMMIT_ID% (%COMMITTER_EMAIL%)](%COMMIT_LINK%) ' .
             'on branch [%BRANCH%](%BRANCH_LINK%)';
 
-        $this->message = $this->options->get('message', $this->message);
+        $this->message = (string)$this->options->get('message', $this->message);
         $this->sendLog = (bool)$this->options->get('send_log', $this->sendLog);
 
         $recipients = $this->options->get('recipients', []);
@@ -148,7 +148,7 @@ class TelegramNotify extends Plugin
      *
      * @return string
      */
-    private function buildMessage()
+    private function buildMessage(): string
     {
         $this->buildMsg = '';
         $buildIcon      = $this->build->isSuccessful() ? '✅' : '❌';

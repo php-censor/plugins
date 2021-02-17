@@ -20,22 +20,22 @@ class Options
     /**
      * @var ParameterBag
      */
-    private $options;
+    private ParameterBag $options;
 
     /**
      * @var string
      */
-    private $location;
+    private string $location;
 
     /**
      * @var bool
      */
-    private $allowPublicArtifacts;
+    private bool $allowPublicArtifacts;
 
     /**
      * @var array
      */
-    private $arguments = [];
+    private array $arguments = [];
 
     /**
      * @param ParameterBag $options

@@ -25,12 +25,12 @@ class Phan extends Plugin
      * @var string Location on the server where the files are stored. Preferably in the webroot for inclusion
      *             in the readme.md of the repository
      */
-    private $location;
+    private string $location;
 
     /**
      * @var int
      */
-    private $allowedWarnings = 0;
+    private int $allowedWarnings = 0;
 
     /**
      * {@inheritdoc}
@@ -128,7 +128,7 @@ class Phan extends Plugin
      *
      * @throws Exception
      */
-    private function processReport($jsonString)
+    private function processReport(string $jsonString): int
     {
         $json = \json_decode($jsonString, true);
 

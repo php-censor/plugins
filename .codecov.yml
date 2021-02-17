@@ -2,7 +2,7 @@ coverage:
     round: nearest
     precision: 0
 
-comment: off
+comment: false
 
 ignore:
     - "tests"

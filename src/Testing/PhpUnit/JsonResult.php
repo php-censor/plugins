@@ -21,13 +21,12 @@ class JsonResult extends Result
     const EVENT_TEST_START  = 'testStart';
     const EVENT_SUITE_START = 'suiteStart';
 
-    protected $options;
-    protected $arguments = [];
+    protected array $arguments = [];
 
     /**
      * {@inheritdoc}
      */
-    public function parse()
+    public function parse(): JsonResult
     {
         $rawResults = \file_get_contents($this->outputFile);
 
@@ -69,15 +68,15 @@ class JsonResult extends Result
     /**
      * {@inheritdoc}
      */
-    protected function getSeverity($event): string
+    protected function getSeverity($testCase): string
     {
-        $status = $event['status'];
+        $status = $testCase['status'];
         switch ($status) {
             case 'fail':
                 $severity = self::SEVERITY_FAIL;
                 break;
             case 'error':
-                if (\strpos($event['message'], 'Skipped') === 0 || \strpos($event['message'], 'Incomplete') === 0) {
+                if (\strpos($testCase['message'], 'Skipped') === 0 || \strpos($testCase['message'], 'Incomplete') === 0) {
                     $severity = self::SEVERITY_SKIPPED;
                 } else {
                     $severity = self::SEVERITY_ERROR;
@@ -97,11 +96,11 @@ class JsonResult extends Result
     /**
      * {@inheritdoc}
      */
-    protected function buildMessage($event): string
+    protected function buildMessage($testCase): string
     {
-        $message = $event['test'];
-        if ($event['message']) {
-            $message .= PHP_EOL . $event ['message'];
+        $message = $testCase['test'];
+        if ($testCase['message']) {
+            $message .= PHP_EOL . $testCase ['message'];
         }
 
         return $message;
@@ -110,11 +109,11 @@ class JsonResult extends Result
     /**
      * {@inheritdoc}
      */
-    protected function buildTrace($event): array
+    protected function buildTrace($testCase): array
     {
         $formattedTrace = [];
-        if (!empty($event['trace'])) {
-            foreach ($event['trace'] as $step) {
+        if (!empty($testCase['trace'])) {
+            foreach ($testCase['trace'] as $step) {
                 $line             = \str_replace($this->buildPath, '', $step['file']) . ':' . $step['line'];
                 $formattedTrace[] = $line;
             }
@@ -126,16 +125,16 @@ class JsonResult extends Result
     /**
      * {@inheritdoc}
      */
-    protected function getFileAndLine($event)
+    protected function getFileAndLine($testCase): array
     {
-        if (empty($event['trace'])) {
+        if (empty($testCase['trace'])) {
             return [
                 'file' => '',
                 'line' => '',
             ];
         }
-        $firstTrace = \end($event['trace']);
-        \reset($event['trace']);
+        $firstTrace = \end($testCase['trace']);
+        \reset($testCase['trace']);
 
         return [
             'file' => \str_replace($this->buildPath, '', $firstTrace['file']),

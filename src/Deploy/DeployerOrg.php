@@ -21,7 +21,7 @@ class DeployerOrg extends Plugin
     /**
      * @var string
      */
-    private $branch;
+    private string $branch;
 
     /**
      * {@inheritdoc}
@@ -124,7 +124,7 @@ class DeployerOrg extends Plugin
      *
      * @return string Verbosity flag
      */
-    private function getVerbosityOption($verbosity)
+    private function getVerbosityOption(string $verbosity): string
     {
         $logLevelList = [
             'verbose'      => 'v',
@@ -137,6 +137,7 @@ class DeployerOrg extends Plugin
         if ('normal' !== $verbosity) {
             return '-' . $logLevelList[$verbosity];
         }
+
         return '';
     }
 
@@ -147,7 +148,7 @@ class DeployerOrg extends Plugin
      *
      * @return string Deployer options
      */
-    private function getOptions($config)
+    private function getOptions(array $config): string
     {
         $options = [];
         if (!empty($config['task'])) {

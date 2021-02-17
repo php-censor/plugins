@@ -27,37 +27,37 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var string[]
      */
-    private $suffixes = ['php'];
+    private array $suffixes = ['php'];
 
     /**
      * @var int
      */
-    private $allowedErrors = 0;
+    private int $allowedErrors = 0;
 
     /**
      * @var string[] - terms to search for
      */
-    private $searches = ['TODO', 'FIXME', 'TO DO', 'FIX ME'];
+    private array $searches = ['TODO', 'FIXME', 'TO DO', 'FIX ME'];
 
     /**
      * @var array - lines of . and X to visualize errors
      */
-    private $errorPerFile = [];
+    private array $errorPerFile = [];
 
     /**
      * @var int
      */
-    private $currentLineSize = 0;
+    private int $currentLineSize = 0;
 
     /**
      * @var int
      */
-    private $lineNumber = 0;
+    private int $lineNumber = 0;
 
     /**
      * @var int
      */
-    private $numberOfAnalysedFile = 0;
+    private int $numberOfAnalysedFile = 0;
 
     /**
      * {@inheritdoc}

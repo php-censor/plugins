@@ -25,47 +25,47 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var array
      */
-    private $suffixes = ['php'];
+    private array $suffixes = ['php'];
 
     /**
      * @var string
      */
-    private $standard = 'PSR2';
+    private string $standard = 'PSR2';
 
     /**
      * @var string
      */
-    private $tabWidth = '';
+    private string $tabWidth = '';
 
     /**
      * @var string
      */
-    private $encoding = '';
+    private string $encoding = '';
 
     /**
      * @var int
      */
-    private $allowedErrors = 0;
+    private int $allowedErrors = 0;
 
     /**
      * @var int
      */
-    private $allowedWarnings = 0;
+    private int $allowedWarnings = 0;
 
     /**
      * @var int|null
      */
-    private $severity = null;
+    private ?int $severity = null;
 
     /**
      * @var null|int
      */
-    private $errorSeverity = null;
+    private ?int $errorSeverity = null;
 
     /**
      * @var null|int
      */
-    private $warningSeverity = null;
+    private ?int $warningSeverity = null;
 
     /**
      * {@inheritdoc}
@@ -160,7 +160,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
         $this->allowedErrors   = (int)$this->options->get('allowed_errors', $this->allowedErrors);
         $this->allowedWarnings = (int)$this->options->get('allowed_warnings', $this->allowedWarnings);
         $this->suffixes        = (array)$this->options->get('suffixes', $this->suffixes);
-        $this->standard        = $this->options->get('standard', $this->standard);
+        $this->standard        = (string)$this->options->get('standard', $this->standard);
         $this->severity        = $this->options->get('severity', $this->severity);
         $this->errorSeverity   = $this->options->get('error_severity', $this->errorSeverity);
         $this->warningSeverity = $this->options->get('warning_severity', $this->warningSeverity);

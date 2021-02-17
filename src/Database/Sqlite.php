@@ -21,17 +21,17 @@ class Sqlite extends Plugin
     /**
      * @var array
      */
-    private $queries = [];
+    private array $queries = [];
 
     /**
      * @var string
      */
-    private $path = '';
+    private string $path = '';
 
     /**
      * @var array
      */
-    private $pdoOptions = [];
+    private array $pdoOptions = [];
 
     /**
      * {@inheritdoc}
@@ -75,8 +75,8 @@ class Sqlite extends Plugin
         $buildSettings    = (array)$this->buildSettings->get('sqlite', []);
         $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
 
-        $this->path       = $buildSettingsBag->get('path', $this->path);
-        $this->pdoOptions = $buildSettingsBag->get('options', $this->pdoOptions);
+        $this->path       = (string)$buildSettingsBag->get('path', $this->path);
+        $this->pdoOptions = (array)$buildSettingsBag->get('options', $this->pdoOptions);
 
         $this->queries = (array)$this->options->get('queries', $this->queries);
     }

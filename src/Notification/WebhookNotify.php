@@ -24,7 +24,7 @@ class WebhookNotify extends Plugin
     /**
      * @var string The URL to send the webhook to.
      */
-    private $url;
+    private string $url;
 
     /**
      * {@inheritdoc}

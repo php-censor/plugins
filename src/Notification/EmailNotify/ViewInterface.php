@@ -19,7 +19,7 @@ interface ViewInterface
      *
      * @return bool
      */
-    public function hasVariable(string $key);
+    public function hasVariable(string $key): bool;
 
     /**
      * @param string $key

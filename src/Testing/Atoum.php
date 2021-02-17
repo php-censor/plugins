@@ -19,14 +19,14 @@ use PHPCensor\Common\Plugin\Plugin;
 class Atoum extends Plugin
 {
     /**
-     * @var string|null
+     * @var string
      */
-    private $args = null;
+    private string $args = '';
 
     /**
-     * @var string|null
+     * @var string
      */
-    private $config = null;
+    private string $config = '';
 
     /**
      * {@inheritdoc}
@@ -44,11 +44,11 @@ class Atoum extends Plugin
         $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
         $cmd        = $executable;
 
-        if (null !== $this->args) {
+        if ($this->args) {
             $cmd .= " {$this->args}";
         }
 
-        if (null !== $this->config) {
+        if ($this->config) {
             $cmd .= " -c '{$this->config}'";
         }
 
@@ -90,8 +90,8 @@ class Atoum extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->args   = $this->options->get('args', $this->args);
-        $this->config = $this->options->get('config', $this->config);
+        $this->args   = (string)$this->options->get('args', $this->args);
+        $this->config = (string)$this->options->get('config', $this->config);
     }
 
     /**

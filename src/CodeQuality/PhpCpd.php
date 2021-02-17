@@ -35,10 +35,13 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
      */
     public function execute(): bool
     {
-        $ignoresString = '';
-        $filesToIgnore = [];
+        $ignoresString       = '';
+        $ignoreForNewVersion = '';
+        $filesToIgnore       = [];
         if (\is_array($this->ignores)) {
             foreach ($this->ignores as $ignore) {
+                $ignoreForNewVersion .= \sprintf(' --exclude="%s"', $ignore);
+
                 $ignore = \rtrim($ignore, '/');
                 if (\is_file($this->build->getBuildPath() . $ignore)) {
                     $ignoredFile     = \explode('/', $ignore);
@@ -55,6 +58,18 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
         }
 
         $executable  = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
+        $lastLine = \exec(
+            \sprintf(
+                ('cd "%s" && ' . $executable . ' %s "%s" --version'),
+                $this->build->getBuildPath(),
+                $ignoresString,
+                $this->directory
+            )
+        );
+        if (false !== \strpos($lastLine, '--names-exclude')) {
+            $ignoresString = $ignoreForNewVersion;
+        }
+
         $tmpFileName = \tempnam(\sys_get_temp_dir(), (self::getName() . '_'));
 
         $cmd     = 'cd "%s" && ' . $executable . ' --log-pmd "%s" %s "%s"';

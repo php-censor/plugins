@@ -23,17 +23,17 @@ class Pdepend extends Plugin
     /**
      * @var string File where the summary.xml is stored
      */
-    private $summary = 'summary.xml';
+    private string $summary = 'summary.xml';
 
     /**
      * @var string File where the chart.svg is stored
      */
-    private $chart = 'chart.svg';
+    private string $chart = 'chart.svg';
 
     /**
      * @var string File where the pyramid.svg is stored
      */
-    private $pyramid = 'pyramid.svg';
+    private string $pyramid = 'pyramid.svg';
 
     /**
      * {@inheritdoc}

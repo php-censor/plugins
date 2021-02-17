@@ -22,7 +22,7 @@ class CleanBuild extends Plugin
     /**
      * @var array
      */
-    private $removeFiles = [];
+    private array $removeFiles = [];
 
     /**
      * {@inheritdoc}
@@ -75,6 +75,6 @@ class CleanBuild extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->removeFiles = $this->options->get('remove', $this->removeFiles);
+        $this->removeFiles = (array)$this->options->get('remove', $this->removeFiles);
     }
 }

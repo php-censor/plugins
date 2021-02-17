@@ -25,7 +25,7 @@ class PhpStan extends Plugin
     /**
      * @var int
      */
-    private $allowedErrors = 0;
+    private int $allowedErrors = 0;
 
     /**
      * {@inheritdoc}

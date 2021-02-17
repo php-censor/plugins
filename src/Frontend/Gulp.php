@@ -21,12 +21,12 @@ class Gulp extends Plugin
     /**
      * @var string
      */
-    private $task = '';
+    private string $task = '';
 
     /**
      * @var string
      */
-    private $gulpfile = 'gulpfile.js';
+    private string $gulpfile = 'gulpfile.js';
 
     /**
      * {@inheritdoc}
@@ -70,8 +70,8 @@ class Gulp extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->task     = $this->options->get('task', $this->task);
-        $this->gulpfile = $this->options->get('gulpfile', $this->gulpfile);
+        $this->task     = (string)$this->options->get('task', $this->task);
+        $this->gulpfile = (string)$this->options->get('gulpfile', $this->gulpfile);
     }
 
     /**

@@ -24,7 +24,7 @@ class EmailNotify extends Plugin
     /**
      * @var ViewFactoryInterface
      */
-    private $viewFactory;
+    private ViewFactoryInterface $viewFactory;
 
     /**
      * {@inheritdoc}
@@ -117,7 +117,7 @@ class EmailNotify extends Plugin
      *
      * @return int
      */
-    private function sendEmail($toAddress, $ccList, $subject, $body)
+    private function sendEmail(string $toAddress, array $ccList, string $subject, string $body): int
     {
         $email = new EmailHelper(Config::getInstance());
 

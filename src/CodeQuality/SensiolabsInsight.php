@@ -24,22 +24,22 @@ class SensiolabsInsight extends Plugin
     /**
      * @var string
      */
-    private $userUuid = '';
+    private string $userUuid = '';
 
     /**
      * @var string
      */
-    private $authToken = '';
+    private string $authToken = '';
 
     /**
      * @var string
      */
-    private $projectUuid = '';
+    private string $projectUuid = '';
 
     /**
      * @var int
      */
-    private $allowedWarnings = 0;
+    private int $allowedWarnings = 0;
 
     /**
      * {@inheritdoc}
@@ -82,9 +82,9 @@ class SensiolabsInsight extends Plugin
     protected function initPluginSettings(): void
     {
         $this->allowedWarnings = (int)$this->options->get('allowed_warnings', $this->allowedWarnings);
-        $this->userUuid        = $this->options->get('user_uuid', $this->userUuid);
-        $this->authToken       = $this->options->get('auth_token', $this->authToken);
-        $this->projectUuid     = $this->options->get('project_uuid', $this->projectUuid);
+        $this->userUuid        = (string)$this->options->get('user_uuid', $this->userUuid);
+        $this->authToken       = (string)$this->options->get('auth_token', $this->authToken);
+        $this->projectUuid     = (string)$this->options->get('project_uuid', $this->projectUuid);
     }
 
     /**

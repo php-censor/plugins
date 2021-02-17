@@ -23,7 +23,7 @@ class Behat extends Plugin
     /**
      * @var string
      */
-    private $features = '';
+    private string $features = '';
 
     /**
      * {@inheritdoc}
@@ -77,7 +77,7 @@ class Behat extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->features = $this->options->get('features', $this->features);
+        $this->features = (string)$this->options->get('features', $this->features);
     }
 
     /**

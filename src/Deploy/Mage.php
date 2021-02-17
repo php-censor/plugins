@@ -19,7 +19,7 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Mage extends Plugin
 {
-    private $mageEnv = '';
+    private string $mageEnv = '';
 
     /**
      * {@inheritdoc}

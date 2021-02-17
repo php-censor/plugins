@@ -21,12 +21,12 @@ class Lint extends Plugin
     /**
      * @var array
      */
-    private $directories = [];
+    private array $directories = [];
 
     /**
      * @var bool
      */
-    private $recursive = true;
+    private bool $recursive = true;
 
     /**
      * {@inheritdoc}
@@ -84,7 +84,7 @@ class Lint extends Plugin
      *
      * @return bool
      */
-    private function lintDirectory($path)
+    private function lintDirectory($path): bool
     {
         $success   = true;
         $directory = new \DirectoryIterator($path);
@@ -115,7 +115,7 @@ class Lint extends Plugin
      *
      * @return bool
      */
-    private function lintItem(\SplFileInfo $item, $itemPath)
+    private function lintItem(\SplFileInfo $item, string $itemPath): bool
     {
         $success = true;
         if ($item->isFile() && $item->getExtension() == 'php' && !$this->lintFile($itemPath)) {
@@ -138,7 +138,7 @@ class Lint extends Plugin
      *
      * @return bool
      */
-    private function lintFile($path)
+    private function lintFile($path): bool
     {
         $success = true;
         if (!$this->commandExecutor->executeCommand('php -l "%s"', $path)) {

@@ -24,21 +24,21 @@ class Phar extends Plugin
      *
      * @var string
      */
-    private $filename = 'build.phar';
+    private string $filename = 'build.phar';
 
     /**
      * Regular Expression Filename Capture
      *
      * @var string
      */
-    private $regexp = '/\.php$/';
+    private string $regexp = '/\.php$/';
 
     /**
      * Stub Filename
      *
      * @var string
      */
-    private $stub = '';
+    private string $stub = '';
 
     /**
      * {@inheritdoc}
@@ -95,9 +95,9 @@ class Phar extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->filename = $this->options->get('filename', $this->filename);
-        $this->regexp   = $this->options->get('regexp', $this->regexp);
-        $this->stub     = $this->options->get('stub', $this->stub);
+        $this->filename = (string)$this->options->get('filename', $this->filename);
+        $this->regexp   = (string)$this->options->get('regexp', $this->regexp);
+        $this->stub     = (string)$this->options->get('stub', $this->stub);
     }
 
     /**

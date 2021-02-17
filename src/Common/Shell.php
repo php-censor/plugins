@@ -21,12 +21,12 @@ class Shell extends Plugin
     /**
      * @var string[] $commands The commands to be executed
      */
-    private $commands = [];
+    private array $commands = [];
 
     /**
      * @var bool
      */
-    private $executeAll = false;
+    private bool $executeAll = false;
 
     /**
      * {@inheritdoc}

@@ -21,37 +21,37 @@ class XmppNotify extends Plugin
     /**
      * @var string Username of sender account xmpp
      */
-    private $username = '';
+    private string $username = '';
 
     /**
      * @var string Alias server of sender account xmpp
      */
-    private $server = '';
+    private string $server = '';
 
     /**
      * @var string Password of sender account xmpp
      */
-    private $password = '';
+    private string $password = '';
 
     /**
      * @var string Alias for sender
      */
-    private $alias = '';
+    private string $alias = '';
 
     /**
      * @var bool Use tls
      */
-    private $tls = false;
+    private bool $tls = false;
 
     /**
      * @var array List of recipients xmpp accounts
      */
-    private $recipients = [];
+    private array $recipients = [];
 
     /**
      * @var string Mask to format date
      */
-    private $dateFormat = '%c';
+    private string $dateFormat = '%c';
 
     /**
      * {@inheritdoc}
@@ -123,7 +123,7 @@ class XmppNotify extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->recipients = $this->options->get('recipients', $this->recipients);
+        $this->recipients = (array)$this->options->get('recipients', $this->recipients);
         if ($this->recipients && \is_string($this->recipients)) {
             $this->recipients = [(string)$this->recipients];
         }

@@ -24,22 +24,22 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var bool
      */
-    private $skipClasses = false;
+    private bool $skipClasses = false;
 
     /**
      * @var bool
      */
-    private $skipMethods = false;
+    private bool $skipMethods = false;
 
     /**
      * @var bool
      */
-    private $skipSignatures = false;
+    private bool $skipSignatures = false;
 
     /**
      * @var int
      */
-    private $allowedWarnings = 0;
+    private int $allowedWarnings = 0;
 
     /**
      * {@inheritdoc}

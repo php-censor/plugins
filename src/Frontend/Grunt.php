@@ -21,12 +21,12 @@ class Grunt extends Plugin
     /**
      * @var string
      */
-    private $task = '';
+    private string $task = '';
 
     /**
      * @var string
      */
-    private $gruntfile = 'Gruntfile.js';
+    private string $gruntfile = 'Gruntfile.js';
 
     /**
      * {@inheritdoc}
@@ -70,8 +70,8 @@ class Grunt extends Plugin
      */
     protected function initPluginSettings(): void
     {
-        $this->task      = $this->options->get('task', $this->task);
-        $this->gruntfile = $this->options->get('gruntfile', $this->gruntfile);
+        $this->task      = (string)$this->options->get('task', $this->task);
+        $this->gruntfile = (string)$this->options->get('gruntfile', $this->gruntfile);
     }
 
     /**

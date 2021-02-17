@@ -19,10 +19,10 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Phing extends Plugin
 {
-    private $buildFile    = 'build.xml';
-    private $targets      = ['build'];
-    private $properties   = [];
-    private $propertyFile = '';
+    private string $buildFile    = 'build.xml';
+    private array $targets      = ['build'];
+    private array $properties   = [];
+    private string $propertyFile = '';
 
     /**
      * {@inheritdoc}

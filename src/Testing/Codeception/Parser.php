@@ -18,37 +18,32 @@ class Parser implements ParserInterface
     /**
      * @var string
      */
-    private $buildPath;
+    private string $buildPath;
 
     /**
      * @var string
      */
-    private $xmlPath;
-
-    /**
-     * @var array
-     */
-    private $results;
+    private string $xmlPath;
 
     /**
      * @var int
      */
-    private $totalTests = 0;
+    private int $totalTests = 0;
 
     /**
      * @var int
      */
-    private $totalTimeTaken = 0;
+    private int $totalTimeTaken = 0;
 
     /**
      * @var int
      */
-    private $totalFailures = 0;
+    private int $totalFailures = 0;
 
     /**
      * @var int
      */
-    private $totalErrors = 0;
+    private int $totalErrors = 0;
 
     /**
      * @param string $builderPath
@@ -65,11 +60,11 @@ class Parser implements ParserInterface
      */
     public function parse(): array
     {
-        $rtn           = [];
-        $this->results = $this->loadFromFile($this->xmlPath);
+        $rtn     = [];
+        $results = $this->loadFromFile($this->xmlPath);
 
-        if ($this->results) {
-            foreach ($this->results->testsuite as $testSuite) {
+        if ($results) {
+            foreach ($results->testsuite as $testSuite) {
                 $this->totalTests     += (int)$testSuite['tests'];
                 $this->totalTimeTaken += (float)$testSuite['time'];
                 $this->totalFailures  += (int)$testSuite['failures'];
@@ -180,7 +175,7 @@ class Parser implements ParserInterface
             }
 
             if (!$dom->hasChildNodes()) {
-                new \SimpleXMLElement('<empty/>');
+                return new \SimpleXMLElement('<empty />');
             }
 
             $xml = \simplexml_import_dom($dom);

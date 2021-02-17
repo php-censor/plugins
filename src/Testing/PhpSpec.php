@@ -57,9 +57,6 @@ class PhpSpec extends Plugin
             'suites'   => [],
         ];
 
-        /**
-         * @var \SimpleXMLElement $group
-         */
         foreach ($xml->xpath('testsuite') as $group) {
             $attr  = $group->attributes();
             $suite = [
@@ -73,9 +70,6 @@ class PhpSpec extends Plugin
                 'cases'    => [],
             ];
 
-            /**
-             * @var \SimpleXMLElement $child
-             */
             foreach ($group->xpath('testcase') as $child) {
                 $attr = $child->attributes();
                 $case = [

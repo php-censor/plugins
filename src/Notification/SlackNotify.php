@@ -25,33 +25,33 @@ class SlackNotify extends Plugin
     /**
      * @var string
      */
-    private $webHook;
+    private string $webHook = '';
 
     /**
      * @var string
      */
-    private $room = '#php-censor';
+    private string $room = '#php-censor';
 
     /**
      * @var string
      */
-    private $username = 'PHP Censor';
+    private string $username = 'PHP Censor';
 
     /**
      * @var string
      */
-    private $message = '<%PROJECT_LINK%|%PROJECT_TITLE%> - <%BUILD_LINK%|Build #%BUILD_ID%> has finished for commit '
+    private string $message = '<%PROJECT_LINK%|%PROJECT_TITLE%> - <%BUILD_LINK%|Build #%BUILD_ID%> has finished for commit '
         . '<%COMMIT_LINK%|%SHORT_COMMIT_ID% (%COMMITTER_EMAIL%)> on branch <%BRANCH_LINK%|%BRANCH%>';
 
     /**
-     * @var string|null
+     * @var string
      */
-    private $icon = null;
+    private string $icon = '';
 
     /**
      * @var bool
      */
-    private $showStatus = true;
+    private bool $showStatus = true;
 
     /**
      * {@inheritdoc}
@@ -73,7 +73,7 @@ class SlackNotify extends Plugin
         $message->setChannel($this->room);
         $message->setUsername($this->username);
 
-        if (!empty($this->icon)) {
+        if ($this->icon) {
             $message->setIcon($this->icon);
         }
 
@@ -141,10 +141,10 @@ class SlackNotify extends Plugin
         }
 
         $this->webHook    = \trim((string)$this->options->get('webhook_url', ''));
-        $this->message    = $this->options->get('message', $this->message);
-        $this->room       = $this->options->get('room', $this->room);
-        $this->username   = $this->options->get('username', $this->username);
-        $this->showStatus = $this->options->get('show_status', $this->showStatus);
-        $this->icon       = $this->options->get('icon', $this->icon);
+        $this->message    = (string)$this->options->get('message', $this->message);
+        $this->room       = (string)$this->options->get('room', $this->room);
+        $this->username   = (string)$this->options->get('username', $this->username);
+        $this->showStatus = (bool)$this->options->get('show_status', $this->showStatus);
+        $this->icon       = (string)$this->options->get('icon', $this->icon);
     }
 }

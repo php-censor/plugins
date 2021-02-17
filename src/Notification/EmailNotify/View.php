@@ -19,17 +19,17 @@ class View implements ViewInterface
     /**
      * @var array
      */
-    protected $data = [];
+    protected array $data = [];
 
     /**
      * @var string
      */
-    protected $viewPath;
+    protected string $viewPath;
 
     /**
      * @var string
      */
-    protected $viewExtension = 'phtml';
+    protected string $viewExtension = 'phtml';
 
     /**
      * @param string      $viewPath
@@ -54,7 +54,7 @@ class View implements ViewInterface
     /**
      * {@inheritdoc}
      */
-    public function hasVariable(string $key)
+    public function hasVariable(string $key): bool
     {
         return isset($this->data[$key]);
     }

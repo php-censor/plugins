@@ -21,27 +21,27 @@ class IrcNotify extends Plugin
     /**
      * @var string
      */
-    private $message;
+    private string $message;
 
     /**
      * @var string
      */
-    private $server = '';
+    private string $server = '';
 
     /**
      * @var int
      */
-    private $port = 6667;
+    private int $port = 6667;
 
     /**
      * @var string
      */
-    private $room = '';
+    private string $room = '';
 
     /**
      * @var string
      */
-    private $nick = '';
+    private string $nick = '';
 
     /**
      * {@inheritdoc}
@@ -106,17 +106,17 @@ class IrcNotify extends Plugin
         $buildSettings    = (array)$this->buildSettings->get('irc_notify', []);
         $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
 
-        $this->server = $buildSettingsBag->get('server', $this->server);
-        $this->port   = $buildSettingsBag->get('port', $this->port);
-        $this->room   = $buildSettingsBag->get('room', $this->room);
-        $this->nick   = $buildSettingsBag->get('nick', $this->nick);
+        $this->server = (string)$buildSettingsBag->get('server', $this->server);
+        $this->port   = (int)$buildSettingsBag->get('port', $this->port);
+        $this->room   = (string)$buildSettingsBag->get('room', $this->room);
+        $this->nick   = (string)$buildSettingsBag->get('nick', $this->nick);
 
         $this->message = '[%PROJECT_TITLE%](%PROJECT_LINK%)' .
             ' - [Build #%BUILD_ID%](%BUILD_LINK%) has finished ' .
             'for commit [%SHORT_COMMIT_ID% (%COMMITTER_EMAIL%)](%COMMIT_LINK%) ' .
             'on branch [%BRANCH%](%BRANCH_LINK%)';
 
-        $this->message = $this->options->get('message', $this->message);
+        $this->message = (string)$this->options->get('message', $this->message);
     }
 
     /**
@@ -136,7 +136,7 @@ class IrcNotify extends Plugin
         // almost all servers expect pingback!
         while ($response = \fgets($socket)) {
             $matches = [];
-            if (\preg_match('/^PING \\:([A-Z0-9]+)/', $response, $matches)) {
+            if (\preg_match('/^PING \\\\:([A-Z0-9]+)/', $response, $matches)) {
                 $pingBack = $matches[1];
             }
         }

@@ -38,7 +38,7 @@
         }
     },
     "require": {
-        "php":                         ">=7.1.0",
+        "php":                         ">=7.4.0",
         "ext-json":                    "*",
         "ext-simplexml":               "*",
         "ext-libxml":                  "*",
@@ -62,7 +62,7 @@
     },
     "extra": {
         "platform": {
-            "php": "7.1.*"
+            "php": "7.4.*"
         }
     }
 }

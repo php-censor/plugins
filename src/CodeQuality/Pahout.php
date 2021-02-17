@@ -25,7 +25,7 @@ class Pahout extends Plugin
     /**
      * @var int
      */
-    private $allowedWarnings = -1;
+    private int $allowedWarnings = -1;
 
     /**
      * {@inheritdoc}

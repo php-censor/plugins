@@ -27,27 +27,27 @@ abstract class Result
     /**
      * @var string
      */
-    protected $outputFile;
+    protected string $outputFile;
 
     /**
      * @var string
      */
-    protected $buildPath;
+    protected string $buildPath;
 
     /**
      * @var array
      */
-    protected $results;
+    protected array $results;
 
     /**
      * @var int
      */
-    protected $failures = 0;
+    protected int $failures = 0;
 
     /**
      * @var array
      */
-    protected $errors = [];
+    protected array $errors = [];
 
     /**
      * @param string $outputFile
@@ -66,67 +66,67 @@ abstract class Result
      *
      * @throws Exception If fails to parse the output
      */
-    abstract public function parse();
+    abstract public function parse(): Result;
 
     /**
-     * @param mixed $testcase
+     * @param mixed $testCase
      *
      * @return string
      */
-    abstract protected function getSeverity($testcase): string;
+    abstract protected function getSeverity($testCase): string;
 
     /**
-     * @param mixed $testcase
+     * @param mixed $testCase
      *
      * @return string
      */
-    abstract protected function buildMessage($testcase): string;
+    abstract protected function buildMessage($testCase): string;
 
     /**
-     * @param mixed $testcase
+     * @param mixed $testCase
      *
      * @return array
      */
-    abstract protected function buildTrace($testcase): array;
+    abstract protected function buildTrace($testCase): array;
 
     /**
-     * @param mixed $testcase
+     * @param mixed $testCase
      *
-     * @return mixed
+     * @return array
      */
-    protected function getFileAndLine($testcase)
+    protected function getFileAndLine($testCase): array
     {
-        return $testcase;
+        return $testCase;
     }
 
     /**
-     * @param mixed $testcase
+     * @param mixed $testCase
      *
      * @return string
      */
-    protected function getOutput($testcase): string
+    protected function getOutput($testCase): string
     {
-        return $testcase['output'];
+        return $testCase['output'];
     }
 
     /**
-     * @param mixed $testcase
+     * @param mixed $testCase
      */
-    protected function parseTestcase($testcase): void
+    protected function parseTestcase($testCase): void
     {
-        $severity = $this->getSeverity($testcase);
+        $severity = $this->getSeverity($testCase);
         $pass = isset(\array_fill_keys([self::SEVERITY_PASS, self::SEVERITY_SKIPPED], true)[$severity]);
         $data = [
             'pass'     => $pass,
             'severity' => $severity,
-            'message'  => $this->buildMessage($testcase),
-            'trace'    => $pass ? [] : $this->buildTrace($testcase),
-            'output'   => $this->getOutput($testcase),
+            'message'  => $this->buildMessage($testCase),
+            'trace'    => $pass ? [] : $this->buildTrace($testCase),
+            'output'   => $this->getOutput($testCase),
         ];
 
         if (!$pass) {
             $this->failures++;
-            $info = $this->getFileAndLine($testcase);
+            $info = $this->getFileAndLine($testCase);
             $this->errors[] = [
                 'message'  => $data['message'],
                 'severity' => $severity,

@@ -19,8 +19,8 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Mage3 extends Plugin
 {
-    private $mageEnv = '';
-    private $mageLogDir = '';
+    private string $mageEnv = '';
+    private string $mageLogDir = '';
 
     /**
      * {@inheritdoc}

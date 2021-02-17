@@ -22,27 +22,27 @@ class Composer extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var string
      */
-    private $action = 'install';
+    private string $action = 'install';
 
     /**
      * @var bool
      */
-    private $preferDist = false;
+    private bool $preferDist = false;
 
     /**
      * @var bool
      */
-    private $noDev = false;
+    private bool $noDev = false;
 
     /**
      * @var bool
      */
-    private $ignorePlatformReqs = false;
+    private bool $ignorePlatformReqs = false;
 
     /**
      * @var bool
      */
-    private $preferSource = true;
+    private bool $preferSource = true;
 
     /**
      * {@inheritdoc}
@@ -100,7 +100,7 @@ class Composer extends Plugin implements ZeroConfigPluginInterface
      */
     protected function initPluginSettings(): void
     {
-        $this->action             = $this->options->get('action', $this->action);
+        $this->action             = (string)$this->options->get('action', $this->action);
         $this->preferDist         = (bool)$this->options->get('prefer_dist', $this->preferDist);
         $this->noDev              = (bool)$this->options->get('no_dev', $this->noDev);
         $this->ignorePlatformReqs = (bool)$this->options->get('ignore_platform_reqs', $this->ignorePlatformReqs);

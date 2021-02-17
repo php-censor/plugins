@@ -19,9 +19,9 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Deployer extends Plugin
 {
-    private $webhookUrl = '';
-    private $reason = '';
-    private $updateOnly = true;
+    private string $webhookUrl = '';
+    private string $reason = '';
+    private bool $updateOnly = true;
 
     /**
      * {@inheritdoc}
@@ -81,8 +81,8 @@ class Deployer extends Plugin
     {
         $this->reason = 'PHP Censor Build #%BUILD_ID% - %COMMIT_MESSAGE%';
 
-        $this->webhookUrl = $this->options->get('webhook_url', $this->webhookUrl);
-        $this->reason     = $this->options->get('reason', $this->reason);
+        $this->webhookUrl = (string)$this->options->get('webhook_url', $this->webhookUrl);
+        $this->reason     = (string)$this->options->get('reason', $this->reason);
         $this->updateOnly = (bool)$this->options->get('update_only', $this->updateOnly);
     }
 }

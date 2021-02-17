@@ -30,12 +30,12 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var PhpUnitOptions
      */
-    private $phpUnitOptions;
+    private PhpUnitOptions $phpUnitOptions;
 
     /**
      * @var string
      */
-    private $executable;
+    private string $executable;
 
     /**
      * {@inheritdoc}
@@ -200,6 +200,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
 
         $this->processResults($logFile, $logFormat);
 
+        $coverageSuccess = true;
         if ($phpUnitOptions->getOption('coverage')) {
             $currentCoverage = $this->extractCoverage($output);
             $this->buildMetaWriter->write(
@@ -227,10 +228,10 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
                 );
             }
 
-            return $this->checkRequiredCoverage($currentCoverage);
+            $coverageSuccess = $this->checkRequiredCoverage($currentCoverage);
         }
 
-        return $success;
+        return $success && $coverageSuccess;
     }
 
     /**
@@ -243,7 +244,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
     private function extractCoverage(string $output): array
     {
         \preg_match(
-            '#Classes:[\s]*(.*?)%[^M]*?Methods:[\s]*(.*?)%[^L]*?Lines:[\s]*(.*?)\%#s',
+            '#Classes:[\s]*(.*?)%[^M]*?Methods:[\s]*(.*?)%[^L]*?Lines:[\s]*(.*?)%#s',
             $output,
             $matches
         );

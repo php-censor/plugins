@@ -22,12 +22,12 @@ class CopyBuild extends Plugin
     /**
      * @var bool
      */
-    private $respectIgnore = false;
+    private bool $respectIgnore = false;
 
     /**
      * @var bool
      */
-    private $wipe = false;
+    private bool $wipe = false;
 
     /**
      * {@inheritdoc}

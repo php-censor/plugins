@@ -18,7 +18,10 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Git extends Plugin
 {
-    private $actions = [];
+    /**
+     * @var array
+     */
+    private array $actions = [];
 
     /**
      * {@inheritdoc}
@@ -85,7 +88,7 @@ class Git extends Plugin
      *
      * @return bool
      */
-    private function runAction(string $action, array $options = [])
+    private function runAction(string $action, array $options = []): bool
     {
         switch ($action) {
             case 'merge':
@@ -100,7 +103,6 @@ class Git extends Plugin
             case 'push':
                 return $this->runPushAction($options);
         }
-
 
         return false;
     }

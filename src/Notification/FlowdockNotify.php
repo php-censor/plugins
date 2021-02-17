@@ -24,17 +24,17 @@ class FlowdockNotify extends Plugin
     /**
      * @var string
      */
-    private $authToken;
+    private string $authToken;
 
     /**
      * @var string
      */
-    private $email = 'PHP Censor';
+    private string $email = 'PHP Censor';
 
     /**
      * @var string
      */
-    private $message = 'Build %BUILD_ID% has finished for commit <a href="%COMMIT_LINK%">%SHORT_COMMIT_ID%</a>
+    private string $message = 'Build %BUILD_ID% has finished for commit <a href="%COMMIT_LINK%">%SHORT_COMMIT_ID%</a>
 (%COMMITTER_EMAIL%)> on branch <a href="%BRANCH_LINK%">%BRANCH%</a>';
 
     /**
@@ -99,7 +99,7 @@ class FlowdockNotify extends Plugin
         }
 
         $this->authToken = \trim($this->options->get('auth_token'));
-        $this->message   = $this->options->get('message', $this->message);
-        $this->email     = $this->options->get('email', $this->email);
+        $this->message   = (string)$this->options->get('message', $this->message);
+        $this->email     = (string)$this->options->get('email', $this->email);
     }
 }

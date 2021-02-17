@@ -21,37 +21,37 @@ class CampfireNotify extends Plugin
     /**
      * @var string
      */
-    private $url = '';
+    private string $url = '';
 
     /**
      * @var string
      */
-    private $authToken = '';
+    private string $authToken = '';
 
     /**
      * @var string
      */
-    private $userAgent;
+    private string $userAgent;
 
     /**
      * @var string
      */
-    private $cookie;
+    private string $cookie;
 
     /**
      * @var bool
      */
-    private $verbose = false;
+    private bool $verbose = false;
 
     /**
      * @var string
      */
-    private $roomId = '';
+    private string $roomId = '';
 
     /**
      * @var string
      */
-    private $message = '';
+    private string $message = '';
 
     /**
      * {@inheritdoc}
@@ -99,9 +99,9 @@ class CampfireNotify extends Plugin
         $buildSettings    = (array)$this->buildSettings->get('campfire', []);
         $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
 
-        $this->url       = $buildSettingsBag->get('url', $this->url);
-        $this->authToken = $buildSettingsBag->get('auth_token', $this->authToken);
-        $this->roomId    = $buildSettingsBag->get('room_id', $this->roomId);
+        $this->url       = (string)$buildSettingsBag->get('url', $this->url);
+        $this->authToken = (string)$buildSettingsBag->get('auth_token', $this->authToken);
+        $this->roomId    = (string)$buildSettingsBag->get('room_id', $this->roomId);
 
         $this->message = (string)$this->options->get('message', $this->message);
         $this->verbose = (bool)$this->options->get('verbose', $this->verbose);
@@ -137,9 +137,9 @@ class CampfireNotify extends Plugin
      * @param string $roomId
      * @param bool   $isPaste
      *
-     * @return mixed
+     * @return string
      */
-    public function speak(string $message, string $roomId, bool $isPaste = false)
+    public function speak(string $message, string $roomId, bool $isPaste = false): string
     {
         $page = '/room/' . $roomId . '/speak.json';
 
@@ -158,9 +158,9 @@ class CampfireNotify extends Plugin
      * @param string $page
      * @param array  $data
      *
-     * @return mixed
+     * @return string
      */
-    private function getPageByPost(string $page, $data = [])
+    private function getPageByPost(string $page, $data = []): string
     {
         $url = $this->url . $page;
         // The new API allows JSON, so we can pass
@@ -193,6 +193,6 @@ class CampfireNotify extends Plugin
         }
 
         // Simple 200 OK response (such as for joining a room)
-        return true;
+        return '';
     }
 }

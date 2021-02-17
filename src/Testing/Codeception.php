@@ -28,19 +28,19 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var string
      */
-    private $args = '';
+    private string $args = '';
 
     /**
      * @var string $ymlConfigFile The path of a yml config for Parser
      */
-    private $ymlConfigFile;
+    private string $ymlConfigFile = '';
 
     /**
      * default sub-path for report.xml file
      *
      * @var array $path The path to the report.xml file
      */
-    private $outputPath = [
+    private array $outputPath = [
         'tests/_output',
         'tests/_log',
     ];
@@ -48,7 +48,7 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var string
      */
-    private $executable;
+    private string $executable;
 
     /**
      * {@inheritdoc}
@@ -99,7 +99,7 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
             $this->ymlConfigFile = $this->directory . $config;
         }
 
-        $this->args = $this->options->get('args', $this->args);
+        $this->args = (string)$this->options->get('args', $this->args);
 
         $outputPath = $this->options->get('output_path');
         if ($outputPath) {
@@ -123,9 +123,9 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
      *
      * @param string $buildPath
      *
-     * @return null|string
+     * @return string
      */
-    public static function findConfigFile(string $buildPath): ?string
+    public static function findConfigFile(string $buildPath): string
     {
         if (\file_exists($buildPath . 'codeception.yml')) {
             return $buildPath . 'codeception.yml';
@@ -135,15 +135,15 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
             return $buildPath . 'codeception.dist.yml';
         }
 
-        return null;
+        return '';
     }
 
     /**
      * Run tests from a Parser config file.
      *
-     * @return mixed
+     * @return bool
      */
-    private function runConfigFile()
+    private function runConfigFile(): bool
     {
         if (!$this->executable) {
             $this->buildLogger->logFailure(\sprintf('Could not find "%s" binary', 'codecept'));
@@ -193,7 +193,7 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
 
         // NOTE: Parser does not use stderr, so failure can only be detected
         // through tests
-        $success = $success && ((int)($meta['failures']) < 1);
+        $success = ((int)($meta['failures']) < 1);
 
         $this->buildMetaWriter->write(
             $this->build->getId(),

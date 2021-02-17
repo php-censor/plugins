@@ -20,7 +20,7 @@ class JunitResult extends Result
     /**
      * {@inheritdoc}
      */
-    public function parse()
+    public function parse(): JunitResult
     {
         // Reset the parsing variables
         $this->results  = [];
@@ -93,7 +93,7 @@ class JunitResult extends Result
         }
         if ('' === $msg) {
             $msg = $testCase['class'].'::'.$testCase['name'];
-        };
+        }
         $testCase['_tracePos'] = $tracePos; // will be converted to string
 
         return $msg;
@@ -154,13 +154,15 @@ class JunitResult extends Result
 
     /**
      * @return \SimpleXMLElement|null
+     *
+     * @throws Exception
      */
     private function loadResultFile(): ?\SimpleXMLElement
     {
         if (!\file_exists($this->outputFile) || 0 === \filesize($this->outputFile)) {
             $this->internalProblem('empty output file');
 
-            return new \SimpleXMLElement('<empty/>'); // new empty element
+            return new \SimpleXMLElement('<empty />'); // new empty element
         }
 
         return $this->loadFromFile($this->outputFile);
@@ -217,7 +219,7 @@ class JunitResult extends Result
             }
 
             if (!$dom->hasChildNodes()) {
-                new \SimpleXMLElement('<empty/>');
+                return new \SimpleXMLElement('<empty />');
             }
 
             $xml = \simplexml_import_dom($dom);

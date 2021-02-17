@@ -26,17 +26,17 @@ class PhpCsFixer extends Plugin
     /**
      * @var string
      */
-    private $args = '';
+    private string $args = '';
 
     /**
      * @var bool
      */
-    private $config = false;
+    private bool $config = false;
 
     /**
      * @var string[]
      */
-    private $configs = [
+    private array $configs = [
         '.php_cs',
         '.php_cs.dist',
     ];
@@ -44,22 +44,22 @@ class PhpCsFixer extends Plugin
     /**
      * @var bool
      */
-    private $errors = false;
+    private bool $errors = false;
 
     /**
      * @var bool
      */
-    private $reportErrors = false;
+    private bool $reportErrors = false;
 
     /**
      * @var int
      */
-    private $allowedWarnings = 0;
+    private int $allowedWarnings = 0;
 
     /**
      * @var bool
      */
-    private $supportsUdiff = false;
+    private bool $supportsUdiff = false;
 
     /**
      * {@inheritdoc}
@@ -98,7 +98,7 @@ class PhpCsFixer extends Plugin
 
         // Determine the version of PHP CS Fixer
         $cmd     = $executable . ' --version';
-        $success = $this->commandExecutor->executeCommand($cmd);
+        $this->commandExecutor->executeCommand($cmd);
         $output  = $this->commandExecutor->getLastCommandOutput();
         $matches = [];
         if (\preg_match('/(\d+\.\d+\.\d+)/', $output, $matches)) {
@@ -210,7 +210,7 @@ class PhpCsFixer extends Plugin
      *
      * @throws Exception
      */
-    private function processReport($output)
+    private function processReport(string $output): int
     {
         $data = \json_decode(\trim($output), true);
 

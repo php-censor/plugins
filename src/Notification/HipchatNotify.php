@@ -23,22 +23,22 @@ class HipchatNotify extends Plugin
     /**
      * @var string
      */
-    private $authToken;
+    private string $authToken;
 
     /**
      * @var string
      */
-    private $color = 'yellow';
+    private string $color = 'yellow';
 
     /**
      * @var bool
      */
-    private $notify = false;
+    private bool $notify = false;
 
     /**
      * @var string
      */
-    private $message = '%PROJECT_TITLE% built at %BUILD_LINK%';
+    private string $message = '%PROJECT_TITLE% built at %BUILD_LINK%';
 
     /**
      * @var string|string[]
@@ -104,10 +104,10 @@ class HipchatNotify extends Plugin
             throw new Exception("Please define 'room' and 'auth_token' for HipchatNotify plugin!");
         }
 
-        $this->authToken = $this->options->get('auth_token');
-        $this->room      = $this->options->get('room');
-        $this->message   = $this->options->get('message', $this->message);
-        $this->color     = $this->options->get('color', $this->color);
+        $this->authToken = (string)$this->options->get('auth_token');
+        $this->room      = (string)$this->options->get('room');
+        $this->message   = (string)$this->options->get('message', $this->message);
+        $this->color     = (string)$this->options->get('color', $this->color);
         $this->notify    = (bool)$this->options->get('notify', $this->notify);
     }
 }

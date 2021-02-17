@@ -23,12 +23,12 @@ class PhpParallelLint extends Plugin implements ZeroConfigPluginInterface
     /**
      * @var string Comma separated list of file extensions
      */
-    private $extensions = 'php';
+    private string $extensions = 'php';
 
     /**
      * @var bool Enable short tags
      */
-    private $shortTags = false;
+    private bool $shortTags = false;
 
     /**
      * {@inheritdoc}
@@ -57,7 +57,7 @@ class PhpParallelLint extends Plugin implements ZeroConfigPluginInterface
         $output = $this->commandExecutor->getLastCommandOutput();
 
         $matches = [];
-        if (\preg_match_all("#Parse error\:#", $output, $matches)) {
+        if (\preg_match_all("#Parse error:#", $output, $matches)) {
             $this->buildMetaWriter->write(
                 $this->build->getId(),
                 self::getName(),
@@ -86,7 +86,7 @@ class PhpParallelLint extends Plugin implements ZeroConfigPluginInterface
      */
     protected function initPluginSettings(): void
     {
-        $this->shortTags = $this->options->get('shorttags', $this->shortTags);
+        $this->shortTags = (bool)$this->options->get('shorttags', $this->shortTags);
 
         if ($this->options->has('extensions')) {
             $pattern    = '#^([a-z]+)(,\ *[a-z]*)*$#';

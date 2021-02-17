@@ -20,22 +20,22 @@ class PluginResult
     /**
      * @var string $plugin
      */
-    protected $plugin;
+    protected string $plugin;
 
     /**
      * @var int $left
      */
-    protected $left;
+    protected int $left;
 
     /**
      * @var int $right
      */
-    protected $right;
+    protected int $right;
 
     /**
      * @var string $outputFormat
      */
-    protected $outputFormat;
+    protected string $outputFormat;
 
     /**
      * @param string $plugin
@@ -178,7 +178,7 @@ class PluginResult
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->plugin;
     }

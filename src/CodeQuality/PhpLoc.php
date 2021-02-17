@@ -45,7 +45,7 @@ class PhpLoc extends Plugin implements ZeroConfigPluginInterface
 
         $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
         $success    = $this->commandExecutor->executeCommand(
-            'cd "%s" && ' . $executable . ' %s "%s"',
+            'cd "%s" && php -d xdebug.mode=0 -d error_reporting=0 ' . $executable . ' %s "%s"',
             $this->build->getBuildPath(),
             $ignoreString,
             $this->directory
