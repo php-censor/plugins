@@ -1,7 +1,7 @@
 PHP Censor Plugins
 ==================
 
-[WIP] PHP Censor common plugins (for PHP Censor v2.0+).
+[WIP] PHP Censor common plugins (for PHP Censor v3.0+).
 
 Code style
 ----------
@@ -26,3 +26,4 @@ Infection mutation tests:
 ```bash
 vendor/bin/infection --threads=4 --show-mutations -vvv
 ```
+
