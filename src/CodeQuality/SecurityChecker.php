@@ -9,7 +9,6 @@ use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
 use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
-use SensioLabs\Security\SecurityChecker as SensiolabsSecurityChecker;
 
 /**
  * SensioLabs Security Checker Plugin
@@ -27,6 +26,19 @@ class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
     private int $allowedWarnings = 0;
 
     /**
+     * @var string
+     */
+    private string $binaryType = 'symfony';
+
+    /**
+     * @var string[]
+     */
+    private array $allowedBinaryTypes = [
+        'symfony',
+        'local-php-security-checker',
+    ];
+
+    /**
      * {@inheritdoc}
      */
     public static function getName(): string
@@ -40,30 +52,32 @@ class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
     public function execute(): bool
     {
         $success = true;
-        if (\in_array('symfony', $this->binaryNames, true)) {
-            $lockFile = $this->build->getBuildPath() . 'composer.lock';
-            if (!\is_file($lockFile)) {
-                throw new Exception('Lock file (composer.lock) does not exist.');
-            }
 
-            $cmd        = '%s check:security --format=json --dir=%s';
-            $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
-            if (!$this->build->isDebug()) {
-                $this->commandExecutor->disableCommandOutput();
-            }
-
-            // works with dir, composer.lock, composer.json
-            $this->commandExecutor->executeCommand($cmd, $executable, $lockFile);
-
-            $this->commandExecutor->enableCommandOutput();
-
-            $result = $this->commandExecutor->getLastCommandOutput();
-        } else {
-            $checker = new SensiolabsSecurityChecker();
-            $result  = $checker->check($this->build->getBuildPath() . 'composer.lock');
+        $composerLockFile = $this->build->getBuildPath() . 'composer.lock';
+        if (!\is_file($composerLockFile)) {
+            throw new Exception('Lock file (composer.lock) does not exist.');
         }
 
-        $warnings = \json_decode((string)$result, true);
+        if ('symfony' === $this->binaryType) {
+            $cmd        = '%s check:security --format=json --dir=%s';
+            $executable = $this->commandExecutor->findBinary(['symfony']);
+        } else {
+            $cmd        = '%s --format=json --path="%s"';
+            $executable = $this->commandExecutor->findBinary(['local-php-security-checker']);
+        }
+
+        if (!$this->build->isDebug()) {
+            $this->commandExecutor->disableCommandOutput();
+        }
+
+        // works with dir, composer.lock, composer.json
+        $this->commandExecutor->executeCommand($cmd, $executable, $composerLockFile);
+
+        $this->commandExecutor->enableCommandOutput();
+
+        $result = $this->commandExecutor->getLastCommandOutput();
+
+        $warnings = \json_decode($result, true);
 
         if ($warnings) {
             foreach ($warnings as $library => $warning) {
@@ -77,9 +91,11 @@ class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
                 }
             }
 
-            if ($this->allowedWarnings !== -1 && ($result->count() > $this->allowedWarnings)) {
+            if ($this->allowedWarnings !== -1 && (\count($warnings) > $this->allowedWarnings)) {
                 $success = false;
             }
+        } elseif (null === $warnings && $result) {
+            throw new Exception('invalid json: '.$result);
         }
 
         return $success;
@@ -106,6 +122,13 @@ class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
     {
         if ($this->options->has('zero_config') && $this->options->get('zero_config', false)) {
             $this->allowedWarnings = -1;
+        }
+
+        if (
+            $this->options->has('binary_type') &&
+            \in_array((string)$this->options->get('binary_type'), $this->allowedBinaryTypes, true)
+        ) {
+            $this->binaryType = (string)$this->options->get('binary_type');
         }
 
         $this->allowedWarnings = (int)$this->options->get('allowed_warnings', $this->allowedWarnings);

@@ -47,7 +47,6 @@
         "ext-curl":                    "*",
         "ext-bcmath":                  "*",
         "php-censor/common":           "dev-master",
-        "sensiolabs/security-checker": "^5.0",
         "guzzlehttp/guzzle":           "^6.5",
         "hipchat/hipchat-php":         "^1.4",
         "maknz/slack":                 "^1.7",
