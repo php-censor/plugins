@@ -10,7 +10,7 @@ use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Build\BuildMetaInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
-use PHPCensor\Common\Plugin\Plugin\ParameterBag;
+use PHPCensor\Common\ParameterBag;
 use PHPCensor\Common\Repository\BuildErrorRepositoryInterface;
 use PHPCensor\Common\Repository\BuildMetaRepositoryInterface;
 use PHPCensor\Common\Repository\BuildRepositoryInterface;

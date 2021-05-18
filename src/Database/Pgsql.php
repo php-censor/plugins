@@ -6,6 +6,7 @@ namespace PHPCensor\Plugins\Database;
 
 use PDO;
 use PHPCensor\Common\Build\BuildInterface;
+use PHPCensor\Common\ParameterBag;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
@@ -99,7 +100,7 @@ class Pgsql extends Plugin
     protected function initPluginSettings(): void
     {
         $buildSettings    = (array)$this->buildSettings->get('pgsql', []);
-        $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
+        $buildSettingsBag = new ParameterBag($buildSettings);
 
         $this->host       = (string)$buildSettingsBag->get('host', $this->host);
         $this->port       = (int)$buildSettingsBag->get('port', $this->port);

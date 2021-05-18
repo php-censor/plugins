@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace PHPCensor\Plugins\Notification;
 
 use PHPCensor\Common\Build\BuildInterface;
+use PHPCensor\Common\ParameterBag;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
@@ -104,7 +105,7 @@ class IrcNotify extends Plugin
     protected function initPluginSettings(): void
     {
         $buildSettings    = (array)$this->buildSettings->get('irc_notify', []);
-        $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
+        $buildSettingsBag = new ParameterBag($buildSettings);
 
         $this->server = (string)$buildSettingsBag->get('server', $this->server);
         $this->port   = (int)$buildSettingsBag->get('port', $this->port);

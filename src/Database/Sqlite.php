@@ -6,6 +6,7 @@ namespace PHPCensor\Plugins\Database;
 
 use PDO;
 use PHPCensor\Common\Build\BuildInterface;
+use PHPCensor\Common\ParameterBag;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
@@ -73,7 +74,7 @@ class Sqlite extends Plugin
     protected function initPluginSettings(): void
     {
         $buildSettings    = (array)$this->buildSettings->get('sqlite', []);
-        $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
+        $buildSettingsBag = new ParameterBag($buildSettings);
 
         $this->path       = (string)$buildSettingsBag->get('path', $this->path);
         $this->pdoOptions = (array)$buildSettingsBag->get('options', $this->pdoOptions);

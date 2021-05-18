@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace PHPCensor\Plugins\Notification;
 
 use PHPCensor\Common\Build\BuildInterface;
+use PHPCensor\Common\ParameterBag;
 use PHPCensor\Common\Plugin\Plugin;
 
 /**
@@ -97,7 +98,7 @@ class CampfireNotify extends Plugin
     protected function initPluginSettings(): void
     {
         $buildSettings    = (array)$this->buildSettings->get('campfire', []);
-        $buildSettingsBag = new Plugin\ParameterBag($buildSettings);
+        $buildSettingsBag = new ParameterBag($buildSettings);
 
         $this->url       = (string)$buildSettingsBag->get('url', $this->url);
         $this->authToken = (string)$buildSettingsBag->get('auth_token', $this->authToken);

@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace PHPCensor\Plugins\Testing\PhpUnit;
 
-use PHPCensor\Common\Plugin\Plugin\ParameterBag;
+use PHPCensor\Common\ParameterBag;
 
 /**
  * Class Options validates and parse the option for the PhpUnitV2 plugin
