@@ -23,6 +23,11 @@ use PHPCensor\Common\Plugin\Plugin;
 class PhpStan extends Plugin
 {
     /**
+     * @var string[]
+     */
+    protected array $directories = [];
+
+    /**
      * @var int
      */
     private int $allowedErrors = 0;
@@ -47,9 +52,9 @@ class PhpStan extends Plugin
         }
 
         $this->commandExecutor->executeCommand(
-            'cd "%s" && ' . $executable . ' analyze --error-format=json "%s"',
+            'cd "%s" && ' . $executable . ' analyze --error-format=json %s',
             $this->build->getBuildPath(),
-            $this->directory
+            \implode(' ', $this->directories)
         );
         $this->commandExecutor->enableCommandOutput();
 
@@ -125,6 +130,7 @@ class PhpStan extends Plugin
     protected function initPluginSettings(): void
     {
         $this->allowedErrors = (int)$this->options->get('allowed_errors', $this->allowedErrors);
+        $this->directories   = (array)$this->options->get('directories', $this->directories);
     }
 
     /**
