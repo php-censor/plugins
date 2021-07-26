@@ -7,8 +7,10 @@ namespace PHPCensor\Plugins\Notification;
 use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
-use PHPCensor\Plugins\Notification\EmailNotify\ViewFactoryInterface;
-use PHPCensor\Plugins\Notification\EmailNotify\ViewInterface;
+use PHPCensor\Common\Email;
+use PHPCensor\Common\EmailSenderInterface;
+use PHPCensor\Common\ViewFactoryInterface;
+use PHPCensor\Common\ViewInterface;
 
 /**
  * EmailNotify Plugin - Provides simple email capability.
@@ -25,6 +27,16 @@ class EmailNotify extends Plugin
      * @var ViewFactoryInterface
      */
     private ViewFactoryInterface $viewFactory;
+
+    private bool $committer = false;
+
+    private array $addresses = [];
+
+    private string $defaultMailtoAddress = '';
+
+    private array $cc = [];
+
+    private string $template = '';
 
     /**
      * {@inheritdoc}
@@ -107,6 +119,14 @@ class EmailNotify extends Plugin
     protected function initPluginSettings(): void
     {
         $this->viewFactory = $this->container->get(ViewFactoryInterface::class);
+
+        $this->committer = (bool)$this->options->get('committer', $this->committer);
+
+        $this->defaultMailtoAddress = (string)$this->options->get('default_mailto_address', $this->defaultMailtoAddress);
+        $this->template             = (string)$this->options->get('template', $this->template);
+
+        $this->addresses = (array)$this->options->get('addresses', $this->addresses);
+        $this->cc        = (array)$this->options->get('cc', $this->cc);
     }
 
     /**
@@ -119,20 +139,23 @@ class EmailNotify extends Plugin
      */
     private function sendEmail(string $toAddress, array $ccList, string $subject, string $body): int
     {
-        $email = new EmailHelper(Config::getInstance());
+        $email = new Email();
 
         $email->setEmailTo($toAddress, $toAddress);
         $email->setSubject($subject);
         $email->setBody($body);
-        $email->setHtml(true);
+        $email->setIsHtml(true);
 
-        if (\is_array($ccList) && \count($ccList)) {
+        if ($ccList) {
             foreach ($ccList as $address) {
-                $email->addCc($address, $address);
+                $email->addCarbonCopyEmail($address, $address);
             }
         }
 
-        return $email->send($this->builder);
+        /** @var EmailSenderInterface $sender */
+        $sender = $this->container->get(EmailSenderInterface::class);
+
+        return $sender->send($email);
     }
 
     /**
@@ -147,10 +170,8 @@ class EmailNotify extends Plugin
     private function sendSeparateEmails(array $toAddresses, string $subject, string $body): int
     {
         $failures = 0;
-        $ccList   = $this->getCcAddresses();
-
         foreach ($toAddresses as $address) {
-            if (!$this->sendEmail($address, $ccList, $subject, $body)) {
+            if (!$this->sendEmail($address, $this->cc, $subject, $body)) {
                 $failures++;
             }
         }
@@ -158,66 +179,41 @@ class EmailNotify extends Plugin
         return $failures;
     }
 
-    /**
-     * Get the list of email addresses to send to.
-     *
-     * @return array
-     */
     private function getEmailAddresses(): array
     {
         $addresses = [];
         $committer = $this->build->getCommitterEmail();
 
         $this->buildLogger->logDebug(\sprintf("Committer email: '%s'", $committer));
-        $this->buildLogger->logDebug(\sprintf(
-            "Committer option: '%s'",
-            (!empty($this->options['committer']) && $this->options['committer']) ? 'true' : 'false'
-        ));
+        $this->buildLogger->logDebug(\sprintf("Committer option: '%s'", $this->committer ? 'true' : 'false'));
 
-        if (!empty($this->options['committer']) && $this->options['committer']) {
-            if ($committer) {
-                $addresses[] = $committer;
-            }
+        if ($this->committer && $committer) {
+            $addresses[] = $committer;
         }
 
-        $this->buildLogger->logDebug(\sprintf(
-            "Addresses option: '%s'",
-            (!empty($this->options['addresses']) && \is_array($this->options['addresses'])) ? \implode(', ', $this->options['addresses']) : 'false'
-        ));
+        $this->buildLogger->logDebug(
+            \sprintf(
+                "Addresses option: '%s'",
+                ($this->addresses ? \implode(', ', $this->addresses) : 'false')
+            )
+        );
 
-        if (!empty($this->options['addresses']) && \is_array($this->options['addresses'])) {
-            foreach ($this->options['addresses'] as $address) {
+        if ($this->addresses) {
+            foreach ($this->addresses as $address) {
                 $addresses[] = $address;
             }
         }
 
         $this->buildLogger->logDebug(\sprintf(
             "Default mailTo option: '%s'",
-            !empty($this->options['default_mailto_address']) ? $this->options['default_mailto_address'] : 'false'
+            $this->defaultMailtoAddress ? $this->defaultMailtoAddress : 'false'
         ));
 
-        if (empty($addresses) && !empty($this->options['default_mailto_address'])) {
-            $addresses[] = $this->options['default_mailto_address'];
+        if (empty($addresses) && $this->defaultMailtoAddress) {
+            $addresses[] = $this->defaultMailtoAddress;
         }
 
         return \array_unique($addresses);
-    }
-
-    /**
-     * Get the list of email addresses to CC.
-     *
-     * @return array
-     */
-    private function getCcAddresses(): array
-    {
-        $ccAddresses = [];
-        if (isset($this->options['cc'])) {
-            foreach ($this->options['cc'] as $address) {
-                $ccAddresses[] = $address;
-            }
-        }
-
-        return $ccAddresses;
     }
 
     /**
@@ -229,8 +225,8 @@ class EmailNotify extends Plugin
      */
     private function getMailTemplate(): ViewInterface
     {
-        if (isset($this->options['template'])) {
-            return $this->viewFactory->createView('EmailNotify/' . $this->options['template']);
+        if ($this->template) {
+            return $this->viewFactory->createView('EmailNotify/' . $this->template);
         }
 
         return $this->getDefaultMailTemplate();

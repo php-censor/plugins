@@ -106,14 +106,8 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
      */
     protected function initPluginSettings(): void
     {
-        $allowPublicArtifacts = false;
+        $allowPublicArtifacts = $this->application->isPublicArtifactsAllowed();
         $applicationConfig    = $this->application->getConfig();
-        if (
-            isset($applicationConfig['php-censor']['build']['allow_public_artifacts']) &&
-            $applicationConfig['php-censor']['build']['allow_public_artifacts']
-        ) {
-            $allowPublicArtifacts = true;
-        }
 
         $this->phpUnitOptions = new PhpUnitOptions(
             $this->options,
@@ -146,16 +140,8 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
      */
     private function runConfig(string $directory, string $logFormat, ?string $configFile = null): bool
     {
-        $allowPublicArtifacts = false;
-        $applicationConfig    = $this->application->getConfig();
-        if (
-            isset($applicationConfig['php-censor']['build']['allow_public_artifacts']) &&
-            $applicationConfig['php-censor']['build']['allow_public_artifacts']
-        ) {
-            $allowPublicArtifacts = true;
-        }
-
-        $fileSystem = new Filesystem();
+        $allowPublicArtifacts = $this->application->isPublicArtifactsAllowed();
+        $fileSystem           = new Filesystem();
 
         $phpUnitOptions = clone $this->phpUnitOptions;
         $buildPath = $this->build->getBuildPath();

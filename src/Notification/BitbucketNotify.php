@@ -151,7 +151,7 @@ class BitbucketNotify extends Plugin
             $this->message .= '```' . PHP_EOL;
             $this->message .= '%BUILD_LINK%?is_new=only_new#errors' . PHP_EOL . PHP_EOL;
 
-            $projectConfig    = $this->project->getConfig();
+            $projectConfig    = $this->project->getBuildConfig();
             $testOptionsArray = [];
             if (!empty($projectConfig['test'])) {
                 $testOptionsArray = $projectConfig['test'];
@@ -191,7 +191,7 @@ class BitbucketNotify extends Plugin
     {
         $endpoint = \sprintf('/projects/%s/repos/%s/pull-requests', $this->projectKey, $this->repositorySlug);
         $response = $this->apiRequest($endpoint)->getBody();
-        $response = \json_decode($response, true);
+        $response = \json_decode((string)$response, true);
 
         foreach ($response['values'] as $pullRequest) {
             if ($pullRequest['fromRef']['displayId'] === $this->build->getBranch()) {
@@ -219,7 +219,7 @@ class BitbucketNotify extends Plugin
         );
 
         $response = $this->apiRequest($endpoint)->getBody();
-        $response = \json_decode($response, true);
+        $response = \json_decode((string)$response, true);
 
         return $response['toRef']['displayId'];
     }
@@ -242,7 +242,7 @@ class BitbucketNotify extends Plugin
         );
 
         $response = $this->apiRequest($endpoint, 'post', ['text' => $message])->getBody();
-        $response = \json_decode($response, true);
+        $response = \json_decode((string)$response, true);
 
         return (int)$response['id'];
     }

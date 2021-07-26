@@ -48,16 +48,8 @@ class Pdepend extends Plugin
      */
     public function execute(): bool
     {
-        $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
-
-        $allowPublicArtifacts = false;
-        $applicationConfig    = $this->application->getConfig();
-        if (
-            isset($applicationConfig['php-censor']['build']['allow_public_artifacts']) &&
-            $applicationConfig['php-censor']['build']['allow_public_artifacts']
-        ) {
-            $allowPublicArtifacts = true;
-        }
+        $executable           = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
+        $allowPublicArtifacts = $this->application->isPublicArtifactsAllowed();
 
         $fileSystem = new Filesystem();
 
