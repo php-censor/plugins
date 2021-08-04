@@ -34,14 +34,6 @@ class PhpCsFixer extends Plugin
     private bool $config = false;
 
     /**
-     * @var string[]
-     */
-    private array $configs = [
-        '.php_cs',
-        '.php_cs.dist',
-    ];
-
-    /**
      * @var bool
      */
     private bool $errors = false;
@@ -74,17 +66,40 @@ class PhpCsFixer extends Plugin
      */
     public function execute(): bool
     {
+        $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
+
+        // Determine the version of PHP CS Fixer
+        $cmd = $executable . ' --version';
+        $this->commandExecutor->executeCommand($cmd);
+        $output  = $this->commandExecutor->getLastCommandOutput();
+        $matches = [];
+        if (!\preg_match('/(\d+\.\d+\.\d+)/', $output, $matches)) {
+            throw new Exception('Unable to determine the version of the PHP Coding Standards Fixer.');
+        }
+
+        $version = $matches[1];
+        // Appeared in PHP CS Fixer 2.8.0 and used by default since 3.0.0
+        // https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/2.19/CHANGELOG.md#changelog-for-v280
+        $this->supportsUdiff = \version_compare($version, '2.8.0', '>=')
+            && \version_compare($version, '3.0.0', '<');
+
         $directory = '';
         if (!empty($this->directory)) {
             $directory = $this->directory;
         }
 
+        $config = [];
         if (!$this->config) {
-            foreach ($this->configs as $config) {
+            if (\version_compare($version, '3.0.0', '>=')) {
+                $configs = ['.php-cs-fixer.php', '.php-cs-fixer.dist.php'];
+            } else {
+                $configs = ['.php_cs', '.php_cs.dist'];
+            }
+
+            foreach ($configs as $config) {
                 if (\file_exists($this->build->getBuildPath() . $config)) {
                     $this->config = true;
                     $this->args .= ' --config=./' . $config;
-
                     break;
                 }
             }
@@ -94,25 +109,12 @@ class PhpCsFixer extends Plugin
             $directory = '.';
         }
 
-        $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
-
-        // Determine the version of PHP CS Fixer
-        $cmd     = $executable . ' --version';
-        $this->commandExecutor->executeCommand($cmd);
-        $output  = $this->commandExecutor->getLastCommandOutput();
-        $matches = [];
-        if (\preg_match('/(\d+\.\d+\.\d+)/', $output, $matches)) {
-            $version = $matches[1];
-            // Appeared in PHP CS Fixer 2.8.0
-            // https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/2.12/CHANGELOG.md#changelog-for-v280
-            $this->supportsUdiff = \version_compare($version, '2.8.0', '>=');
-        }
-
         if ($this->errors) {
             $this->args .= ' --verbose --format json --diff';
             if ($this->supportsUdiff) {
                 $this->args .= ' --diff-format udiff';
             }
+
             if (!$this->build->isDebug()) {
                 $this->commandExecutor->disableCommandOutput(); // do not show json output
             }

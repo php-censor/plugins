@@ -109,6 +109,9 @@ class Pgsql extends Plugin
         $this->password   = (string)$buildSettingsBag->get('password', $this->password);
         $this->pdoOptions = (array)$buildSettingsBag->get('options', $this->pdoOptions);
 
-        $this->queries = (array)$this->options->get('queries', $this->queries);
+        $queries = (array)$this->options->get('queries', $this->queries);
+        foreach ($queries as $query) {
+            $this->queries[] = $this->variableInterpolator->interpolate($query);
+        }
     }
 }

@@ -130,7 +130,11 @@ class Mysql extends Plugin
         $this->pdoOptions = (array)$buildSettingsBag->get('options', $this->pdoOptions);
         $this->charset    = (string)$buildSettingsBag->get('charset', $this->charset);
 
-        $this->queries = (array)$this->options->get('queries', $this->queries);
+        $queries = (array)$this->options->get('queries', $this->queries);
+        foreach ($queries as $query) {
+            $this->queries[] = $this->variableInterpolator->interpolate($query);
+        }
+
         $this->imports = (array)$this->options->get('imports', $this->imports);
     }
 
