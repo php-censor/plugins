@@ -1,7 +1,10 @@
-/vendor
 /composer.phar
 /composer.lock
-/.php_cs.cache
+
+/vendor
+
+/.php-cs-fixer.cache
+/.phpunit.result.cache
+
 /tests/var/log/*.log
 /tests/var/coverage
-/tests/runtime/*
