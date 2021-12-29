@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class PhpDocblockCheckerTest extends TestCase
 {
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('php_docblock_checker', PhpDocblockChecker::getName());
     }
@@ -21,7 +21,7 @@ class PhpDocblockCheckerTest extends TestCase
      * @param string $stage
      * @param bool $expectedResult
      */
-    public function testCanExecute(string $stage, bool $expectedResult)
+    public function testCanExecute(string $stage, bool $expectedResult): void
     {
         $this->assertEquals(
             $expectedResult,

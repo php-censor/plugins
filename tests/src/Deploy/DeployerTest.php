@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class DeployerTest extends TestCase
 {
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('deployer', Deployer::getName());
     }
@@ -21,7 +21,7 @@ class DeployerTest extends TestCase
      * @param string $stage
      * @param bool $expectedResult
      */
-    public function testCanExecute(string $stage, bool $expectedResult)
+    public function testCanExecute(string $stage, bool $expectedResult): void
     {
         $this->assertEquals(
             $expectedResult,

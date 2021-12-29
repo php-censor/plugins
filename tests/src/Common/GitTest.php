@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class GitTest extends TestCase
 {
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('git', Git::getName());
     }
@@ -21,7 +21,7 @@ class GitTest extends TestCase
      * @param string $stage
      * @param bool $expectedResult
      */
-    public function testCanExecute(string $stage, bool $expectedResult)
+    public function testCanExecute(string $stage, bool $expectedResult): void
     {
         $this->assertEquals(
             $expectedResult,

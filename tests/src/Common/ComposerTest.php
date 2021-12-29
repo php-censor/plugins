@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class ComposerTest extends TestCase
 {
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('composer', Composer::getName());
     }
