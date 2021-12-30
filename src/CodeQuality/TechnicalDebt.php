@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -29,9 +29,6 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
      */
     private array $suffixes = ['php'];
 
-    /**
-     * @var int
-     */
     private int $allowedErrors = 0;
 
     /**
@@ -44,23 +41,14 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
      */
     private array $errorPerFile = [];
 
-    /**
-     * @var int
-     */
     private int $currentLineSize = 0;
 
-    /**
-     * @var int
-     */
     private int $lineNumber = 0;
 
-    /**
-     * @var int
-     */
     private int $numberOfAnalysedFile = 0;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -68,7 +56,7 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -92,7 +80,7 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -104,7 +92,7 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -119,8 +107,6 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Gets the number and list of errors returned from the search
-     *
-     * @return int
      */
     private function getErrorList(): int
     {
@@ -220,10 +206,8 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
      * Store the status of the file :
      *   . : checked no errors
      *   X : checked with one or more errors
-     *
-     * @param string $char
      */
-    private function buildLogString(string $char)
+    private function buildLogString(string $char): void
     {
         if (isset($this->errorPerFile[$this->lineNumber])) {
             $this->errorPerFile[$this->lineNumber] .= $char;

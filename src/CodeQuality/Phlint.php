@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -22,13 +22,10 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Phlint extends Plugin
 {
-    /**
-     * @var int
-     */
     private int $allowedErrors = 0;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -36,7 +33,7 @@ class Phlint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -72,7 +69,7 @@ class Phlint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -84,7 +81,7 @@ class Phlint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -92,7 +89,7 @@ class Phlint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -102,11 +99,6 @@ class Phlint extends Plugin
         ];
     }
 
-    /**
-     * @param string $output
-     *
-     * @return array
-     */
     private function processReport(string $output): array
     {
         $data = \explode(\chr(226), \preg_replace('#\\x1b[[][^A-Za-z\n]*[A-Za-z]#', '', \trim($output)));

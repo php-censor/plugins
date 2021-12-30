@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -20,15 +20,14 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Pahout extends Plugin
 {
-    const TAB = "\t";
+    public const TAB = "\t";
 
     /**
-     * @var int
      */
     private int $allowedWarnings = -1;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -36,7 +35,7 @@ class Pahout extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -86,7 +85,7 @@ class Pahout extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -98,7 +97,7 @@ class Pahout extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -106,7 +105,7 @@ class Pahout extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -116,11 +115,6 @@ class Pahout extends Plugin
         ];
     }
 
-    /**
-     * @param string $output
-     *
-     * @return array
-     */
     private function processReport(string $output): array
     {
         $data  = \json_decode(\trim($output), true);

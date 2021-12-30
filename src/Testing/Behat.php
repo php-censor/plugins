@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing;
 
@@ -20,13 +20,10 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Behat extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $features = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -34,7 +31,7 @@ class Behat extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -61,7 +58,7 @@ class Behat extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -73,7 +70,7 @@ class Behat extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -81,7 +78,7 @@ class Behat extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -93,8 +90,6 @@ class Behat extends Plugin
 
     /**
      * Parse the behat output and return details on failures
-     *
-     * @return array
      */
     public function parseBehatOutput(): array
     {

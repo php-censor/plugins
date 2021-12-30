@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Database;
 
@@ -20,43 +20,22 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Pgsql extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $host = '127.0.0.1';
 
-    /**
-     * @var int
-     */
     private int $port = 5432;
 
-    /**
-     * @var string
-     */
     private string $dbName = '';
 
-    /**
-     * @var array
-     */
     private array $pdoOptions = [];
 
-    /**
-     * @var string
-     */
     private string $user = '';
 
-    /**
-     * @var string
-     */
     private string $password = '';
 
-    /**
-     * @var array
-     */
     private array $queries = [];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -64,7 +43,7 @@ class Pgsql extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -87,7 +66,7 @@ class Pgsql extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -95,7 +74,7 @@ class Pgsql extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {

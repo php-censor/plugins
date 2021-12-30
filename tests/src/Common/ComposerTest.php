@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\PHPCensor\Plugins\Common;
 
@@ -17,9 +17,6 @@ class ComposerTest extends TestCase
 
     /**
      * @dataProvider canExecuteProvider
-     *
-     * @param string $stage
-     * @param bool $expectedResult
      */
     public function testCanExecuteWithNotExistsPath(string $stage, bool $expectedResult)
     {
@@ -40,8 +37,6 @@ class ComposerTest extends TestCase
     /**
      * @dataProvider canExecuteProvider
      *
-     * @param string $stage
-     * @param bool $expectedResult
      */
     public function testCanExecuteWithExistsPath(string $stage, bool $expectedResult)
     {

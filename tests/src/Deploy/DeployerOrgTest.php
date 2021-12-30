@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\PHPCensor\Plugins\Deploy;
 
@@ -17,9 +17,6 @@ class DeployerOrgTest extends TestCase
 
     /**
      * @dataProvider canExecuteProvider
-     *
-     * @param string $stage
-     * @param bool $expectedResult
      */
     public function testCanExecute(string $stage, bool $expectedResult): void
     {

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Common;
 
@@ -19,33 +19,18 @@ use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
  */
 class Composer extends Plugin implements ZeroConfigPluginInterface
 {
-    /**
-     * @var string
-     */
     private string $action = 'install';
 
-    /**
-     * @var bool
-     */
     private bool $preferDist = false;
 
-    /**
-     * @var bool
-     */
     private bool $noDev = false;
 
-    /**
-     * @var bool
-     */
     private bool $ignorePlatformReqs = false;
 
-    /**
-     * @var bool
-     */
     private bool $preferSource = true;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -53,7 +38,7 @@ class Composer extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -82,7 +67,7 @@ class Composer extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -96,7 +81,7 @@ class Composer extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -112,7 +97,7 @@ class Composer extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {

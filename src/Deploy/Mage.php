@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Deploy;
 
@@ -22,7 +22,7 @@ class Mage extends Plugin
     private string $mageEnv = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -30,7 +30,7 @@ class Mage extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -61,7 +61,7 @@ class Mage extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -73,7 +73,7 @@ class Mage extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -83,7 +83,7 @@ class Mage extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -94,8 +94,6 @@ class Mage extends Plugin
     }
 
     /**
-     * @return array
-     *
      * @throws Exception
      */
     private function getMageLog(): array

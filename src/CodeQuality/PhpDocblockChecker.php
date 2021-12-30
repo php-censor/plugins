@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -21,28 +21,16 @@ use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
  */
 class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
 {
-    /**
-     * @var bool
-     */
     private bool $skipClasses = false;
 
-    /**
-     * @var bool
-     */
     private bool $skipMethods = false;
 
-    /**
-     * @var bool
-     */
     private bool $skipSignatures = false;
 
-    /**
-     * @var int
-     */
     private int $allowedWarnings = 0;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -50,7 +38,7 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -110,7 +98,7 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -122,7 +110,7 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -137,7 +125,7 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -149,8 +137,6 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Report all of the errors we've encountered line-by-line.
-     *
-     * @param array $output
      */
     private function reportErrors(array $output): void
     {
@@ -197,7 +183,7 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
             $this->buildErrorWriter->write(
                 $this->build->getId(),
                 self::getName(),
-                (string)$message,
+                $message,
                 $severity,
                 (string)$error['file'],
                 (int)$error['line']

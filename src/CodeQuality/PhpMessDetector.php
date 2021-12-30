@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -22,26 +22,18 @@ use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
  */
 class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
 {
-    /**
-     * @var array
-     */
     private array $suffixes = ['php'];
 
     /**
      * Array of PHPMD rules. Can be one of the builtins (codesize, unusedcode, naming, design, controversial)
      * or a filename (detected by checking for a / in it), either absolute or relative to the project root.
-     *
-     * @var array
      */
     private array $rules = ['codesize', 'unusedcode', 'naming'];
 
-    /**
-     * @var int
-     */
     private int $allowedWarnings = 0;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -49,7 +41,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -78,7 +70,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -90,7 +82,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -104,7 +96,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -125,10 +117,6 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Process PHPMD's XML output report.
-     *
-     * @param $xmlString
-     *
-     * @return int
      *
      * @throws Exception
      */
@@ -165,10 +153,8 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Execute PHP Mess Detector.
-     *
-     * @param $executable
      */
-    private function executePhpMd($executable)
+    private function executePhpMd(string $executable)
     {
         $cmd = 'cd "%s" && ' . $executable . ' "%s" xml %s %s %s';
 

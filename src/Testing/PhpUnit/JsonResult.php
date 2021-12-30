@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing\PhpUnit;
 
@@ -17,14 +17,14 @@ use PHPCensor\Common\Exception\Exception;
  */
 class JsonResult extends Result
 {
-    const EVENT_TEST        = 'test';
-    const EVENT_TEST_START  = 'testStart';
-    const EVENT_SUITE_START = 'suiteStart';
+    public const EVENT_TEST        = 'test';
+    public const EVENT_TEST_START  = 'testStart';
+    public const EVENT_SUITE_START = 'suiteStart';
 
     protected array $arguments = [];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function parse(): JsonResult
     {
@@ -66,7 +66,7 @@ class JsonResult extends Result
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getSeverity($testCase): string
     {
@@ -94,7 +94,7 @@ class JsonResult extends Result
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function buildMessage($testCase): string
     {
@@ -107,7 +107,7 @@ class JsonResult extends Result
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function buildTrace($testCase): array
     {
@@ -123,7 +123,7 @@ class JsonResult extends Result
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getFileAndLine($testCase): array
     {

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification;
 
@@ -19,33 +19,18 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class IrcNotify extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $message;
 
-    /**
-     * @var string
-     */
     private string $server = '';
 
-    /**
-     * @var int
-     */
     private int $port = 6667;
 
-    /**
-     * @var string
-     */
     private string $room = '';
 
-    /**
-     * @var string
-     */
     private string $nick = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -53,7 +38,7 @@ class IrcNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -82,7 +67,7 @@ class IrcNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -100,7 +85,7 @@ class IrcNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -122,9 +107,6 @@ class IrcNotify extends Plugin
 
     /**
      * @param resource $socket
-     * @param array    $commands
-     *
-     * @return bool
      */
     private function executeIrcCommands($socket, array $commands): bool
     {

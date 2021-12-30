@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification;
 
@@ -54,7 +54,7 @@ class XmppNotify extends Plugin
     private string $dateFormat = '%c';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -62,7 +62,7 @@ class XmppNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -101,7 +101,7 @@ class XmppNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -119,7 +119,7 @@ class XmppNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -130,7 +130,7 @@ class XmppNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -141,8 +141,6 @@ class XmppNotify extends Plugin
 
     /**
      * Get config format for sendxmpp config file
-     *
-     * @return string
      */
     private function getConfigFormat(): string
     {
@@ -162,8 +160,6 @@ class XmppNotify extends Plugin
 
     /**
      * Find config file for sendxmpp binary (default is .sendxmpprc)
-     *
-     * @return bool
      */
     private function findConfigFile(): bool
     {
@@ -180,11 +176,6 @@ class XmppNotify extends Plugin
         return false;
     }
 
-    /**
-     * @param string $messageFile
-     *
-     * @return bool
-     */
     private function buildMessage(string $messageFile): bool
     {
         if ($this->build->isSuccessful()) {

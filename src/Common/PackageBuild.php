@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Common;
 
@@ -18,9 +18,6 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class PackageBuild extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $filename = 'build';
 
     /**
@@ -29,7 +26,7 @@ class PackageBuild extends Plugin
     private array $format = ['zip'];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -37,7 +34,7 @@ class PackageBuild extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -77,7 +74,7 @@ class PackageBuild extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -96,7 +93,7 @@ class PackageBuild extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {

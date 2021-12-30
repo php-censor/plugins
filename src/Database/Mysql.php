@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Database;
 
@@ -22,53 +22,26 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Mysql extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $host = '127.0.0.1';
 
-    /**
-     * @var int
-     */
     private int $port = 3306;
 
-    /**
-     * @var string
-     */
     private string $dbName = '';
 
-    /**
-     * @var string
-     */
     private string $charset = '';
 
-    /**
-     * @var array
-     */
     private array $pdoOptions = [];
 
-    /**
-     * @var string
-     */
     private string $user = '';
 
-    /**
-     * @var string
-     */
     private string $password = '';
 
-    /**
-     * @var array
-     */
     private array $queries = [];
 
-    /**
-     * @var array
-     */
     private array $imports = [];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -76,7 +49,7 @@ class Mysql extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -107,7 +80,7 @@ class Mysql extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -115,7 +88,7 @@ class Mysql extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -139,10 +112,6 @@ class Mysql extends Plugin
     }
 
     /**
-     * @param array $query
-     *
-     * @return bool
-     *
      * @throws Exception
      */
     private function executeFile(array $query): bool
@@ -171,10 +140,8 @@ class Mysql extends Plugin
      *
      * @param string $importFile Path to file, relative to the build root
      * @param string $database   If specified, this database is selected before execution
-     *
-     * @return string
      */
-    private function getImportCommand(string $importFile, $database = null): string
+    private function getImportCommand(string $importFile, ?string $database = null): string
     {
         $decompression = [
             'bz2' => '| bzip2 --decompress',

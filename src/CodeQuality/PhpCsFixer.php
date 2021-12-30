@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -23,38 +23,20 @@ use SebastianBergmann\Diff\Parser;
  */
 class PhpCsFixer extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $args = '';
 
-    /**
-     * @var bool
-     */
     private bool $config = false;
 
-    /**
-     * @var bool
-     */
     private bool $errors = false;
 
-    /**
-     * @var bool
-     */
     private bool $reportErrors = false;
 
-    /**
-     * @var int
-     */
     private int $allowedWarnings = 0;
 
-    /**
-     * @var bool
-     */
     private bool $supportsUdiff = false;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -62,7 +44,7 @@ class PhpCsFixer extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -144,7 +126,7 @@ class PhpCsFixer extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -156,7 +138,7 @@ class PhpCsFixer extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -193,7 +175,7 @@ class PhpCsFixer extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -205,10 +187,6 @@ class PhpCsFixer extends Plugin
 
     /**
      * Process the PHP CS Fixer report.
-     *
-     * @param string $output
-     *
-     * @return int
      *
      * @throws Exception
      */

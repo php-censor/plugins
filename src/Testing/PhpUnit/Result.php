@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing\PhpUnit;
 
@@ -17,42 +17,23 @@ use PHPCensor\Common\Exception\Exception;
  */
 abstract class Result
 {
-    const SEVERITY_PASS    = 'success';
-    const SEVERITY_FAIL    = 'fail';
-    const SEVERITY_ERROR   = 'error';
-    const SEVERITY_SKIPPED = 'skipped';
-    const SEVERITY_WARN    = self::SEVERITY_PASS;
-    const SEVERITY_RISKY   = self::SEVERITY_PASS;
+    public const SEVERITY_PASS    = 'success';
+    public const SEVERITY_FAIL    = 'fail';
+    public const SEVERITY_ERROR   = 'error';
+    public const SEVERITY_SKIPPED = 'skipped';
+    public const SEVERITY_WARN    = self::SEVERITY_PASS;
+    public const SEVERITY_RISKY   = self::SEVERITY_PASS;
 
-    /**
-     * @var string
-     */
     protected string $outputFile;
 
-    /**
-     * @var string
-     */
     protected string $buildPath;
 
-    /**
-     * @var array
-     */
     protected array $results;
 
-    /**
-     * @var int
-     */
     protected int $failures = 0;
 
-    /**
-     * @var array
-     */
     protected array $errors = [];
 
-    /**
-     * @param string $outputFile
-     * @param string $buildPath
-     */
     public function __construct(string $outputFile, string $buildPath = '')
     {
         $this->outputFile = $outputFile;
@@ -70,29 +51,21 @@ abstract class Result
 
     /**
      * @param mixed $testCase
-     *
-     * @return string
      */
     abstract protected function getSeverity($testCase): string;
 
     /**
      * @param mixed $testCase
-     *
-     * @return string
      */
     abstract protected function buildMessage($testCase): string;
 
     /**
      * @param mixed $testCase
-     *
-     * @return array
      */
     abstract protected function buildTrace($testCase): array;
 
     /**
      * @param mixed $testCase
-     *
-     * @return array
      */
     protected function getFileAndLine($testCase): array
     {
@@ -101,8 +74,6 @@ abstract class Result
 
     /**
      * @param mixed $testCase
-     *
-     * @return string
      */
     protected function getOutput($testCase): string
     {
@@ -150,8 +121,6 @@ abstract class Result
 
     /**
      * Get the total number of failing tests
-     *
-     * @return int
      */
     public function getFailures(): int
     {

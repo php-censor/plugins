@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Common;
 
@@ -18,13 +18,10 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Git extends Plugin
 {
-    /**
-     * @var array
-     */
     private array $actions = [];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -32,7 +29,7 @@ class Git extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -53,7 +50,7 @@ class Git extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -73,7 +70,7 @@ class Git extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -82,11 +79,6 @@ class Git extends Plugin
 
     /**
      * Determine which action to run, and run it.
-     *
-     * @param string $action
-     * @param array  $options
-     *
-     * @return bool
      */
     private function runAction(string $action, array $options = []): bool
     {
@@ -109,10 +101,6 @@ class Git extends Plugin
 
     /**
      * Handle a merge action.
-     *
-     * @param array $options
-     *
-     * @return bool
      */
     private function runMergeAction(array $options = []): bool
     {
@@ -128,10 +116,6 @@ class Git extends Plugin
 
     /**
      * Handle a tag action.
-     *
-     * @param array $options
-     *
-     * @return bool
      */
     private function runTagAction(array $options = []): bool
     {
@@ -147,15 +131,12 @@ class Git extends Plugin
         }
 
         $cmd = 'git tag %s -m "%s"';
+
         return $this->commandExecutor->executeCommand($cmd, $tagName, $message);
     }
 
     /**
      * Handle a pull action.
-     *
-     * @param array $options
-     *
-     * @return bool
      */
     private function runPullAction(array $options = []): bool
     {
@@ -175,10 +156,6 @@ class Git extends Plugin
 
     /**
      * Handle a push action.
-     *
-     * @param array $options
-     *
-     * @return bool
      */
     private function runPushAction(array $options = []): bool
     {

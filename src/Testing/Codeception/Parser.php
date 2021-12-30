@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing\Codeception;
 
@@ -15,40 +15,18 @@ namespace PHPCensor\Plugins\Testing\Codeception;
  */
 class Parser implements ParserInterface
 {
-    /**
-     * @var string
-     */
     private string $buildPath;
 
-    /**
-     * @var string
-     */
     private string $xmlPath;
 
-    /**
-     * @var int
-     */
     private int $totalTests = 0;
 
-    /**
-     * @var int
-     */
     private int $totalTimeTaken = 0;
 
-    /**
-     * @var int
-     */
     private int $totalFailures = 0;
 
-    /**
-     * @var int
-     */
     private int $totalErrors = 0;
 
-    /**
-     * @param string $builderPath
-     * @param string $xmlPath
-     */
     public function __construct(string $builderPath, string $xmlPath)
     {
         $this->buildPath = $builderPath;
@@ -106,8 +84,6 @@ class Parser implements ParserInterface
 
     /**
      * Get the total number of tests performed.
-     *
-     * @return int
      */
     public function getTotalTests(): int
     {
@@ -116,8 +92,6 @@ class Parser implements ParserInterface
 
     /**
      * The time take to complete all tests
-     *
-     * @return float
      */
     public function getTotalTimeTaken(): float
     {
@@ -126,19 +100,12 @@ class Parser implements ParserInterface
 
     /**
      * A count of the test failures
-     *
-     * @return int
      */
     public function getTotalFailures(): int
     {
         return $this->totalFailures + $this->totalErrors;
     }
 
-    /**
-     * @param string $filePath
-     *
-     * @return \SimpleXMLElement|null
-     */
     private function loadFromFile(string $filePath): ?\SimpleXMLElement
     {
         \stream_filter_register('xml_utf8_clean', 'PHPCensor\Helper\Xml\Utf8CleanFilter');

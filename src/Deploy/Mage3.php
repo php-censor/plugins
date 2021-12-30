@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Deploy;
 
@@ -23,7 +23,7 @@ class Mage3 extends Plugin
     private string $mageLogDir = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -31,7 +31,7 @@ class Mage3 extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -62,7 +62,7 @@ class Mage3 extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -74,7 +74,7 @@ class Mage3 extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -88,7 +88,7 @@ class Mage3 extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -99,8 +99,6 @@ class Mage3 extends Plugin
     }
 
     /**
-     * @return array
-     *
      * @throws Exception
      */
     private function getMageLog(): array

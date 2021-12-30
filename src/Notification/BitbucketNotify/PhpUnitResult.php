@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification\BitbucketNotify;
 
@@ -15,11 +15,6 @@ namespace PHPCensor\Plugins\Notification\BitbucketNotify;
  */
 class PhpUnitResult extends PluginResult
 {
-    /**
-     * @param string $plugin
-     * @param int    $left
-     * @param int    $right
-     */
     public function __construct(string $plugin, int $left, int $right)
     {
         parent::__construct($plugin, $left, $right);
@@ -27,25 +22,16 @@ class PhpUnitResult extends PluginResult
         $this->outputFormat = "%s | %01.2f\t=> %01.2f\t%s";
     }
 
-    /**
-     * @return bool
-     */
     public function isImproved(): bool
     {
         return $this->right > $this->left;
     }
 
-    /**
-     * @return bool
-     */
     public function isDegraded(): bool
     {
         return $this->right < $this->left;
     }
 
-    /**
-     * @return string
-     */
     protected function getTaskDescriptionMessage(): string
     {
         return 'pls fix %s because the coverage has decreased from %d to %d';

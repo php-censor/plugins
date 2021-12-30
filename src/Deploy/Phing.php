@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Deploy;
 
@@ -25,7 +25,7 @@ class Phing extends Plugin
     private string $propertyFile = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -33,7 +33,7 @@ class Phing extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -55,7 +55,7 @@ class Phing extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -67,7 +67,7 @@ class Phing extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -92,7 +92,7 @@ class Phing extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -104,8 +104,6 @@ class Phing extends Plugin
 
     /**
      * Converts an array of targets into a string.
-     *
-     * @return string
      */
     private function targetsToString(): string
     {
@@ -125,8 +123,6 @@ class Phing extends Plugin
     }
 
     /**
-     * @param string $buildFile
-     *
      * @throws Exception
      */
     private function setBuildFile(string $buildFile)
@@ -140,17 +136,12 @@ class Phing extends Plugin
 
     /**
      * Get phing build file path.
-     *
-     * @return string
      */
     private function getBuildFilePath(): string
     {
         return $this->directory . $this->buildFile;
     }
 
-    /**
-     * @return string
-     */
     public function propertiesToString(): string
     {
         /** Fix the problem when execute phing out of the build dir */
@@ -179,17 +170,12 @@ class Phing extends Plugin
         $this->properties = $properties;
     }
 
-    /**
-     * @return string
-     */
     private function getPropertyFile(): string
     {
         return $this->propertyFile;
     }
 
     /**
-     * @param string $propertyFile
-     *
      * @throws Exception
      */
     private function setPropertyFile(string $propertyFile)
