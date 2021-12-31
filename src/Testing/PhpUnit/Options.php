@@ -54,7 +54,9 @@ class Options
     {
         $argumentString = '';
         foreach ($this->getCommandArguments() as $argumentName => $argumentValues) {
-            $prefix = $argumentName[0] == '-' ? '' : '--';
+            $prefix = $argumentName[0] === '-'
+                ? ''
+                : '--';
 
             if (!\is_array($argumentValues)) {
                 $argumentValues = [$argumentValues];
@@ -139,7 +141,7 @@ class Options
      * Add an argument to the collection
      * Note: adding argument before parsing the options will prevent the other options from been parsed.
      */
-    public function addArgument(string $argumentName, ?string $argumentValue = null)
+    public function addArgument(string $argumentName, ?string $argumentValue = null): void
     {
         if (isset($this->arguments[$argumentName])) {
             if (!\is_array($this->arguments[$argumentName])) {
@@ -166,13 +168,11 @@ class Options
 
         if (\is_string($directories)) {
             $directories = [$directories];
-        } else {
-            if (\is_null($directories)) {
-                $directories = [];
-            }
+        } elseif (\is_null($directories)) {
+            $directories = [];
         }
 
-        return \is_array($directories) ? $directories : [$directories];
+        return $directories;
     }
 
     /**

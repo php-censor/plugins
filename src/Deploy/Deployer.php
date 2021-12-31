@@ -57,7 +57,7 @@ class Deployer extends Plugin
             ]
         );
 
-        $status = (int)$response->getStatusCode();
+        $status = $response->getStatusCode();
 
         return ($status >= 200 && $status < 300);
     }

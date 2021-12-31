@@ -103,6 +103,6 @@ class PackageBuild extends Plugin
         if (!\is_array($format)) {
             $format = [$format];
         }
-        $this->format = (array)$format;
+        $this->format = $format;
     }
 }

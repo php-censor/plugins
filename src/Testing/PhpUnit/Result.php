@@ -130,7 +130,7 @@ abstract class Result
     /**
      * Get the tests with failing status
      *
-     * @return string[]
+     * @return array[]
      */
     public function getErrors(): array
     {

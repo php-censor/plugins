@@ -45,7 +45,7 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
         $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
 
         $ignore = '';
-        if (\is_array($this->ignores)) {
+        if (0 < \count($this->ignores)) {
             $ignore = \sprintf(' --exclude="%s"', \implode(',', $this->ignores));
         }
 
@@ -114,7 +114,7 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
      */
     protected function initPluginSettings(): void
     {
-        if (isset($options['zero_config']) && $options['zero_config']) {
+        if ($this->options->has('zero_config') && $this->options->get('zero_config', false)) {
             $this->allowedWarnings = -1;
         }
 

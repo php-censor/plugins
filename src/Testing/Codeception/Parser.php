@@ -44,7 +44,7 @@ class Parser implements ParserInterface
         if ($results) {
             foreach ($results->testsuite as $testSuite) {
                 $this->totalTests     += (int)$testSuite['tests'];
-                $this->totalTimeTaken += (float)$testSuite['time'];
+                $this->totalTimeTaken += (int)$testSuite['time'];
                 $this->totalFailures  += (int)$testSuite['failures'];
                 $this->totalErrors    += (int)$testSuite['errors'];
 
@@ -56,6 +56,7 @@ class Parser implements ParserInterface
                         'feature'    => (string)$testCase['feature'],
                         'assertions' => (int)$testCase['assertions'],
                         'time'       => (float)$testCase['time'],
+                        'class'      => 'Unknown',
                     ];
 
                     if (isset($testCase['class'])) {

@@ -93,7 +93,7 @@ class CampfireNotify extends Plugin
     /**
      * Join a Campfire room.
      */
-    private function joinRoom(string $roomId)
+    private function joinRoom(string $roomId): void
     {
         $this->getPageByPost('/room/' . $roomId . '/join.json');
     }
@@ -101,7 +101,7 @@ class CampfireNotify extends Plugin
     /**
      * Leave a Campfire room.
      */
-    public function leaveRoom(string $roomId)
+    public function leaveRoom(string $roomId): void
     {
         $this->getPageByPost('/room/' . $roomId . '/leave.json');
     }
@@ -145,7 +145,7 @@ class CampfireNotify extends Plugin
         \curl_setopt($handle, CURLOPT_COOKIEFILE, $this->cookie);
 
         \curl_setopt($handle, CURLOPT_POSTFIELDS, $json);
-        $output = \curl_exec($handle);
+        $output = (string)\curl_exec($handle);
 
         \curl_close($handle);
 

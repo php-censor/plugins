@@ -38,17 +38,16 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
         $ignoresString       = '';
         $ignoreForNewVersion = '';
         $filesToIgnore       = [];
-        if (\is_array($this->ignores)) {
-            foreach ($this->ignores as $ignore) {
-                $ignoreForNewVersion .= \sprintf(' --exclude="%s"', $ignore);
 
-                $ignore = \rtrim($ignore, '/');
-                if (\is_file($this->build->getBuildPath() . $ignore)) {
-                    $ignoredFile     = \explode('/', $ignore);
-                    $filesToIgnore[] = \array_pop($ignoredFile);
-                } else {
-                    $ignoresString .= \sprintf(' --exclude="%s"', $ignore);
-                }
+        foreach ($this->ignores as $ignore) {
+            $ignoreForNewVersion .= \sprintf(' --exclude="%s"', $ignore);
+
+            $ignore = \rtrim($ignore, '/');
+            if (\is_file($this->build->getBuildPath() . $ignore)) {
+                $ignoredFile     = \explode('/', $ignore);
+                $filesToIgnore[] = \array_pop($ignoredFile);
+            } else {
+                $ignoresString .= \sprintf(' --exclude="%s"', $ignore);
             }
         }
 

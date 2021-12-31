@@ -47,12 +47,13 @@
         "ext-curl":                    "*",
         "ext-bcmath":                  "*",
         "php-censor/common":           "dev-master",
-        "guzzlehttp/guzzle":           "*",
-        "hipchat/hipchat-php":         "*",
-        "maknz/slack":                 "*",
-        "sebastian/diff":              "*",
-        "php-censor/flowdock-client":  "*",
-        "swiftmailer/swiftmailer":     "*"
+        "guzzlehttp/guzzle":           "^6.5",
+        "hipchat/hipchat-php":         "^1.4",
+        "maknz/slack":                 "^1.7",
+        "sebastian/diff":              "^4.0",
+        "php-censor/flowdock-client":  "^1.0",
+        "swiftmailer/swiftmailer":     "^6.3",
+        "symfony/yaml":                "^5.3"
     },
     "require-dev": {
         "phpunit/phpunit":           "^9.5",

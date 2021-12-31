@@ -113,7 +113,7 @@ class SensiolabsInsight extends Plugin
                     self::getName(),
                     (string)$violation,
                     BuildErrorInterface::SEVERITY_HIGH,
-                    (string)$fileName,
+                    $fileName,
                     (int)$violation['beginline'],
                     (int)$violation['endline']
                 );

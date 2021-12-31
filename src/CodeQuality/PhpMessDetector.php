@@ -154,7 +154,7 @@ class PhpMessDetector extends Plugin implements ZeroConfigPluginInterface
     /**
      * Execute PHP Mess Detector.
      */
-    private function executePhpMd(string $executable)
+    private function executePhpMd(string $executable): void
     {
         $cmd = 'cd "%s" && ' . $executable . ' "%s" xml %s %s %s';
 

@@ -167,7 +167,7 @@ class JunitResult extends Result
     /**
      * @throws Exception
      */
-    private function internalProblem(string $description)
+    private function internalProblem(string $description): void
     {
         throw new Exception($description);
     }

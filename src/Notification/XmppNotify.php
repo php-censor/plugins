@@ -68,7 +68,7 @@ class XmppNotify extends Plugin
     {
         $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
 
-        if (!\is_array($this->recipients) || 0 === \count($this->recipients)) {
+        if (!$this->recipients) {
             return false;
         }
 
@@ -124,9 +124,6 @@ class XmppNotify extends Plugin
     protected function initPluginSettings(): void
     {
         $this->recipients = (array)$this->options->get('recipients', $this->recipients);
-        if ($this->recipients && \is_string($this->recipients)) {
-            $this->recipients = [(string)$this->recipients];
-        }
     }
 
     /**

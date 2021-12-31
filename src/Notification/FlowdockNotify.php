@@ -61,7 +61,7 @@ class FlowdockNotify extends Plugin
 
         if (!$push->sendTeamInboxMessage($flowMessage, ['connect_timeout' => 5000, 'timeout' => 5000])) {
             throw new Exception(
-                \sprintf('Flowdock Failed: %s', $flowMessage->getResponseErrors())
+                \sprintf('Flowdock Failed: %s', \json_encode($flowMessage->getResponseErrors()))
             );
         }
 
@@ -95,7 +95,7 @@ class FlowdockNotify extends Plugin
             throw new Exception("Please define the 'auth_token' for FlowdockNotify plugin!");
         }
 
-        $this->authToken = \trim($this->options->get('auth_token'));
+        $this->authToken = \trim((string)$this->options->get('auth_token'));
         $this->message   = (string)$this->options->get('message', $this->message);
         $this->email     = (string)$this->options->get('email', $this->email);
     }

@@ -73,10 +73,8 @@ class Lint extends Plugin
 
     /**
      * Run php -l against a directory of files.
-     *
-     * @param $path
      */
-    private function lintDirectory($path): bool
+    private function lintDirectory(string $path): bool
     {
         $success   = true;
         $directory = new \DirectoryIterator($path);
@@ -120,10 +118,8 @@ class Lint extends Plugin
 
     /**
      * Run php -l against a specific file.
-     *
-     * @param $path
      */
-    private function lintFile($path): bool
+    private function lintFile(string $path): bool
     {
         $success = true;
         if (!$this->commandExecutor->executeCommand('php -l "%s"', $path)) {

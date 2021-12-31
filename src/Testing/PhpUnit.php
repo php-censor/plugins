@@ -70,9 +70,9 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
             }
         } else {
             // Run any config files
-            if (!empty($xmlConfigFiles)) {
+            if ($xmlConfigFiles) {
                 foreach ($xmlConfigFiles as $configFile) {
-                    $success[] = $this->runConfig($this->phpUnitOptions->getTestsPath(), $logFormat, $configFile);
+                    $success[] = $this->runConfig((string)$this->phpUnitOptions->getTestsPath(), $logFormat, $configFile);
                 }
             }
         }
@@ -101,7 +101,6 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
     protected function initPluginSettings(): void
     {
         $allowPublicArtifacts = $this->application->isPublicArtifactsAllowed();
-        $applicationConfig    = $this->application->getConfig();
 
         $this->phpUnitOptions = new PhpUnitOptions(
             $this->options,
@@ -280,7 +279,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
                     $this->build->getId(),
                     self::getName(),
                     (string)$error['message'],
-                    (int)$severity,
+                    $severity,
                     (string)$error['file'],
                     (int)$error['line']
                 );

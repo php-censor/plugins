@@ -129,7 +129,7 @@ class Behat extends Plugin
                     self::getName(),
                     'Behat scenario failed.',
                     BuildErrorInterface::SEVERITY_HIGH,
-                    (string)$lineParts[0],
+                    $lineParts[0],
                     (int)$lineParts[1]
                 );
             }
