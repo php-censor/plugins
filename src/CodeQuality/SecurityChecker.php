@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -20,14 +20,8 @@ use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
  */
 class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
 {
-    /**
-     * @var int
-     */
     private int $allowedWarnings = 0;
 
-    /**
-     * @var string
-     */
     private string $binaryType = 'symfony';
 
     /**
@@ -39,7 +33,7 @@ class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
     ];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -47,7 +41,7 @@ class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -102,7 +96,7 @@ class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -116,7 +110,7 @@ class SecurityChecker extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {

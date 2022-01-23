@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\PHPCensor\Plugins\CodeQuality;
 
@@ -10,18 +10,15 @@ use PHPUnit\Framework\TestCase;
 
 class TechnicalDebtTest extends TestCase
 {
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('technical_debt', TechnicalDebt::getName());
     }
 
     /**
      * @dataProvider canExecuteProvider
-     *
-     * @param string $stage
-     * @param bool $expectedResult
      */
-    public function testCanExecute(string $stage, bool $expectedResult)
+    public function testCanExecute(string $stage, bool $expectedResult): void
     {
         $this->assertEquals(
             $expectedResult,

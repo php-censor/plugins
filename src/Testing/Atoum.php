@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing;
 
@@ -18,18 +18,12 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Atoum extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $args = '';
 
-    /**
-     * @var string
-     */
     private string $config = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -37,7 +31,7 @@ class Atoum extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -74,7 +68,7 @@ class Atoum extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -86,7 +80,7 @@ class Atoum extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -95,7 +89,7 @@ class Atoum extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {

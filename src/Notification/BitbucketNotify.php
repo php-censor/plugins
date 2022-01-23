@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification;
 
@@ -30,48 +30,24 @@ use Psr\Http\Message\ResponseInterface;
  */
 class BitbucketNotify extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $url = '';
 
-    /**
-     * @var string
-     */
     private string $authToken = '';
 
-    /**
-     * @var string
-     */
     private string $projectKey = '';
 
-    /**
-     * @var string
-     */
     private string $repositorySlug = '';
 
-    /**
-     * @var bool
-     */
     private bool $createTaskPerFail = true;
 
-    /**
-     * @var bool
-     */
     private bool $createTaskIfFail = true;
 
-    /**
-     * @var bool
-     */
     private bool $updateBuild = false;
 
-    /**
-     * @var string
-     */
     private string $message = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -79,7 +55,7 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -112,7 +88,7 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -130,7 +106,7 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -183,8 +159,6 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * @return int
-     *
      * @throws GuzzleException
      */
     private function findPullRequestsByBranch(): int
@@ -203,10 +177,6 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * @param int $pullRequestId
-     *
-     * @return string
-     *
      * @throws GuzzleException
      */
     private function getTargetBranchForPullRequest(int $pullRequestId): string
@@ -225,11 +195,6 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * @param int    $pullRequestId
-     * @param string $message
-     *
-     * @return int
-     *
      * @throws GuzzleException
      */
     private function createCommentInPullRequest(int $pullRequestId, string $message): int
@@ -248,9 +213,6 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * @param int    $commentId
-     * @param string $message
-     *
      * @throws GuzzleException
      */
     private function createTaskForCommentInPullRequest(int $commentId, string $message): void
@@ -294,8 +256,6 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * @param string $targetBranch
-     *
      * @return PluginResult[]
      */
     private function prepareResult(string $targetBranch): array
@@ -336,11 +296,6 @@ class BitbucketNotify extends Plugin
         return $result;
     }
 
-    /**
-     * @param string $targetBranch
-     *
-     * @return PluginResult
-     */
     private function getPhpUnitCoverage(string $targetBranch): PluginResult
     {
         /** @var BuildMetaRepositoryInterface $buildMetaRepository */
@@ -383,8 +338,6 @@ class BitbucketNotify extends Plugin
 
     /**
      * @param PluginResult[] $plugins
-     *
-     * @return array
      */
     private function buildResultComparator(array $plugins): array
     {
@@ -401,11 +354,6 @@ class BitbucketNotify extends Plugin
         return $lines;
     }
 
-    /**
-     * @param array $stats
-     *
-     * @return string
-     */
     private function reportGenerator(array $stats): string
     {
         $statsString = \trim(\implode(PHP_EOL, $stats));
@@ -418,12 +366,6 @@ class BitbucketNotify extends Plugin
         return $this->variableInterpolator->interpolate($message);
     }
 
-    /**
-     * @param string $branchName
-     *
-     * @return int|null
-     *
-     */
     private function findLatestBuild(string $branchName): ?int
     {
         /** @var BuildRepositoryInterface $buildRepository */
@@ -435,12 +377,6 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * @param string     $endpoint
-     * @param string     $method
-     * @param array|null $jsonBody
-     *
-     * @return ResponseInterface
-     *
      * @throws GuzzleException
      */
     private function buildStatusRequest(string $endpoint, string $method = 'get', ?array $jsonBody = null): ResponseInterface
@@ -449,12 +385,6 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * @param string     $endpoint
-     * @param string     $method
-     * @param array|null $jsonBody
-     *
-     * @return ResponseInterface
-     *
      * @throws GuzzleException
      */
     private function apiRequest(string $endpoint, string $method = 'get', array $jsonBody = null): ResponseInterface
@@ -463,12 +393,6 @@ class BitbucketNotify extends Plugin
     }
 
     /**
-     * @param string     $endpoint
-     * @param string     $method
-     * @param array|null $jsonBody
-     *
-     * @return ResponseInterface
-     *
      * @throws GuzzleException
      */
     private function request(string $endpoint, string $method = 'get', array $jsonBody = null): ResponseInterface

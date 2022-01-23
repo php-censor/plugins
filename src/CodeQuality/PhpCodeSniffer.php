@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -22,53 +22,26 @@ use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
  */
 class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
 {
-    /**
-     * @var array
-     */
     private array $suffixes = ['php'];
 
-    /**
-     * @var string
-     */
     private string $standard = 'PSR2';
 
-    /**
-     * @var string
-     */
     private string $tabWidth = '';
 
-    /**
-     * @var string
-     */
     private string $encoding = '';
 
-    /**
-     * @var int
-     */
     private int $allowedErrors = 0;
 
-    /**
-     * @var int
-     */
     private int $allowedWarnings = 0;
 
-    /**
-     * @var int|null
-     */
     private ?int $severity = null;
 
-    /**
-     * @var null|int
-     */
     private ?int $errorSeverity = null;
 
-    /**
-     * @var null|int
-     */
     private ?int $warningSeverity = null;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -76,7 +49,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -136,7 +109,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -148,7 +121,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -175,7 +148,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -223,10 +196,6 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * @param string $output
-     *
-     * @return array
-     *
      * @throws Exception
      */
     private function processReport(string $output): array

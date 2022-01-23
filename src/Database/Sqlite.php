@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Database;
 
@@ -19,23 +19,14 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Sqlite extends Plugin
 {
-    /**
-     * @var array
-     */
     private array $queries = [];
 
-    /**
-     * @var string
-     */
     private string $path = '';
 
-    /**
-     * @var array
-     */
     private array $pdoOptions = [];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -43,7 +34,7 @@ class Sqlite extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -61,7 +52,7 @@ class Sqlite extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -69,7 +60,7 @@ class Sqlite extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {

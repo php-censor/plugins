@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Common;
 
@@ -21,27 +21,21 @@ class Phar extends Plugin
 {
     /**
      * Phar Filename
-     *
-     * @var string
      */
     private string $filename = 'build.phar';
 
     /**
      * Regular Expression Filename Capture
-     *
-     * @var string
      */
     private string $regexp = '/\.php$/';
 
     /**
      * Stub Filename
-     *
-     * @var string
      */
     private string $stub = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -49,7 +43,7 @@ class Phar extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -72,7 +66,7 @@ class Phar extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -91,7 +85,7 @@ class Phar extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -102,8 +96,6 @@ class Phar extends Plugin
 
     /**
      * Get stub content for the Phar file.
-     *
-     * @return string
      */
     private function getStubContent(): string
     {

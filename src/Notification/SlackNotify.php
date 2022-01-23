@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification;
 
@@ -22,39 +22,21 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class SlackNotify extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $webHook = '';
 
-    /**
-     * @var string
-     */
     private string $room = '#php-censor';
 
-    /**
-     * @var string
-     */
     private string $username = 'PHP Censor';
 
-    /**
-     * @var string
-     */
     private string $message = '<%PROJECT_LINK%|%PROJECT_TITLE%> - <%BUILD_LINK%|Build #%BUILD_ID%> has finished for commit '
         . '<%COMMIT_LINK%|%SHORT_COMMIT_ID% (%COMMITTER_EMAIL%)> on branch <%BRANCH_LINK%|%BRANCH%>';
 
-    /**
-     * @var string
-     */
     private string $icon = '';
 
-    /**
-     * @var bool
-     */
     private bool $showStatus = true;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -62,7 +44,7 @@ class SlackNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -114,7 +96,7 @@ class SlackNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -132,7 +114,7 @@ class SlackNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {

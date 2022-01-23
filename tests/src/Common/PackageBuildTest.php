@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Tests\PHPCensor\Plugins\Common;
 
@@ -10,18 +10,15 @@ use PHPUnit\Framework\TestCase;
 
 class PackageBuildTest extends TestCase
 {
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->assertEquals('package_build', PackageBuild::getName());
     }
 
     /**
      * @dataProvider canExecuteProvider
-     *
-     * @param string $stage
-     * @param bool $expectedResult
      */
-    public function testCanExecute(string $stage, bool $expectedResult)
+    public function testCanExecute(string $stage, bool $expectedResult): void
     {
         $this->assertEquals(
             $expectedResult,

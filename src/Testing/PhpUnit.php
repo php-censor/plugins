@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing;
 
@@ -27,18 +27,12 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class PhpUnit extends Plugin implements ZeroConfigPluginInterface
 {
-    /**
-     * @var PhpUnitOptions
-     */
     private PhpUnitOptions $phpUnitOptions;
 
-    /**
-     * @var string
-     */
     private string $executable;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -46,7 +40,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -76,18 +70,18 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
             }
         } else {
             // Run any config files
-            if (!empty($xmlConfigFiles)) {
+            if ($xmlConfigFiles) {
                 foreach ($xmlConfigFiles as $configFile) {
-                    $success[] = $this->runConfig($this->phpUnitOptions->getTestsPath(), $logFormat, $configFile);
+                    $success[] = $this->runConfig((string)$this->phpUnitOptions->getTestsPath(), $logFormat, $configFile);
                 }
             }
         }
 
-        return !\in_array(false, $success);
+        return !\in_array(false, $success, true);
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -102,12 +96,11 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
         $allowPublicArtifacts = $this->application->isPublicArtifactsAllowed();
-        $applicationConfig    = $this->application->getConfig();
 
         $this->phpUnitOptions = new PhpUnitOptions(
             $this->options,
@@ -117,7 +110,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -129,10 +122,6 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Run the tests defined in a PHPUnit config file or in a specific directory.
-     *
-     * @param string      $directory
-     * @param string      $logFormat
-     * @param string|null $configFile
      *
      * @return bool|mixed
      *
@@ -222,10 +211,6 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Extracts coverage from output
-     *
-     * @param string $output
-     *
-     * @return array
      */
     private function extractCoverage(string $output): array
     {
@@ -244,10 +229,6 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Checks required test coverage
-     *
-     * @param array $coverage
-     *
-     * @return bool
      */
     private function checkRequiredCoverage(array $coverage): bool
     {
@@ -264,9 +245,6 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Saves the test results
-     *
-     * @param string $logFile
-     * @param string $logFormat
      *
      * @throws Exception If failed to parse the log file
      */
@@ -301,7 +279,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
                     $this->build->getId(),
                     self::getName(),
                     (string)$error['message'],
-                    (int)$severity,
+                    $severity,
                     (string)$error['file'],
                     (int)$error['line']
                 );

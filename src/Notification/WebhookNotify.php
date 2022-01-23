@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification;
 
@@ -27,7 +27,7 @@ class WebhookNotify extends Plugin
     private string $url;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -35,7 +35,7 @@ class WebhookNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -78,7 +78,7 @@ class WebhookNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -96,7 +96,7 @@ class WebhookNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -111,9 +111,6 @@ class WebhookNotify extends Plugin
         $this->url = \trim((string)$this->options->get('url', ''));
     }
 
-    /**
-     * @return string
-     */
     private function getReadableStatus(): string
     {
         switch ($this->build->getStatus()) {

@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification;
 
@@ -23,9 +23,6 @@ use PHPCensor\Common\ViewInterface;
  */
 class EmailNotify extends Plugin
 {
-    /**
-     * @var ViewFactoryInterface
-     */
     private ViewFactoryInterface $viewFactory;
 
     private bool $committer = false;
@@ -39,7 +36,7 @@ class EmailNotify extends Plugin
     private string $template = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -47,7 +44,7 @@ class EmailNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -65,7 +62,7 @@ class EmailNotify extends Plugin
             $view = $this->getMailTemplate();
         } catch (Exception $e) {
             $this->buildLogger->logWarning(
-                \sprintf('Unknown mail template "%s", falling back to default.', $this->options['template'])
+                \sprintf('Unknown mail template "%s", falling back to default.', (string)$this->options->get('template'))
             );
             $view = $this->getDefaultMailTemplate();
         }
@@ -96,7 +93,7 @@ class EmailNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -114,7 +111,7 @@ class EmailNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -134,8 +131,6 @@ class EmailNotify extends Plugin
      * @param string[] $ccList
      * @param string $subject EmailNotify subject
      * @param string $body EmailNotify body
-     *
-     * @return int
      */
     private function sendEmail(string $toAddress, array $ccList, string $subject, string $body): int
     {
@@ -219,8 +214,6 @@ class EmailNotify extends Plugin
     /**
      * Get the mail template used to sent the mail.
      *
-     * @return ViewInterface
-     *
      * @throws Exception
      */
     private function getMailTemplate(): ViewInterface
@@ -234,8 +227,6 @@ class EmailNotify extends Plugin
 
     /**
      * Get the default mail template.
-     *
-     * @return ViewInterface
      *
      * @throws Exception
      */

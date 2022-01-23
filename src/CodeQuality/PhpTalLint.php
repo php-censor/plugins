@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -23,14 +23,8 @@ class PhpTalLint extends Plugin
 
     private array $suffixes = ['zpt'];
 
-    /**
-     * @var int
-     */
     private int $allowedWarnings = 0;
 
-    /**
-     * @var int
-     */
     private int $allowedErrors = 0;
 
     /**
@@ -41,7 +35,7 @@ class PhpTalLint extends Plugin
     private string $executable;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -49,7 +43,7 @@ class PhpTalLint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -86,7 +80,7 @@ class PhpTalLint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -98,7 +92,7 @@ class PhpTalLint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -108,7 +102,7 @@ class PhpTalLint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -120,12 +114,8 @@ class PhpTalLint extends Plugin
 
     /**
      * Run phptal lint against a directory of files.
-     *
-     * @param $path
-     *
-     * @return bool
      */
-    private function lintDirectory($path): bool
+    private function lintDirectory(string $path): bool
     {
         $success   = true;
         $directory = new \DirectoryIterator($path);
@@ -136,7 +126,7 @@ class PhpTalLint extends Plugin
 
             $itemPath = $path . $item->getFilename();
 
-            if (\in_array($itemPath, $this->ignores)) {
+            if (\in_array($itemPath, $this->ignores, true)) {
                 continue;
             }
 
@@ -150,16 +140,11 @@ class PhpTalLint extends Plugin
 
     /**
      * Lint an item (file or directory) by calling the appropriate method.
-     *
-     * @param $item
-     * @param $itemPath
-     *
-     * @return bool
      */
-    private function lintItem(\SplFileInfo $item, $itemPath): bool
+    private function lintItem(\SplFileInfo $item, string $itemPath): bool
     {
         $success = true;
-        if ($item->isFile() && \in_array(\strtolower($item->getExtension()), $this->suffixes)) {
+        if ($item->isFile() && \in_array(\strtolower($item->getExtension()), $this->suffixes, true)) {
             if (!$this->lintFile($itemPath)) {
                 $success = false;
             }
@@ -172,10 +157,6 @@ class PhpTalLint extends Plugin
 
     /**
      * Run phptal lint against a specific file.
-     *
-     * @param string $path
-     *
-     * @return bool
      */
     private function lintFile(string $path): bool
     {

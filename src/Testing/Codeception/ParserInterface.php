@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing\Codeception;
 
@@ -20,18 +20,9 @@ interface ParserInterface
      */
     public function parse(): array;
 
-    /**
-     * @return int
-     */
     public function getTotalTests(): int;
 
-    /**
-     * @return float
-     */
     public function getTotalTimeTaken(): float;
 
-    /**
-     * @return int
-     */
     public function getTotalFailures(): int;
 }

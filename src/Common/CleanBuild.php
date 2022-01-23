@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Common;
 
@@ -19,13 +19,10 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class CleanBuild extends Plugin
 {
-    /**
-     * @var array
-     */
     private array $removeFiles = [];
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -33,7 +30,7 @@ class CleanBuild extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -52,7 +49,7 @@ class CleanBuild extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -71,7 +68,7 @@ class CleanBuild extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {

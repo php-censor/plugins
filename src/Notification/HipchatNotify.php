@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification;
 
@@ -20,24 +20,12 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class HipchatNotify extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $authToken;
 
-    /**
-     * @var string
-     */
     private string $color = 'yellow';
 
-    /**
-     * @var bool
-     */
     private bool $notify = false;
 
-    /**
-     * @var string
-     */
     private string $message = '%PROJECT_TITLE% built at %BUILD_LINK%';
 
     /**
@@ -46,7 +34,7 @@ class HipchatNotify extends Plugin
     private $room;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -54,7 +42,7 @@ class HipchatNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -78,7 +66,7 @@ class HipchatNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -96,7 +84,7 @@ class HipchatNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {

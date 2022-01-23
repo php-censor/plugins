@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -27,13 +27,10 @@ class PhpStan extends Plugin
      */
     protected array $directories = [];
 
-    /**
-     * @var int
-     */
     private int $allowedErrors = 0;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -41,7 +38,7 @@ class PhpStan extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -113,7 +110,7 @@ class PhpStan extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -125,7 +122,7 @@ class PhpStan extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -134,7 +131,7 @@ class PhpStan extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -144,11 +141,6 @@ class PhpStan extends Plugin
         ];
     }
 
-    /**
-     * @param string $output
-     *
-     * @return array
-     */
     private function processReport(string $output): array
     {
         $data = \json_decode(\trim($output), true);

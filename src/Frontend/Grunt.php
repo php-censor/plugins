@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Frontend;
 
@@ -18,18 +18,12 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Grunt extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $task = '';
 
-    /**
-     * @var string
-     */
     private string $gruntfile = 'Gruntfile.js';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -37,7 +31,7 @@ class Grunt extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -58,7 +52,7 @@ class Grunt extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -66,7 +60,7 @@ class Grunt extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -75,7 +69,7 @@ class Grunt extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {

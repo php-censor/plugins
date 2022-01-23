@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification;
 
@@ -20,33 +20,18 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class TelegramNotify extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $authToken = '';
 
-    /**
-     * @var string
-     */
     private string $message;
 
-    /**
-     * @var string
-     */
     private string $buildMsg;
 
-    /**
-     * @var array
-     */
     private array $recipients = [];
 
-    /**
-     * @var bool
-     */
     private bool $sendLog = false;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -54,7 +39,7 @@ class TelegramNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -94,7 +79,7 @@ class TelegramNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -112,7 +97,7 @@ class TelegramNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -145,8 +130,6 @@ class TelegramNotify extends Plugin
 
     /**
      * Build message.
-     *
-     * @return string
      */
     private function buildMessage(): string
     {

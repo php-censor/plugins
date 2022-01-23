@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -19,18 +19,12 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Psalm extends Plugin
 {
-    /**
-     * @var int
-     */
     private int $allowedErrors = 0;
 
-    /**
-     * @var int
-     */
     private int $allowedWarnings = 0;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -38,7 +32,7 @@ class Psalm extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -102,7 +96,7 @@ class Psalm extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -114,7 +108,7 @@ class Psalm extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -123,7 +117,7 @@ class Psalm extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -133,11 +127,6 @@ class Psalm extends Plugin
         ];
     }
 
-    /**
-     * @param string $output
-     *
-     * @return array
-     */
     private function processReport(string $output): array
     {
         $data = \json_decode(\trim($output), true);
@@ -147,7 +136,7 @@ class Psalm extends Plugin
 
         if (!empty($data) && \is_array($data)) {
             foreach ($data as $value) {
-                if (!\in_array($value['severity'], ['error','info'])) {
+                if (!\in_array($value['severity'], ['error','info'], true)) {
                     continue;
                 }
 

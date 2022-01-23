@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -28,12 +28,11 @@ class Phan extends Plugin
     private string $location;
 
     /**
-     * @var int
      */
     private int $allowedWarnings = 0;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -41,7 +40,7 @@ class Phan extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -88,7 +87,7 @@ class Phan extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -100,7 +99,7 @@ class Phan extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -109,7 +108,7 @@ class Phan extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -121,10 +120,6 @@ class Phan extends Plugin
 
     /**
      * Process the Phan Json report.
-     *
-     * @param string $jsonString
-     *
-     * @return int
      *
      * @throws Exception
      */
@@ -159,10 +154,6 @@ class Phan extends Plugin
 
     /**
      * Transform severity from Phan to PHP-Censor.
-     *
-     * @param  int $severity
-     *
-     * @return int
      */
     private function severity(int $severity): int
     {

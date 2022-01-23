@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -21,28 +21,16 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class SensiolabsInsight extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $userUuid = '';
 
-    /**
-     * @var string
-     */
     private string $authToken = '';
 
-    /**
-     * @var string
-     */
     private string $projectUuid = '';
 
-    /**
-     * @var int
-     */
     private int $allowedWarnings = 0;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -50,7 +38,7 @@ class SensiolabsInsight extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -65,7 +53,7 @@ class SensiolabsInsight extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -77,7 +65,7 @@ class SensiolabsInsight extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -88,7 +76,7 @@ class SensiolabsInsight extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -100,10 +88,6 @@ class SensiolabsInsight extends Plugin
     /**
      * Process PHPMD's XML output report.
      *
-     * @param string $xmlString
-     *
-     * @return int
-     *
      * @throws Exception
      */
     private function processReport(string $xmlString): int
@@ -112,6 +96,7 @@ class SensiolabsInsight extends Plugin
 
         if ($xml === false) {
             $this->buildLogger->logNormal($xmlString);
+
             throw new Exception('Could not process PHPMD report XML.');
         }
 
@@ -128,7 +113,7 @@ class SensiolabsInsight extends Plugin
                     self::getName(),
                     (string)$violation,
                     BuildErrorInterface::SEVERITY_HIGH,
-                    (string)$fileName,
+                    $fileName,
                     (int)$violation['beginline'],
                     (int)$violation['endline']
                 );
@@ -140,8 +125,6 @@ class SensiolabsInsight extends Plugin
 
     /**
      * Execute Sensiolabs Insight.
-     *
-     * @param string $executable
      */
     private function executeSensiolabsInsight(string $executable): void
     {
@@ -167,16 +150,13 @@ class SensiolabsInsight extends Plugin
 
     /**
      * Returns a bool indicating if the error count can be considered a success.
-     *
-     * @param int $errorCount
-     *
-     * @return bool
      */
     private function wasLastExecSuccessful(int $errorCount): bool
     {
         if ($this->allowedWarnings !== -1 && $errorCount > $this->allowedWarnings) {
             return false;
         }
+
         return true;
     }
 }

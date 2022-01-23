@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -18,18 +18,12 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class Lint extends Plugin
 {
-    /**
-     * @var array
-     */
     private array $directories = [];
 
-    /**
-     * @var bool
-     */
     private bool $recursive = true;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -37,7 +31,7 @@ class Lint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -52,7 +46,7 @@ class Lint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -64,7 +58,7 @@ class Lint extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -79,12 +73,8 @@ class Lint extends Plugin
 
     /**
      * Run php -l against a directory of files.
-     *
-     * @param $path
-     *
-     * @return bool
      */
-    private function lintDirectory($path): bool
+    private function lintDirectory(string $path): bool
     {
         $success   = true;
         $directory = new \DirectoryIterator($path);
@@ -95,7 +85,7 @@ class Lint extends Plugin
 
             $itemPath = $path . $item->getFilename();
 
-            if (\in_array($itemPath, $this->ignores)) {
+            if (\in_array($itemPath, $this->ignores, true)) {
                 continue;
             }
 
@@ -109,11 +99,6 @@ class Lint extends Plugin
 
     /**
      * Lint an item (file or directory) by calling the appropriate method.
-     *
-     * @param \SplFileInfo $item
-     * @param string       $itemPath
-     *
-     * @return bool
      */
     private function lintItem(\SplFileInfo $item, string $itemPath): bool
     {
@@ -133,12 +118,8 @@ class Lint extends Plugin
 
     /**
      * Run php -l against a specific file.
-     *
-     * @param $path
-     *
-     * @return bool
      */
-    private function lintFile($path): bool
+    private function lintFile(string $path): bool
     {
         $success = true;
         if (!$this->commandExecutor->executeCommand('php -l "%s"', $path)) {

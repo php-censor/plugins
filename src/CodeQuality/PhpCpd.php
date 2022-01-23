@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\CodeQuality;
 
@@ -23,7 +23,7 @@ use PHPCensor\Common\Plugin\ZeroConfigPluginInterface;
 class PhpCpd extends Plugin implements ZeroConfigPluginInterface
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -31,24 +31,23 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
         $ignoresString       = '';
         $ignoreForNewVersion = '';
         $filesToIgnore       = [];
-        if (\is_array($this->ignores)) {
-            foreach ($this->ignores as $ignore) {
-                $ignoreForNewVersion .= \sprintf(' --exclude="%s"', $ignore);
 
-                $ignore = \rtrim($ignore, '/');
-                if (\is_file($this->build->getBuildPath() . $ignore)) {
-                    $ignoredFile     = \explode('/', $ignore);
-                    $filesToIgnore[] = \array_pop($ignoredFile);
-                } else {
-                    $ignoresString .= \sprintf(' --exclude="%s"', $ignore);
-                }
+        foreach ($this->ignores as $ignore) {
+            $ignoreForNewVersion .= \sprintf(' --exclude="%s"', $ignore);
+
+            $ignore = \rtrim($ignore, '/');
+            if (\is_file($this->build->getBuildPath() . $ignore)) {
+                $ignoredFile     = \explode('/', $ignore);
+                $filesToIgnore[] = \array_pop($ignoredFile);
+            } else {
+                $ignoresString .= \sprintf(' --exclude="%s"', $ignore);
             }
         }
 
@@ -96,7 +95,7 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -108,14 +107,14 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -127,10 +126,6 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Process the PHPCPD XML report.
-     *
-     * @param $xmlString
-     *
-     * @return int
      *
      * @throws Exception
      */

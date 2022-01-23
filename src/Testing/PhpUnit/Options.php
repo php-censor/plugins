@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing\PhpUnit;
 
@@ -17,31 +17,14 @@ use PHPCensor\Common\ParameterBag;
  */
 class Options
 {
-    /**
-     * @var ParameterBag
-     */
     private ParameterBag $options;
 
-    /**
-     * @var string
-     */
     private string $location;
 
-    /**
-     * @var bool
-     */
     private bool $allowPublicArtifacts;
 
-    /**
-     * @var array
-     */
     private array $arguments = [];
 
-    /**
-     * @param ParameterBag $options
-     * @param string       $location
-     * @param bool         $allowPublicArtifacts
-     */
     public function __construct(
         ParameterBag $options,
         string $location,
@@ -55,8 +38,6 @@ class Options
     /**
      * Remove a command argument
      *
-     * @param string $argumentName
-     *
      * @return $this
      */
     public function removeArgument(string $argumentName): self
@@ -68,14 +49,14 @@ class Options
 
     /**
      * Combine all the argument into a string for the phpunit command
-     *
-     * @return string
      */
     public function buildArgumentString(): string
     {
         $argumentString = '';
         foreach ($this->getCommandArguments() as $argumentName => $argumentValues) {
-            $prefix = $argumentName[0] == '-' ? '' : '--';
+            $prefix = $argumentName[0] === '-'
+                ? ''
+                : '--';
 
             if (!\is_array($argumentValues)) {
                 $argumentValues = [$argumentValues];
@@ -159,11 +140,8 @@ class Options
     /**
      * Add an argument to the collection
      * Note: adding argument before parsing the options will prevent the other options from been parsed.
-     *
-     * @param string      $argumentName
-     * @param string|null $argumentValue
      */
-    public function addArgument(string $argumentName, ?string $argumentValue = null)
+    public function addArgument(string $argumentName, ?string $argumentValue = null): void
     {
         if (isset($this->arguments[$argumentName])) {
             if (!\is_array($this->arguments[$argumentName])) {
@@ -190,21 +168,17 @@ class Options
 
         if (\is_string($directories)) {
             $directories = [$directories];
-        } else {
-            if (\is_null($directories)) {
-                $directories = [];
-            }
+        } elseif (\is_null($directories)) {
+            $directories = [];
         }
 
-        return \is_array($directories) ? $directories : [$directories];
+        return $directories;
     }
 
     /**
      * Get an option if defined
      *
-     * @param string $optionName
-     *
-     * @return string[]|string|null
+     * @return string|string[]|null
      */
     public function getOption(string $optionName)
     {
@@ -227,8 +201,6 @@ class Options
 
     /**
      * Ge the directory name where tests file reside
-     *
-     * @return string|null
      */
     public function getTestsPath(): ?string
     {
@@ -237,8 +209,6 @@ class Options
 
     /**
      * Get the PHPUnit configuration from the options, or the optional path
-     *
-     * @param string|null $altPath
      *
      * @return string[] path of files
      */
@@ -257,8 +227,6 @@ class Options
 
     /**
      * Get options for a given argument
-     *
-     * @param string $argumentName
      *
      * @return string[] All the options for given argument
      */
@@ -279,8 +247,6 @@ class Options
      * Find a PHPUnit configuration file in a directory
      *
      * @param string $buildPath The path to configuration file
-     *
-     * @return null|string
      */
     public static function findConfigFile(string $buildPath): ?string
     {

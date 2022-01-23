@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing;
 
@@ -25,9 +25,6 @@ use Symfony\Component\Yaml\Parser as YamlParser;
  */
 class Codeception extends Plugin implements ZeroConfigPluginInterface
 {
-    /**
-     * @var string
-     */
     private string $args = '';
 
     /**
@@ -45,13 +42,10 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
         'tests/_log',
     ];
 
-    /**
-     * @var string
-     */
     private string $executable;
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -59,7 +53,7 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -73,7 +67,7 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -88,7 +82,7 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -108,7 +102,7 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getPluginDefaultBinaryNames(): array
     {
@@ -120,10 +114,6 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Try and find the codeception YML config file.
-     *
-     * @param string $buildPath
-     *
-     * @return string
      */
     public static function findConfigFile(string $buildPath): string
     {
@@ -140,8 +130,6 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
 
     /**
      * Run tests from a Parser config file.
-     *
-     * @return bool
      */
     private function runConfigFile(): bool
     {
@@ -193,7 +181,7 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
 
         // NOTE: Parser does not use stderr, so failure can only be detected
         // through tests
-        $success = ((int)($meta['failures']) < 1);
+        $success = (($meta['failures']) < 1);
 
         $this->buildMetaWriter->write(
             $this->build->getId(),

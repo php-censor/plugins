@@ -13,13 +13,13 @@
         "ci",
         "continuous integration"
     ],
-    "homepage": "http://php-censor.info",
+    "homepage": "https://php-censor.info",
     "license": "BSD-2-Clause",
     "authors": [
         {
             "name": "Dmitry Khomutov",
             "email": "poisoncorpsee@gmail.com",
-            "homepage": "http://corpsee.com",
+            "homepage": "https://corpsee.com",
             "role": "PHP Censor developer"
         }
     ],
@@ -50,19 +50,30 @@
         "guzzlehttp/guzzle":           "^6.5",
         "hipchat/hipchat-php":         "^1.4",
         "maknz/slack":                 "^1.7",
-        "sebastian/diff":              "^3.0",
+        "sebastian/diff":              "^4.0",
         "php-censor/flowdock-client":  "^1.0",
-        "swiftmailer/swiftmailer":     "^6.2"
+        "swiftmailer/swiftmailer":     "^6.3",
+        "symfony/yaml":                "^5.3"
     },
     "require-dev": {
-        "phpunit/phpunit":           "^7.5",
-        "friendsofphp/php-cs-fixer": "^2.16",
-        "infection/infection":       "^0.12",
-        "vimeo/psalm":               "^3.16"
+        "phpunit/phpunit":                     "^9.5",
+        "friendsofphp/php-cs-fixer":           "^3.4",
+        "infection/infection":                 "^0.25",
+        "vimeo/psalm":                         "^4.16",
+        "phpmd/phpmd":                         "^1.5",
+        "sebastian/phpcpd":                    "^6.0",
+        "phploc/phploc":                       "^7.0",
+        "php-parallel-lint/php-parallel-lint": "^1.3"
     },
     "extra": {
         "platform": {
             "php": "7.4.*"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "infection/extension-installer": true
         }
     }
 }

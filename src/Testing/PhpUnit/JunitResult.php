@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing\PhpUnit;
 
@@ -18,7 +18,7 @@ use PHPCensor\Common\Exception\Exception;
 class JunitResult extends Result
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function parse(): JunitResult
     {
@@ -39,7 +39,7 @@ class JunitResult extends Result
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getSeverity($testCase): string
     {
@@ -77,7 +77,7 @@ class JunitResult extends Result
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function buildMessage($testCase): string
     {
@@ -100,7 +100,7 @@ class JunitResult extends Result
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function getOutput($testCase): string
     {
@@ -108,7 +108,7 @@ class JunitResult extends Result
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function buildTrace($testCase): array
     {
@@ -128,8 +128,6 @@ class JunitResult extends Result
 
     /**
      * @param mixed $testCase
-     *
-     * @return string
      */
     private function getMessageTrace($testCase): string
     {
@@ -153,8 +151,6 @@ class JunitResult extends Result
     }
 
     /**
-     * @return \SimpleXMLElement|null
-     *
      * @throws Exception
      */
     private function loadResultFile(): ?\SimpleXMLElement
@@ -169,20 +165,13 @@ class JunitResult extends Result
     }
 
     /**
-     * @param string $description
-     *
      * @throws Exception
      */
-    private function internalProblem(string $description)
+    private function internalProblem(string $description): void
     {
         throw new Exception($description);
     }
 
-    /**
-     * @param string $filePath
-     *
-     * @return \SimpleXMLElement|null
-     */
     private function loadFromFile(string $filePath): ?\SimpleXMLElement
     {
         \stream_filter_register('xml_utf8_clean', 'PHPCensor\Helper\Xml\Utf8CleanFilter');

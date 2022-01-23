@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Notification;
 
@@ -19,43 +19,22 @@ use PHPCensor\Common\Plugin\Plugin;
  */
 class CampfireNotify extends Plugin
 {
-    /**
-     * @var string
-     */
     private string $url = '';
 
-    /**
-     * @var string
-     */
     private string $authToken = '';
 
-    /**
-     * @var string
-     */
     private string $userAgent;
 
-    /**
-     * @var string
-     */
     private string $cookie;
 
-    /**
-     * @var bool
-     */
     private bool $verbose = false;
 
-    /**
-     * @var string
-     */
     private string $roomId = '';
 
-    /**
-     * @var string
-     */
     private string $message = '';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function getName(): string
     {
@@ -63,7 +42,7 @@ class CampfireNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public function execute(): bool
     {
@@ -75,7 +54,7 @@ class CampfireNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     public static function canExecute(string $stage, BuildInterface $build): bool
     {
@@ -93,7 +72,7 @@ class CampfireNotify extends Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
     protected function initPluginSettings(): void
     {
@@ -113,32 +92,22 @@ class CampfireNotify extends Plugin
 
     /**
      * Join a Campfire room.
-     *
-     * @param string $roomId
      */
-    private function joinRoom(string $roomId)
+    private function joinRoom(string $roomId): void
     {
         $this->getPageByPost('/room/' . $roomId . '/join.json');
     }
 
     /**
      * Leave a Campfire room.
-     *
-     * @param string $roomId
      */
-    public function leaveRoom(string $roomId)
+    public function leaveRoom(string $roomId): void
     {
         $this->getPageByPost('/room/' . $roomId . '/leave.json');
     }
 
     /**
      * Send a message to a campfire room.
-     *
-     * @param string $message
-     * @param string $roomId
-     * @param bool   $isPaste
-     *
-     * @return string
      */
     public function speak(string $message, string $roomId, bool $isPaste = false): string
     {
@@ -155,13 +124,8 @@ class CampfireNotify extends Plugin
 
     /**
      * Make a request to Campfire.
-     *
-     * @param string $page
-     * @param array  $data
-     *
-     * @return string
      */
-    private function getPageByPost(string $page, $data = []): string
+    private function getPageByPost(string $page, array $data = []): string
     {
         $url = $this->url . $page;
         // The new API allows JSON, so we can pass
@@ -181,7 +145,7 @@ class CampfireNotify extends Plugin
         \curl_setopt($handle, CURLOPT_COOKIEFILE, $this->cookie);
 
         \curl_setopt($handle, CURLOPT_POSTFIELDS, $json);
-        $output = \curl_exec($handle);
+        $output = (string)\curl_exec($handle);
 
         \curl_close($handle);
 
