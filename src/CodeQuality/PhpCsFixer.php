@@ -33,8 +33,6 @@ class PhpCsFixer extends Plugin
 
     private int $allowedWarnings = 0;
 
-    private bool $supportsUdiff = false;
-
     /**
      * {@inheritDoc}
      */
@@ -62,29 +60,14 @@ class PhpCsFixer extends Plugin
         $version = $matches[1];
         // Appeared in PHP CS Fixer 2.8.0 and used by default since 3.0.0
         // https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/2.19/CHANGELOG.md#changelog-for-v280
-        $this->supportsUdiff = \version_compare($version, '2.8.0', '>=')
-            && \version_compare($version, '3.0.0', '<');
+        $supportsUdiff = (
+            \version_compare($version, '2.8.0', '>=') &&
+            \version_compare($version, '3.0.0', '<')
+        );
 
         $directory = '';
         if (!empty($this->directory)) {
             $directory = $this->directory;
-        }
-
-        $config = [];
-        if (!$this->config) {
-            if (\version_compare($version, '3.0.0', '>=')) {
-                $configs = ['.php-cs-fixer.php', '.php-cs-fixer.dist.php'];
-            } else {
-                $configs = ['.php_cs', '.php_cs.dist'];
-            }
-
-            foreach ($configs as $config) {
-                if (\file_exists($this->build->getBuildPath() . $config)) {
-                    $this->config = true;
-                    $this->args .= ' --config=./' . $config;
-                    break;
-                }
-            }
         }
 
         if (!$this->config && !$directory) {
@@ -93,12 +76,12 @@ class PhpCsFixer extends Plugin
 
         if ($this->errors) {
             $this->args .= ' --verbose --format json --diff';
-            if ($this->supportsUdiff) {
+            if ($supportsUdiff) {
                 $this->args .= ' --diff-format udiff';
             }
 
             if (!$this->build->isDebug()) {
-                $this->commandExecutor->disableCommandOutput(); // do not show json output
+                $this->commandExecutor->disableCommandOutput();
             }
         }
 
