@@ -1,35 +1,28 @@
+[![PHP Censor Plugins](http://ci.php-censor.info/build-status/image/15?branch=master&label=PHP%20Censor%20Plugins&style=flat-square)](http://ci.php-censor.info/build-status/view/15?branch=master)
+[![Latest Version](https://img.shields.io/packagist/v/php-censor/plugins.svg?label=Version&style=flat-square)](https://packagist.org/packages/php-censor/plugins)
+[![Total downloads](https://img.shields.io/packagist/dt/php-censor/plugins.svg?label=Downloads&style=flat-square)](https://packagist.org/packages/php-censor/plugins)
+[![License](https://img.shields.io/packagist/l/php-censor/plugins.svg?label=License&style=flat-square)](https://packagist.org/packages/php-censor/plugins)
+
 PHP Censor Plugins
 ==================
 
-[WIP] PHP Censor common plugins (for PHP Censor v3.0+).
+PHP Censor internal plugins.
 
-Common usage
+Installation
 ------------
 
-```bash
-composer install
-```
-
-Code style
-----------
+Via Composer:
 
 ```bash
-vendor/bin/php-cs-fixer fix --allow-risky=yes --diff
-
-vendor/bin/psalm --config=psalm.xml.dist --threads=4 --show-snippet=true --show-info=true
+composer require php-censor/plugins
 ```
 
-Unit tests
-----------
+Code Quality
+------------
 
-Phpunit tests:
+In the `Makefile` you can find commands for running unit tests, static analyzers etc.
 
-```bash
-vendor/bin/phpunit --configuration=phpunit.xml.dist --coverage-text --coverage-html=tests/var/coverage
-```
+License
+-------
 
-Infection mutation tests:
-
-```bash
-vendor/bin/infection --threads=4 --show-mutations -vvv
-```
+Licensed under the [BSD-2-Clause license](LICENSE).

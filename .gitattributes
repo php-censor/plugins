@@ -5,6 +5,7 @@
 
 /tests/ export-ignore
 
+/Makefile               export-ignore
 /.editorconfig          export-ignore
 /.gitattributes         export-ignore
 /.gitignore             export-ignore

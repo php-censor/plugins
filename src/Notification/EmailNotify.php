@@ -7,10 +7,10 @@ namespace PHPCensor\Plugins\Notification;
 use PHPCensor\Common\Build\BuildInterface;
 use PHPCensor\Common\Exception\Exception;
 use PHPCensor\Common\Plugin\Plugin;
-use PHPCensor\Common\Email;
-use PHPCensor\Common\EmailSenderInterface;
-use PHPCensor\Common\ViewFactoryInterface;
-use PHPCensor\Common\ViewInterface;
+use PHPCensor\Common\Email\Email;
+use PHPCensor\Common\Email\EmailSenderInterface;
+use PHPCensor\Common\View\ViewFactoryInterface;
+use PHPCensor\Common\View\ViewInterface;
 
 /**
  * EmailNotify Plugin - Provides simple email capability.
@@ -136,14 +136,14 @@ class EmailNotify extends Plugin
     {
         $email = new Email();
 
-        $email->setEmailTo($toAddress, $toAddress);
+        $email->setEmailTo($toAddress);
         $email->setSubject($subject);
         $email->setBody($body);
         $email->setIsHtml(true);
 
         if ($ccList) {
             foreach ($ccList as $address) {
-                $email->addCarbonCopyEmail($address, $address);
+                $email->addCarbonCopyEmail($address);
             }
         }
 
