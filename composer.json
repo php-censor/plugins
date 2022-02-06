@@ -51,9 +51,8 @@
         "hipchat/hipchat-php":         "^1.4",
         "maknz/slack":                 "^1.7",
         "sebastian/diff":              "^4.0",
-        "php-censor/flowdock-client":  "^1.0",
-        "swiftmailer/swiftmailer":     "^6.3",
-        "symfony/yaml":                "^5.3"
+        "php-censor/flowdock-client":  "^2.0",
+        "symfony/yaml":                "^5.4"
     },
     "require-dev": {
         "phpunit/phpunit":                     "^9.5",
