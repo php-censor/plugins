@@ -13,7 +13,10 @@ install: php-info ## Install dependencies (make install PHP=php8.0)
 update: php-info ## Update dependencies
 	@$(PHP) $(COMPOSER) update
 
-test: php-info install ## Run PHPUnit tests with coverage report
+test: php-info install ## Run PHPUnit tests
+	$(PHP) vendor/bin/phpunit --configuration=phpunit.xml.dist
+
+test-coverage: php-info install ## Run PHPUnit tests with coverage report
 	$(PHP) vendor/bin/phpunit --configuration=phpunit.xml.dist --coverage-text --coverage-html=tests/var/coverage
 
 mutation-test: php-info install ## Run Infection mutation tests
