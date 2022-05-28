@@ -31,7 +31,7 @@ class JsonResult extends Result
         $rawResults = \file_get_contents($this->outputFile);
 
         $events = [];
-        if ($rawResults && $rawResults[0] == '{') {
+        if ($rawResults && $rawResults[0] === '{') {
             $fixedJson = '[' . \str_replace('}{', '},{', $rawResults) . ']';
             $events    = \json_decode($fixedJson, true);
         } elseif ($rawResults) {
@@ -46,10 +46,10 @@ class JsonResult extends Result
         if ($events) {
             $started = null;
             foreach ($events as $event) {
-                if (isset($event['event']) && $event['event'] == self::EVENT_TEST) {
+                if (isset($event['event']) && $event['event'] === self::EVENT_TEST) {
                     $this->parseTestcase($event);
                     $started = null;
-                } elseif (isset($event['event']) && $event['event'] == self::EVENT_TEST_START) {
+                } elseif (isset($event['event']) && $event['event'] === self::EVENT_TEST_START) {
                     $started = $event;
                 }
             }

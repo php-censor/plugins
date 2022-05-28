@@ -271,7 +271,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
             );
 
             foreach ($parser->getErrors() as $error) {
-                $severity = ($error['severity'] == $parser::SEVERITY_ERROR)
+                $severity = ($error['severity'] === $parser::SEVERITY_ERROR)
                     ? BuildErrorInterface::SEVERITY_CRITICAL
                     : BuildErrorInterface::SEVERITY_HIGH;
 

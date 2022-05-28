@@ -149,7 +149,7 @@ class TelegramNotify extends Plugin
             }
 
             $this->buildMsg .= '*RUNNING PLUGIN: ' . $firstRow . "*\n";
-            $this->buildMsg .= $firstRow == 'composer' ? '' : ('```' . \mb_substr($bm, $pos) . '```');
+            $this->buildMsg .= $firstRow === 'composer' ? '' : ('```' . \mb_substr($bm, $pos) . '```');
         }
 
         return $this->variableInterpolator->interpolate(

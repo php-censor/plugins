@@ -50,7 +50,7 @@ class JunitResult extends Result
                     $severity = self::SEVERITY_FAIL;
                     break 2;
                 case 'error':
-                    if ('PHPUnit\Framework\RiskyTestError' == $child['type']) { // == because conversion to string is desired
+                    if ('PHPUnit\Framework\RiskyTestError' === $child['type']) { // == because conversion to string is desired
                         $severity = self::SEVERITY_RISKY;
                     } else {
                         $severity = self::SEVERITY_ERROR;

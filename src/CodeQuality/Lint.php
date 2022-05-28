@@ -103,7 +103,7 @@ class Lint extends Plugin
     private function lintItem(\SplFileInfo $item, string $itemPath): bool
     {
         $success = true;
-        if ($item->isFile() && $item->getExtension() == 'php' && !$this->lintFile($itemPath)) {
+        if ($item->isFile() && $item->getExtension() === 'php' && !$this->lintFile($itemPath)) {
             $success = false;
         } elseif (
             $item->isDir() &&
