@@ -22,7 +22,7 @@ return $config
         'fully_qualified_strict_types' => true,
         'native_function_invocation'   => ['include' => ['@internal'], 'scope' => 'all', 'strict' => true],
         'array_syntax'                 => ['syntax' => 'short'],
-        'blank_line_before_statement'  => ['statements' => ['return', 'throw']],
+        'blank_line_before_statement'  => ['statements' => ['return', 'throw', 'break', 'continue']],
         'general_phpdoc_tag_rename'    => ['replacements' => [
             'inheritDocs' => 'inheritDoc',
             'inheritdocs' => 'inheritDoc',

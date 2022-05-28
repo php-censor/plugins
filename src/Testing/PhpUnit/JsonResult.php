@@ -74,6 +74,7 @@ class JsonResult extends Result
         switch ($status) {
             case 'fail':
                 $severity = self::SEVERITY_FAIL;
+
                 break;
             case 'error':
                 if (\strpos($testCase['message'], 'Skipped') === 0 || \strpos($testCase['message'], 'Incomplete') === 0) {
@@ -81,10 +82,12 @@ class JsonResult extends Result
                 } else {
                     $severity = self::SEVERITY_ERROR;
                 }
+
                 break;
             case 'pass':
             case 'warning':
                 $severity = self::SEVERITY_PASS;
+
                 break;
             default:
                 throw new Exception("Unexpected PHPUnit test status: {$status}");

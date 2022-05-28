@@ -145,38 +145,45 @@ class PhpDocblockChecker extends Plugin implements ZeroConfigPluginInterface
                 case 'class':
                     $message  = 'Class ' . $error['class'] . ' is missing a docblock.';
                     $severity = BuildErrorInterface::SEVERITY_NORMAL;
+
                     break;
 
                 case 'method':
                     $message  = 'Method ' . $error['class'] . '::' . $error['method'] . ' is missing a docblock.';
                     $severity = BuildErrorInterface::SEVERITY_NORMAL;
+
                     break;
 
                 case 'param-missing':
                     $message  = $error['class'] . '::' . $error['method'] . ' @param ' . $error['param'] . ' missing.';
                     $severity = BuildErrorInterface::SEVERITY_LOW;
+
                     break;
 
                 case 'param-mismatch':
                     $message = $error['class'] . '::' . $error['method'] . ' @param ' . $error['param'] .
                         '(' . $error['doc-type'] . ') does not match method signature (' . $error['param-type'] . ')';
                     $severity = BuildErrorInterface::SEVERITY_LOW;
+
                     break;
 
                 case 'return-missing':
                     $message  = $error['class'] . '::' . $error['method'] . ' @return missing.';
                     $severity = BuildErrorInterface::SEVERITY_LOW;
+
                     break;
 
                 case 'return-mismatch':
                     $message = $error['class'] . '::' . $error['method'] . ' @return ' . $error['doc-type'] .
                         ' does not match method signature (' . $error['return-type'] . ')';
                     $severity = BuildErrorInterface::SEVERITY_LOW;
+
                     break;
 
                 default:
                     $message  = 'Class ' . $error['class'] . ' invalid/missing a docblock.';
                     $severity = BuildErrorInterface::SEVERITY_LOW;
+
                     break;
             }
 

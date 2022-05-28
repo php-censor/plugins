@@ -204,12 +204,15 @@ class PhpCsFixer extends Plugin
                     switch ($line->getType()) {
                         case Line::ADDED:
                             $symbol = '+';
+
                             break;
                         case Line::REMOVED:
                             $symbol = '-';
+
                             break;
                         default:
                             $symbol = ' ';
+
                             break;
                     }
                     $chunkDiff[] = $symbol . $line->getContent();

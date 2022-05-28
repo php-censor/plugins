@@ -42,6 +42,7 @@ class Git extends Plugin
         foreach ($this->actions[$this->build->getBranch()] as $action => $options) {
             if (!$this->runAction($action, $options)) {
                 $success = false;
+
                 break;
             }
         }

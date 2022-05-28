@@ -48,6 +48,7 @@ class JunitResult extends Result
             switch ($child->getName()) {
                 case 'failure':
                     $severity = self::SEVERITY_FAIL;
+
                     break 2;
                 case 'error':
                     if ('PHPUnit\Framework\RiskyTestError' === $child['type']) { // == because conversion to string is desired
@@ -55,13 +56,16 @@ class JunitResult extends Result
                     } else {
                         $severity = self::SEVERITY_ERROR;
                     }
+
                     break 2;
                 case 'skipped':
                     // skipped and ignored, can not distinguish
                     $severity = self::SEVERITY_SKIPPED;
+
                     break 2;
                 case 'warning':
                     $severity = self::SEVERITY_WARN;
+
                     break 2;
                 case 'system-out':
                 case 'system-err':
@@ -69,6 +73,7 @@ class JunitResult extends Result
                     continue 2;
                 default:
                     $severity = 'UNKNOWN RESULT TYPE: '.$child->getName();
+
                     break 2;
             }
         }
@@ -143,6 +148,7 @@ class JunitResult extends Result
                     if ('' === $msg) {
                         $msg = (string)$child;
                     }
+
                     break 2;
             }
         }
