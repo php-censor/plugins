@@ -92,7 +92,7 @@ class HipchatNotify extends Plugin
             throw new Exception("Please define 'room' and 'auth_token' for HipchatNotify plugin!");
         }
 
-        $this->authToken = (string)$this->options->get('auth_token');
+        $this->authToken = $this->variableInterpolator->interpolate((string)$this->options->get('auth_token'));
         $this->room      = (string)$this->options->get('room');
         $this->message   = (string)$this->options->get('message', $this->message);
         $this->color     = (string)$this->options->get('color', $this->color);

@@ -95,7 +95,7 @@ class FlowdockNotify extends Plugin
             throw new Exception("Please define the 'auth_token' for FlowdockNotify plugin!");
         }
 
-        $this->authToken = \trim((string)$this->options->get('auth_token'));
+        $this->authToken = $this->variableInterpolator->interpolate((string)$this->options->get('auth_token'));
         $this->message   = (string)$this->options->get('message', $this->message);
         $this->email     = (string)$this->options->get('email', $this->email);
     }

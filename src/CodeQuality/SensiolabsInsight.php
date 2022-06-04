@@ -71,7 +71,7 @@ class SensiolabsInsight extends Plugin
     {
         $this->allowedWarnings = (int)$this->options->get('allowed_warnings', $this->allowedWarnings);
         $this->userUuid        = (string)$this->options->get('user_uuid', $this->userUuid);
-        $this->authToken       = (string)$this->options->get('auth_token', $this->authToken);
+        $this->authToken       = $this->variableInterpolator->interpolate((string)$this->options->get('auth_token', $this->authToken));
         $this->projectUuid     = (string)$this->options->get('project_uuid', $this->projectUuid);
     }
 

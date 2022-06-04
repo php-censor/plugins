@@ -112,7 +112,7 @@ class BitbucketNotify extends Plugin
     {
         $this->url            = (string)$this->options->get('url', $this->url);
         $this->message        = (string)$this->options->get('message', $this->message);
-        $this->authToken      = (string)$this->options->get('auth_token', $this->authToken);
+        $this->authToken      = $this->variableInterpolator->interpolate((string)$this->options->get('auth_token', $this->authToken));
         $this->projectKey     = (string)$this->options->get('project_key', $this->projectKey);
         $this->repositorySlug = (string)$this->options->get('repository_slug', $this->repositorySlug);
 
