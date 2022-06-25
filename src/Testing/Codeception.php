@@ -73,7 +73,7 @@ class Codeception extends Plugin implements ZeroConfigPluginInterface
     {
         if (
             (BuildInterface::STAGE_TEST === $stage) &&
-            !\is_null(self::findConfigFile($build->getBuildPath()))
+            !\is_null(self::findConfigFile((string)$build->getBuildPath()))
         ) {
             return true;
         }

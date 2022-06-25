@@ -87,7 +87,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
     {
         if (
             (BuildInterface::STAGE_TEST === $stage) &&
-            !\is_null(PhpUnitOptions::findConfigFile($build->getBuildPath()))
+            !\is_null(PhpUnitOptions::findConfigFile((string)$build->getBuildPath()))
         ) {
             return true;
         }
