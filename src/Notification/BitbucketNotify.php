@@ -371,7 +371,7 @@ class BitbucketNotify extends Plugin
         /** @var BuildRepositoryInterface $buildRepository */
         $buildRepository = $this->container->get(BuildRepositoryInterface::class);
 
-        $build = $buildRepository->getLatestByProjectAndBranch($this->project->getId(), $branchName);
+        $build = $buildRepository->getLatestByProjectIdAndBranch($this->project->getId(), $branchName);
 
         return ($build !== null) ? $build->getId() : null;
     }
