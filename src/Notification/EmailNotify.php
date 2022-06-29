@@ -132,11 +132,11 @@ class EmailNotify extends Plugin
      * @param string $subject EmailNotify subject
      * @param string $body EmailNotify body
      */
-    private function sendEmail(string $toAddress, array $ccList, string $subject, string $body): int
+    private function sendEmail(string $toAddress, array $ccList, string $subject, string $body): bool
     {
         $email = new Email();
 
-        $email->setEmailTo($toAddress);
+        $email->addEmailTo($toAddress);
         $email->setSubject($subject);
         $email->setBody($body);
         $email->setIsHtml(true);
