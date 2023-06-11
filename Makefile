@@ -1,8 +1,8 @@
-PHP?=php7.4
+PHP?=php8.1
 COMPOSER=/usr/local/bin/composer
 
 php-info:
-	@echo "Default PHP version: $(PHP) (Run with custom PHP version: make install PHP=php8.0).\n";
+	@echo "Default PHP version: $(PHP) (Run with custom PHP version: make install PHP=php8.2).\n";
 
 list: php-info ## List
 	@sed -rn 's/^([a-zA-Z_-]+):.*?## (.*)$$/"\1" "\2"/p' < $(MAKEFILE_LIST) | xargs printf "%-20s%s\n"
