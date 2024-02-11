@@ -34,5 +34,8 @@ psalm: php-info install ## Run Psalm check
 rector: php-info install ## Run Rector
 	$(PHP) vendor/bin/rector process --clear-cache --dry-run
 
-.PHONY: php-info list install install-force update test test-coverage mutation-test code-style-fix psalm rector
+rector-fix: php-info install ## Run Rector
+	$(PHP) vendor/bin/rector process --clear-cache
+
+.PHONY: php-info list install install-force update test test-coverage mutation-test code-style-fix psalm rector rector-fix
 .DEFAULT_GOAL := list

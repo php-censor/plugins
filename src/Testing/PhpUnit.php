@@ -55,7 +55,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
 
         $cmd      = $this->executable;
         $lastLine = \exec($cmd . ' --log-json . --version');
-        if (false !== \strpos($lastLine, '--log-json')) {
+        if (\str_contains($lastLine, '--log-json')) {
             $logFormat = 'junit'; // --log-json is not supported
         } else {
             $logFormat = 'json';
@@ -234,7 +234,7 @@ class PhpUnit extends Plugin implements ZeroConfigPluginInterface
     {
         foreach ($coverage as $key => $currentValue) {
             if ($requiredValue = $this->phpUnitOptions->getOption(\implode('_', ['required', $key, 'coverage']))) {
-                if (1 === \bccomp($requiredValue, $currentValue)) {
+                if (1 === \bccomp($requiredValue, (string)$currentValue)) {
                     return false;
                 }
             }

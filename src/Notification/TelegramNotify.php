@@ -136,7 +136,7 @@ class TelegramNotify extends Plugin
         $this->buildMsg = '';
         $buildIcon      = $this->build->isSuccessful() ? '✅' : '❌';
         $buildLog       = $this->build->getLog();
-        $buildLog       = \str_replace(['[0;32m', '[0;31m', '[0m', '/[0m'], '', $buildLog);
+        $buildLog       = \str_replace(['[0;32m', '[0;31m', '[0m', '/[0m'], '', (string)$buildLog);
         $buildMessages  = \explode('RUNNING PLUGIN: ', $buildLog);
 
         foreach ($buildMessages as $bm) {

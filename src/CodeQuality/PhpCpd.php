@@ -65,7 +65,7 @@ class PhpCpd extends Plugin implements ZeroConfigPluginInterface
                 $this->directory
             )
         );
-        if (false !== \strpos($lastLine, '--names-exclude')) {
+        if (\str_contains($lastLine, '--names-exclude')) {
             $ignoresString = $ignoreForNewVersion;
         }
 

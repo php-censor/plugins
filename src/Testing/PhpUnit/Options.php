@@ -17,22 +17,13 @@ use PHPCensor\Common\ParameterBag;
  */
 class Options
 {
-    private ParameterBag $options;
-
-    private string $location;
-
-    private bool $allowPublicArtifacts;
-
     private array $arguments = [];
 
     public function __construct(
-        ParameterBag $options,
-        string $location,
-        bool $allowPublicArtifacts
+        private readonly ParameterBag $options,
+        private readonly string $location,
+        private readonly bool $allowPublicArtifacts
     ) {
-        $this->options              = $options;
-        $this->location             = $location;
-        $this->allowPublicArtifacts = $allowPublicArtifacts;
     }
 
     /**

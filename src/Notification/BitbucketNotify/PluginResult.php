@@ -13,24 +13,17 @@ namespace PHPCensor\Plugins\Notification\BitbucketNotify;
  * @author Dmitry Khomutov <poisoncorpsee@gmail.com>
  * @author Eugen Ganshorn <eugen.ganshorn@check24.de>
  */
-class PluginResult
+class PluginResult implements \Stringable
 {
     public const DEFAULT_PLUGIN_OUTPUT_FORMAT = "%s | %d\t=> %d\t%s";
 
-    protected string $plugin;
+    protected string $outputFormat = self::DEFAULT_PLUGIN_OUTPUT_FORMAT;
 
-    protected int $left;
-
-    protected int $right;
-
-    protected string $outputFormat;
-
-    public function __construct(string $plugin, int $left, int $right)
-    {
-        $this->plugin       = $plugin;
-        $this->left         = $left;
-        $this->right        = $right;
-        $this->outputFormat = self::DEFAULT_PLUGIN_OUTPUT_FORMAT;
+    public function __construct(
+        protected string $plugin,
+        protected int $left,
+        protected int $right
+    ) {
     }
 
     public function getPlugin(): string

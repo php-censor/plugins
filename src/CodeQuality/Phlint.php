@@ -101,7 +101,7 @@ class Phlint extends Plugin
 
     private function processReport(string $output): array
     {
-        $data = \explode(\chr(226), \preg_replace('#\\x1b[[][^A-Za-z\n]*[A-Za-z]#', '', \trim($output)));
+        $data = \explode(\chr(226), (string)\preg_replace('#\\x1b[[][^A-Za-z\n]*[A-Za-z]#', '', \trim($output)));
         \array_pop($data);
         \array_shift($data);
 

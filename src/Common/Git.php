@@ -83,21 +83,13 @@ class Git extends Plugin
      */
     private function runAction(string $action, array $options = []): bool
     {
-        switch ($action) {
-            case 'merge':
-                return $this->runMergeAction($options);
-
-            case 'tag':
-                return $this->runTagAction($options);
-
-            case 'pull':
-                return $this->runPullAction($options);
-
-            case 'push':
-                return $this->runPushAction($options);
-        }
-
-        return false;
+        return match ($action) {
+            'merge' => $this->runMergeAction($options),
+            'tag'   => $this->runTagAction($options),
+            'pull'  => $this->runPullAction($options),
+            'push'  => $this->runPushAction($options),
+            default => false,
+        };
     }
 
     /**

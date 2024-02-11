@@ -15,10 +15,6 @@ namespace PHPCensor\Plugins\Testing\Codeception;
  */
 class Parser implements ParserInterface
 {
-    private string $buildPath;
-
-    private string $xmlPath;
-
     private int $totalTests = 0;
 
     private int $totalTimeTaken = 0;
@@ -27,10 +23,10 @@ class Parser implements ParserInterface
 
     private int $totalErrors = 0;
 
-    public function __construct(string $builderPath, string $xmlPath)
-    {
-        $this->buildPath = $builderPath;
-        $this->xmlPath   = $xmlPath;
+    public function __construct(
+        private readonly string $buildPath,
+        private readonly string $xmlPath
+    ) {
     }
 
     /**
@@ -113,9 +109,9 @@ class Parser implements ParserInterface
 
         try {
             $xml = \simplexml_load_file('php://filter/read=xml_utf8_clean/resource=' . $filePath);
-        } catch (\Exception $ex) {
+        } catch (\Exception) {
             $xml = null;
-        } catch (\Throwable $ex) { // since php7
+        } catch (\Throwable) { // since php7
             $xml = null;
         }
 

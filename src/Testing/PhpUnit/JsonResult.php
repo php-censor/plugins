@@ -77,7 +77,7 @@ class JsonResult extends Result
 
                 break;
             case 'error':
-                if (\strpos($testCase['message'], 'Skipped') === 0 || \strpos($testCase['message'], 'Incomplete') === 0) {
+                if (\str_starts_with((string) $testCase['message'], 'Skipped') || \str_starts_with((string) $testCase['message'], 'Incomplete')) {
                     $severity = self::SEVERITY_SKIPPED;
                 } else {
                     $severity = self::SEVERITY_ERROR;
@@ -117,7 +117,7 @@ class JsonResult extends Result
         $formattedTrace = [];
         if (!empty($testCase['trace'])) {
             foreach ($testCase['trace'] as $step) {
-                $line             = \str_replace($this->buildPath, '', $step['file']) . ':' . $step['line'];
+                $line             = \str_replace($this->buildPath, '', (string)$step['file']) . ':' . $step['line'];
                 $formattedTrace[] = $line;
             }
         }
@@ -140,7 +140,7 @@ class JsonResult extends Result
         \reset($testCase['trace']);
 
         return [
-            'file' => \str_replace($this->buildPath, '', $firstTrace['file']),
+            'file' => \str_replace($this->buildPath, '', (string)$firstTrace['file']),
             'line' => $firstTrace['line'],
         ];
     }

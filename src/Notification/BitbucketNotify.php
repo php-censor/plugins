@@ -233,18 +233,11 @@ class BitbucketNotify extends Plugin
             $this->build->getCommitId()
         );
 
-        switch ($this->build->getStatus()) {
-            case BuildInterface::STATUS_SUCCESS:
-                $state = 'SUCCESSFUL';
-
-                break;
-            case BuildInterface::STATUS_FAILED:
-                $state = 'FAILED';
-
-                break;
-            default:
-                $state = 'INPROGRESS';
-        }
+        $state = match ($this->build->getStatus()) {
+            BuildInterface::STATUS_SUCCESS => 'SUCCESSFUL',
+            BuildInterface::STATUS_FAILED  => 'FAILED',
+            default                        => 'INPROGRESS',
+        };
 
         $this->buildStatusRequest($endpoint, 'post', [
             'state'       => $state,
@@ -286,8 +279,8 @@ class BitbucketNotify extends Plugin
         foreach ($plugins as $plugin) {
             $result[] = new PluginResult(
                 $plugin,
-                isset($targetBranchBuildStats[$plugin]) ? $targetBranchBuildStats[$plugin] : 0,
-                isset($currentBranchBuildStats[$plugin]) ? $currentBranchBuildStats[$plugin] : 0
+                $targetBranchBuildStats[$plugin] ?? 0,
+                $currentBranchBuildStats[$plugin] ?? 0
             );
         }
 
@@ -321,18 +314,18 @@ class BitbucketNotify extends Plugin
 
         $targetBranchCoverage = [];
         if ($latestTargetBuildId && $targetMetaData) {
-            $targetBranchCoverage = \json_decode($targetMetaData->getValue(), true);
+            $targetBranchCoverage = \json_decode((string)$targetMetaData->getValue(), true);
         }
 
         $currentBranchCoverage = [];
         if (!\is_null($currentMetaData)) {
-            $currentBranchCoverage = \json_decode($currentMetaData->getValue(), true);
+            $currentBranchCoverage = \json_decode((string)$currentMetaData->getValue(), true);
         }
 
         return new PluginResult(
             PhpUnit::getName() . '-' . BuildMetaInterface::KEY_COVERAGE,
-            isset($targetBranchCoverage['lines']) ? $targetBranchCoverage['lines'] : 0,
-            isset($currentBranchCoverage['lines']) ? $currentBranchCoverage['lines'] : 0
+            $targetBranchCoverage['lines'] ?? 0,
+            $currentBranchCoverage['lines'] ?? 0
         );
     }
 

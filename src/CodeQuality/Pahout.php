@@ -54,7 +54,7 @@ class Pahout extends Plugin
 
         $success = true;
 
-        list($files, $hints) = $this->processReport($this->commandExecutor->getLastCommandOutput());
+        [$files, $hints] = $this->processReport($this->commandExecutor->getLastCommandOutput());
 
         if (0 < \count($hints)) {
             if (-1 !== $this->allowedWarnings && \count($hints) > $this->allowedWarnings) {
