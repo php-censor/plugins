@@ -134,7 +134,7 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
                 $ignoreAbsolute = $this->build->getBuildPath() . $ignore;
 
                 if ('/' === $ignoreAbsolute[0]) {
-                    if (0 === \strpos($filePath, $ignoreAbsolute)) {
+                    if (\str_starts_with($filePath, $ignoreAbsolute)) {
                         $ignored = true;
 
                         break;
@@ -192,8 +192,8 @@ class TechnicalDebt extends Plugin implements ZeroConfigPluginInterface
         $string     = '';
         $fileNumber = 0;
         foreach ($this->errorPerFile as $oneLine) {
-            $fileNumber += \strlen($oneLine);
-            $string     .= \str_pad($oneLine, 60, ' ', STR_PAD_RIGHT);
+            $fileNumber += \strlen((string)$oneLine);
+            $string     .= \str_pad((string)$oneLine, 60, ' ', STR_PAD_RIGHT);
             $string     .= \str_pad((string)$fileNumber, 4, ' ', STR_PAD_LEFT);
             $string     .= "/" . $this->numberOfAnalysedFile . " (" . \floor($fileNumber * 100 / $this->numberOfAnalysedFile) . " %)\n";
         }

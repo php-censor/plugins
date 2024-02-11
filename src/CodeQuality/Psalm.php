@@ -46,7 +46,7 @@ class Psalm extends Plugin
         $this->commandExecutor->enableCommandOutput();
 
         $success = true;
-        list($errors, $infos) = $this->processReport($this->commandExecutor->getLastCommandOutput());
+        [$errors, $infos] = $this->processReport($this->commandExecutor->getLastCommandOutput());
 
         if (0 < \count($errors)) {
             if (-1 !== $this->allowedErrors && \count($errors) > $this->allowedErrors) {

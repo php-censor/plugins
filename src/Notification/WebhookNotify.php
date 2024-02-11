@@ -44,7 +44,7 @@ class WebhookNotify extends Plugin
             'project_title'   => $this->project->getTitle(),
             'build_id'        => $this->build->getId(),
             'commit_id'       => $this->build->getCommitId(),
-            'short_commit_id' => \substr($this->build->getCommitId(), 0, 7),
+            'short_commit_id' => \substr((string)$this->build->getCommitId(), 0, 7),
             'branch'          => $this->build->getBranch(),
             'branch_link'     => $this->build->getBranchLink(),
             'committer_email' => $this->build->getCommitterEmail(),
@@ -70,7 +70,7 @@ class WebhookNotify extends Plugin
                 $this->url,
                 ['json' => $payload]
             );
-        } catch (GuzzleException $e) {
+        } catch (GuzzleException) {
             return false;
         }
 
@@ -113,17 +113,12 @@ class WebhookNotify extends Plugin
 
     private function getReadableStatus(): string
     {
-        switch ($this->build->getStatus()) {
-            case BuildInterface::STATUS_PENDING:
-                return 'Pending';
-            case BuildInterface::STATUS_RUNNING:
-                return 'Running';
-            case BuildInterface::STATUS_SUCCESS:
-                return 'Successful';
-            case BuildInterface::STATUS_FAILED:
-                return 'Failed';
-        }
-
-        return \sprintf('Unknown (%d)', $this->build->getStatus());
+        return match ($this->build->getStatus()) {
+            BuildInterface::STATUS_PENDING => 'Pending',
+            BuildInterface::STATUS_RUNNING => 'Running',
+            BuildInterface::STATUS_SUCCESS => 'Successful',
+            BuildInterface::STATUS_FAILED  => 'Failed',
+            default                        => \sprintf('Unknown (%d)', $this->build->getStatus()),
+        };
     }
 }

@@ -60,9 +60,9 @@ class EmailNotify extends Plugin
 
         try {
             $view = $this->getMailTemplate();
-        } catch (Exception $e) {
+        } catch (Exception) {
             $this->buildLogger->logWarning(
-                \sprintf('Unknown mail template "%s", falling back to default.', (string)$this->options->get('template'))
+                \sprintf('Unknown mail template "%s", falling back to default.', $this->options->get('template'))
             );
             $view = $this->getDefaultMailTemplate();
         }
@@ -201,7 +201,7 @@ class EmailNotify extends Plugin
 
         $this->buildLogger->logDebug(\sprintf(
             "Default mailTo option: '%s'",
-            $this->defaultMailtoAddress ? $this->defaultMailtoAddress : 'false'
+            $this->defaultMailtoAddress ?: 'false'
         ));
 
         if (empty($addresses) && $this->defaultMailtoAddress) {

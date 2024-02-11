@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPCensor\Plugins\Testing\PhpUnit;
 
+use PHPUnit\Framework\RiskyTestError;
 use PHPCensor\Common\Exception\Exception;
 
 /**
@@ -51,7 +52,7 @@ class JunitResult extends Result
 
                     break 2;
                 case 'error':
-                    if ('PHPUnit\Framework\RiskyTestError' === $child['type']) { // == because conversion to string is desired
+                    if (RiskyTestError::class === $child['type']) { // == because conversion to string is desired
                         $severity = self::SEVERITY_RISKY;
                     } else {
                         $severity = self::SEVERITY_ERROR;
@@ -131,10 +132,7 @@ class JunitResult extends Result
         return $trace;
     }
 
-    /**
-     * @param mixed $testCase
-     */
-    private function getMessageTrace($testCase): string
+    private function getMessageTrace(mixed $testCase): string
     {
         $msg = '';
         foreach ($testCase as $child) {
@@ -184,9 +182,9 @@ class JunitResult extends Result
 
         try {
             $xml = \simplexml_load_file('php://filter/read=xml_utf8_clean/resource=' . $filePath);
-        } catch (\Exception $ex) {
+        } catch (\Exception) {
             $xml = null;
-        } catch (\Throwable $ex) { // since php7
+        } catch (\Throwable) { // since php7
             $xml = null;
         }
 

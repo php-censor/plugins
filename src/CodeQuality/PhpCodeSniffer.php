@@ -53,7 +53,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
      */
     public function execute(): bool
     {
-        list($ignores, $standard, $suffixes, $severity, $errorSeverity, $warningSeverity) = $this->getFlags();
+        [$ignores, $standard, $suffixes, $severity, $errorSeverity, $warningSeverity] = $this->getFlags();
 
         $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
 
@@ -77,7 +77,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
         );
 
         $output                  = $this->commandExecutor->getLastCommandOutput();
-        list($errors, $warnings) = $this->processReport($output);
+        [$errors, $warnings] = $this->processReport($output);
 
         $this->commandExecutor->enableCommandOutput();
 
@@ -212,7 +212,7 @@ class PhpCodeSniffer extends Plugin implements ZeroConfigPluginInterface
         $warnings = $data['totals']['warnings'];
 
         foreach ($data['files'] as $fileName => $file) {
-            $fileName = \str_replace($this->build->getBuildPath(), '', $fileName);
+            $fileName = \str_replace($this->build->getBuildPath(), '', (string)$fileName);
 
             foreach ($file['messages'] as $message) {
                 $this->buildErrorWriter->write(

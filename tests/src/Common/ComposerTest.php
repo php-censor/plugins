@@ -43,7 +43,7 @@ class ComposerTest extends TestCase
         $build = $this->createMock(BuildInterface::class);
         $build
             ->method('getBuildPath')
-            ->willReturn(\rtrim(\dirname(\dirname(\dirname(__DIR__))), "/\\") . '/');
+            ->willReturn(\rtrim(\dirname(__DIR__, 3), "/\\") . '/');
 
         $this->assertEquals(
             $expectedResult,

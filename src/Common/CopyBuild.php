@@ -58,7 +58,7 @@ class CopyBuild extends Plugin
             $cmd,
             $buildPath,
             $this->directory,
-            \rtrim($buildPath, '/'),
+            \rtrim((string)$buildPath, '/'),
             $this->directory
         );
 

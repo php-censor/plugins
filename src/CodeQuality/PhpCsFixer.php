@@ -186,7 +186,7 @@ class PhpCsFixer extends Plugin
         $warnings = 0;
         foreach ($data['files'] as $item) {
             $filename      = $item['name'];
-            $appliedFixers = isset($item['appliedFixers']) ? $item['appliedFixers'] : [];
+            $appliedFixers = $item['appliedFixers'] ?? [];
 
             $parser = new Parser();
             $parsed = $parser->parse($item['diff']);
@@ -201,20 +201,11 @@ class PhpCsFixer extends Plugin
                 }
                 $chunkDiff = [];
                 foreach ($chunk->getLines() as $line) {
-                    switch ($line->getType()) {
-                        case Line::ADDED:
-                            $symbol = '+';
-
-                            break;
-                        case Line::REMOVED:
-                            $symbol = '-';
-
-                            break;
-                        default:
-                            $symbol = ' ';
-
-                            break;
-                    }
+                    $symbol = match ($line->getType()) {
+                        Line::ADDED => '+',
+                        Line::REMOVED => '-',
+                        default => ' ',
+                    };
                     $chunkDiff[] = $symbol . $line->getContent();
                     if ($foundChanges) {
                         continue;

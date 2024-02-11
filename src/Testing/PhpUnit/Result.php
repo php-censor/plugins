@@ -24,20 +24,16 @@ abstract class Result
     public const SEVERITY_WARN    = self::SEVERITY_PASS;
     public const SEVERITY_RISKY   = self::SEVERITY_PASS;
 
-    protected string $outputFile;
-
-    protected string $buildPath;
-
     protected array $results;
 
     protected int $failures = 0;
 
     protected array $errors = [];
 
-    public function __construct(string $outputFile, string $buildPath = '')
-    {
-        $this->outputFile = $outputFile;
-        $this->buildPath  = $buildPath;
+    public function __construct(
+        protected string $outputFile,
+        protected string $buildPath = ''
+    ) {
     }
 
     /**
@@ -49,41 +45,23 @@ abstract class Result
      */
     abstract public function parse(): Result;
 
-    /**
-     * @param mixed $testCase
-     */
-    abstract protected function getSeverity($testCase): string;
+    abstract protected function getSeverity(mixed $testCase): string;
 
-    /**
-     * @param mixed $testCase
-     */
-    abstract protected function buildMessage($testCase): string;
+    abstract protected function buildMessage(mixed $testCase): string;
 
-    /**
-     * @param mixed $testCase
-     */
-    abstract protected function buildTrace($testCase): array;
+    abstract protected function buildTrace(mixed $testCase): array;
 
-    /**
-     * @param mixed $testCase
-     */
-    protected function getFileAndLine($testCase): array
+    protected function getFileAndLine(mixed $testCase): array
     {
         return $testCase;
     }
 
-    /**
-     * @param mixed $testCase
-     */
-    protected function getOutput($testCase): string
+    protected function getOutput(mixed $testCase): string
     {
         return $testCase['output'];
     }
 
-    /**
-     * @param mixed $testCase
-     */
-    protected function parseTestcase($testCase): void
+    protected function parseTestcase(mixed $testCase): void
     {
         $severity = $this->getSeverity($testCase);
         $pass = isset(\array_fill_keys([self::SEVERITY_PASS, self::SEVERITY_SKIPPED], true)[$severity]);

@@ -38,7 +38,7 @@ class Behat extends Plugin
         $executable = $this->commandExecutor->findBinary($this->binaryNames, $this->binaryPath);
         $success    = $this->commandExecutor->executeCommand(($executable . ' %s'), $this->features);
 
-        list($errorCount, $data) = $this->parseBehatOutput();
+        [$errorCount, $data] = $this->parseBehatOutput();
 
         $this->buildMetaWriter->write(
             $this->build->getId(),
@@ -113,7 +113,7 @@ class Behat extends Plugin
                 continue;
             }
 
-            if (false === \strpos($line, ':')) {
+            if (!\str_contains($line, ':')) {
                 $storeFailures = false;
             }
 

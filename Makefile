@@ -1,8 +1,8 @@
-PHP?=php7.4
+PHP?=php8.1
 COMPOSER=/usr/local/bin/composer
 
 php-info:
-	@echo "Default PHP version: $(PHP) (Run with custom PHP version: make install PHP=php8.0).\n";
+	@echo "Default PHP version: $(PHP) (Run with custom PHP version: make install PHP=php8.2).\n";
 
 list: php-info ## List
 	@sed -rn 's/^([a-zA-Z_-]+):.*?## (.*)$$/"\1" "\2"/p' < $(MAKEFILE_LIST) | xargs printf "%-20s%s\n"
@@ -31,5 +31,11 @@ code-style-fix: php-info install ## Fix code style
 psalm: php-info install ## Run Psalm check
 	$(PHP) vendor/bin/psalm --config=psalm.xml.dist --threads=4 --show-snippet=true --show-info=true
 
-.PHONY: php-info list install install-force update test test-coverage mutation-test code-style-fix psalm
+rector: php-info install ## Run Rector
+	$(PHP) vendor/bin/rector process --clear-cache --dry-run
+
+rector-fix: php-info install ## Run Rector
+	$(PHP) vendor/bin/rector process --clear-cache
+
+.PHONY: php-info list install install-force update test test-coverage mutation-test code-style-fix psalm rector rector-fix
 .DEFAULT_GOAL := list
